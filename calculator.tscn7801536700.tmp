@@ -1,0 +1,674 @@
+[gd_scene format=3 uid="uid://bt6q6c7nhcaw5"]
+
+[ext_resource type="Script" uid="uid://bf0km6bdrxr0q" path="res://calculator.gd" id="1_2r0k0"]
+[ext_resource type="Script" uid="uid://6dvqdg84bk0s" path="res://basic_buttons.gd" id="1_kvxsv"]
+
+[sub_resource type="FontFile" id="FontFile_kvxsv"]
+cache/0/variation_coordinates = {}
+cache/0/face_index = 0
+cache/0/embolden = 0.0
+cache/0/transform = Transform2D(1, 0, 0, 1, 0, 0)
+cache/0/spacing_top = 0
+cache/0/spacing_bottom = 0
+cache/0/spacing_space = 0
+cache/0/spacing_glyph = 0
+cache/0/baseline_offset = 0.0
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/75/0/ascent = 0.0
+cache/0/75/0/descent = 0.0
+cache/0/75/0/underline_position = 0.0
+cache/0/75/0/underline_thickness = 0.0
+cache/0/75/0/scale = 1.0
+cache/0/76/0/ascent = 0.0
+cache/0/76/0/descent = 0.0
+cache/0/76/0/underline_position = 0.0
+cache/0/76/0/underline_thickness = 0.0
+cache/0/76/0/scale = 1.0
+cache/0/77/0/ascent = 0.0
+cache/0/77/0/descent = 0.0
+cache/0/77/0/underline_position = 0.0
+cache/0/77/0/underline_thickness = 0.0
+cache/0/77/0/scale = 1.0
+cache/0/78/0/ascent = 0.0
+cache/0/78/0/descent = 0.0
+cache/0/78/0/underline_position = 0.0
+cache/0/78/0/underline_thickness = 0.0
+cache/0/78/0/scale = 1.0
+cache/0/79/0/ascent = 0.0
+cache/0/79/0/descent = 0.0
+cache/0/79/0/underline_position = 0.0
+cache/0/79/0/underline_thickness = 0.0
+cache/0/79/0/scale = 1.0
+cache/0/80/0/ascent = 0.0
+cache/0/80/0/descent = 0.0
+cache/0/80/0/underline_position = 0.0
+cache/0/80/0/underline_thickness = 0.0
+cache/0/80/0/scale = 1.0
+cache/0/81/0/ascent = 0.0
+cache/0/81/0/descent = 0.0
+cache/0/81/0/underline_position = 0.0
+cache/0/81/0/underline_thickness = 0.0
+cache/0/81/0/scale = 1.0
+cache/0/82/0/ascent = 0.0
+cache/0/82/0/descent = 0.0
+cache/0/82/0/underline_position = 0.0
+cache/0/82/0/underline_thickness = 0.0
+cache/0/82/0/scale = 1.0
+cache/0/83/0/ascent = 0.0
+cache/0/83/0/descent = 0.0
+cache/0/83/0/underline_position = 0.0
+cache/0/83/0/underline_thickness = 0.0
+cache/0/83/0/scale = 1.0
+cache/0/84/0/ascent = 0.0
+cache/0/84/0/descent = 0.0
+cache/0/84/0/underline_position = 0.0
+cache/0/84/0/underline_thickness = 0.0
+cache/0/84/0/scale = 1.0
+cache/0/85/0/ascent = 0.0
+cache/0/85/0/descent = 0.0
+cache/0/85/0/underline_position = 0.0
+cache/0/85/0/underline_thickness = 0.0
+cache/0/85/0/scale = 1.0
+cache/0/86/0/ascent = 0.0
+cache/0/86/0/descent = 0.0
+cache/0/86/0/underline_position = 0.0
+cache/0/86/0/underline_thickness = 0.0
+cache/0/86/0/scale = 1.0
+cache/0/87/0/ascent = 0.0
+cache/0/87/0/descent = 0.0
+cache/0/87/0/underline_position = 0.0
+cache/0/87/0/underline_thickness = 0.0
+cache/0/87/0/scale = 1.0
+cache/0/88/0/ascent = 0.0
+cache/0/88/0/descent = 0.0
+cache/0/88/0/underline_position = 0.0
+cache/0/88/0/underline_thickness = 0.0
+cache/0/88/0/scale = 1.0
+cache/0/89/0/ascent = 0.0
+cache/0/89/0/descent = 0.0
+cache/0/89/0/underline_position = 0.0
+cache/0/89/0/underline_thickness = 0.0
+cache/0/89/0/scale = 1.0
+cache/0/90/0/ascent = 0.0
+cache/0/90/0/descent = 0.0
+cache/0/90/0/underline_position = 0.0
+cache/0/90/0/underline_thickness = 0.0
+cache/0/90/0/scale = 1.0
+cache/0/91/0/ascent = 0.0
+cache/0/91/0/descent = 0.0
+cache/0/91/0/underline_position = 0.0
+cache/0/91/0/underline_thickness = 0.0
+cache/0/91/0/scale = 1.0
+cache/0/92/0/ascent = 0.0
+cache/0/92/0/descent = 0.0
+cache/0/92/0/underline_position = 0.0
+cache/0/92/0/underline_thickness = 0.0
+cache/0/92/0/scale = 1.0
+cache/0/93/0/ascent = 0.0
+cache/0/93/0/descent = 0.0
+cache/0/93/0/underline_position = 0.0
+cache/0/93/0/underline_thickness = 0.0
+cache/0/93/0/scale = 1.0
+cache/0/94/0/ascent = 0.0
+cache/0/94/0/descent = 0.0
+cache/0/94/0/underline_position = 0.0
+cache/0/94/0/underline_thickness = 0.0
+cache/0/94/0/scale = 1.0
+cache/0/95/0/ascent = 0.0
+cache/0/95/0/descent = 0.0
+cache/0/95/0/underline_position = 0.0
+cache/0/95/0/underline_thickness = 0.0
+cache/0/95/0/scale = 1.0
+cache/0/96/0/ascent = 0.0
+cache/0/96/0/descent = 0.0
+cache/0/96/0/underline_position = 0.0
+cache/0/96/0/underline_thickness = 0.0
+cache/0/96/0/scale = 1.0
+cache/0/97/0/ascent = 0.0
+cache/0/97/0/descent = 0.0
+cache/0/97/0/underline_position = 0.0
+cache/0/97/0/underline_thickness = 0.0
+cache/0/97/0/scale = 1.0
+cache/0/98/0/ascent = 0.0
+cache/0/98/0/descent = 0.0
+cache/0/98/0/underline_position = 0.0
+cache/0/98/0/underline_thickness = 0.0
+cache/0/98/0/scale = 1.0
+cache/0/99/0/ascent = 0.0
+cache/0/99/0/descent = 0.0
+cache/0/99/0/underline_position = 0.0
+cache/0/99/0/underline_thickness = 0.0
+cache/0/99/0/scale = 1.0
+cache/0/100/0/ascent = 0.0
+cache/0/100/0/descent = 0.0
+cache/0/100/0/underline_position = 0.0
+cache/0/100/0/underline_thickness = 0.0
+cache/0/100/0/scale = 1.0
+cache/0/101/0/ascent = 0.0
+cache/0/101/0/descent = 0.0
+cache/0/101/0/underline_position = 0.0
+cache/0/101/0/underline_thickness = 0.0
+cache/0/101/0/scale = 1.0
+cache/0/102/0/ascent = 0.0
+cache/0/102/0/descent = 0.0
+cache/0/102/0/underline_position = 0.0
+cache/0/102/0/underline_thickness = 0.0
+cache/0/102/0/scale = 1.0
+cache/0/103/0/ascent = 0.0
+cache/0/103/0/descent = 0.0
+cache/0/103/0/underline_position = 0.0
+cache/0/103/0/underline_thickness = 0.0
+cache/0/103/0/scale = 1.0
+cache/0/104/0/ascent = 0.0
+cache/0/104/0/descent = 0.0
+cache/0/104/0/underline_position = 0.0
+cache/0/104/0/underline_thickness = 0.0
+cache/0/104/0/scale = 1.0
+cache/0/105/0/ascent = 0.0
+cache/0/105/0/descent = 0.0
+cache/0/105/0/underline_position = 0.0
+cache/0/105/0/underline_thickness = 0.0
+cache/0/105/0/scale = 1.0
+cache/0/106/0/ascent = 0.0
+cache/0/106/0/descent = 0.0
+cache/0/106/0/underline_position = 0.0
+cache/0/106/0/underline_thickness = 0.0
+cache/0/106/0/scale = 1.0
+cache/0/107/0/ascent = 0.0
+cache/0/107/0/descent = 0.0
+cache/0/107/0/underline_position = 0.0
+cache/0/107/0/underline_thickness = 0.0
+cache/0/107/0/scale = 1.0
+cache/0/108/0/ascent = 0.0
+cache/0/108/0/descent = 0.0
+cache/0/108/0/underline_position = 0.0
+cache/0/108/0/underline_thickness = 0.0
+cache/0/108/0/scale = 1.0
+cache/0/109/0/ascent = 0.0
+cache/0/109/0/descent = 0.0
+cache/0/109/0/underline_position = 0.0
+cache/0/109/0/underline_thickness = 0.0
+cache/0/109/0/scale = 1.0
+cache/0/110/0/ascent = 0.0
+cache/0/110/0/descent = 0.0
+cache/0/110/0/underline_position = 0.0
+cache/0/110/0/underline_thickness = 0.0
+cache/0/110/0/scale = 1.0
+cache/0/111/0/ascent = 0.0
+cache/0/111/0/descent = 0.0
+cache/0/111/0/underline_position = 0.0
+cache/0/111/0/underline_thickness = 0.0
+cache/0/111/0/scale = 1.0
+cache/0/112/0/ascent = 0.0
+cache/0/112/0/descent = 0.0
+cache/0/112/0/underline_position = 0.0
+cache/0/112/0/underline_thickness = 0.0
+cache/0/112/0/scale = 1.0
+cache/0/113/0/ascent = 0.0
+cache/0/113/0/descent = 0.0
+cache/0/113/0/underline_position = 0.0
+cache/0/113/0/underline_thickness = 0.0
+cache/0/113/0/scale = 1.0
+cache/0/114/0/ascent = 0.0
+cache/0/114/0/descent = 0.0
+cache/0/114/0/underline_position = 0.0
+cache/0/114/0/underline_thickness = 0.0
+cache/0/114/0/scale = 1.0
+cache/0/115/0/ascent = 0.0
+cache/0/115/0/descent = 0.0
+cache/0/115/0/underline_position = 0.0
+cache/0/115/0/underline_thickness = 0.0
+cache/0/115/0/scale = 1.0
+cache/0/116/0/ascent = 0.0
+cache/0/116/0/descent = 0.0
+cache/0/116/0/underline_position = 0.0
+cache/0/116/0/underline_thickness = 0.0
+cache/0/116/0/scale = 1.0
+cache/0/117/0/ascent = 0.0
+cache/0/117/0/descent = 0.0
+cache/0/117/0/underline_position = 0.0
+cache/0/117/0/underline_thickness = 0.0
+cache/0/117/0/scale = 1.0
+cache/0/118/0/ascent = 0.0
+cache/0/118/0/descent = 0.0
+cache/0/118/0/underline_position = 0.0
+cache/0/118/0/underline_thickness = 0.0
+cache/0/118/0/scale = 1.0
+cache/0/119/0/ascent = 0.0
+cache/0/119/0/descent = 0.0
+cache/0/119/0/underline_position = 0.0
+cache/0/119/0/underline_thickness = 0.0
+cache/0/119/0/scale = 1.0
+cache/0/120/0/ascent = 0.0
+cache/0/120/0/descent = 0.0
+cache/0/120/0/underline_position = 0.0
+cache/0/120/0/underline_thickness = 0.0
+cache/0/120/0/scale = 1.0
+cache/0/121/0/ascent = 0.0
+cache/0/121/0/descent = 0.0
+cache/0/121/0/underline_position = 0.0
+cache/0/121/0/underline_thickness = 0.0
+cache/0/121/0/scale = 1.0
+cache/0/122/0/ascent = 0.0
+cache/0/122/0/descent = 0.0
+cache/0/122/0/underline_position = 0.0
+cache/0/122/0/underline_thickness = 0.0
+cache/0/122/0/scale = 1.0
+cache/0/123/0/ascent = 0.0
+cache/0/123/0/descent = 0.0
+cache/0/123/0/underline_position = 0.0
+cache/0/123/0/underline_thickness = 0.0
+cache/0/123/0/scale = 1.0
+cache/0/124/0/ascent = 0.0
+cache/0/124/0/descent = 0.0
+cache/0/124/0/underline_position = 0.0
+cache/0/124/0/underline_thickness = 0.0
+cache/0/124/0/scale = 1.0
+cache/0/125/0/ascent = 0.0
+cache/0/125/0/descent = 0.0
+cache/0/125/0/underline_position = 0.0
+cache/0/125/0/underline_thickness = 0.0
+cache/0/125/0/scale = 1.0
+cache/0/126/0/ascent = 0.0
+cache/0/126/0/descent = 0.0
+cache/0/126/0/underline_position = 0.0
+cache/0/126/0/underline_thickness = 0.0
+cache/0/126/0/scale = 1.0
+cache/0/127/0/ascent = 0.0
+cache/0/127/0/descent = 0.0
+cache/0/127/0/underline_position = 0.0
+cache/0/127/0/underline_thickness = 0.0
+cache/0/127/0/scale = 1.0
+cache/0/50/0/ascent = 0.0
+cache/0/50/0/descent = 0.0
+cache/0/50/0/underline_position = 0.0
+cache/0/50/0/underline_thickness = 0.0
+cache/0/50/0/scale = 1.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_pcbpg"]
+font = SubResource("FontFile_kvxsv")
+font_size = 50
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_kvxsv"]
+font_size = 50
+
+[node name="Calculator" type="Window" unique_id=294026827]
+oversampling_override = 1.0
+position = Vector2i(0, 36)
+size = Vector2i(420, 630)
+content_scale_size = Vector2i(420, 630)
+content_scale_mode = 2
+content_scale_aspect = 4
+script = ExtResource("1_2r0k0")
+
+[node name="Background" type="ColorRect" parent="." unique_id=855351027]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.17997457, 0.17997457, 0.17997457, 1)
+
+[node name="Screen" type="ColorRect" parent="." unique_id=1635951192]
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.05
+anchor_right = 0.95
+anchor_bottom = 0.3
+
+[node name="ScreenText" type="Label" parent="Screen" unique_id=1943197688]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -0.5
+text = "1
+"
+label_settings = SubResource("LabelSettings_pcbpg")
+vertical_alignment = 1
+autowrap_mode = 1
+
+[node name="SectionButtons" type="BoxContainer" parent="." unique_id=178241114]
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.3
+anchor_right = 0.95
+anchor_bottom = 0.4
+size_flags_stretch_ratio = 0.0
+theme_override_constants/separation = 5
+alignment = 1
+
+[node name="Button" type="Button" parent="SectionButtons" unique_id=1706182808]
+layout_direction = 1
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button2" type="Button" parent="SectionButtons" unique_id=1055359169]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button3" type="Button" parent="SectionButtons" unique_id=1077307713]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button4" type="Button" parent="SectionButtons" unique_id=589772059]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button5" type="Button" parent="SectionButtons" unique_id=1873550932]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BasicButtons" type="Control" parent="." unique_id=936144439]
+layout_mode = 3
+anchor_top = 0.4
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1_kvxsv")
+
+[node name="Basic" type="HBoxContainer" parent="BasicButtons" unique_id=2089769560]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.01
+anchor_right = 0.65
+anchor_bottom = 0.9
+
+[node name="Column1" type="VBoxContainer" parent="BasicButtons/Basic" unique_id=1938622953]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="One" type="Button" parent="BasicButtons/Basic/Column1" unique_id=1897693732]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="BasicButtons/Basic/Column1/One" unique_id=1551685884]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "1"
+label_settings = SubResource("LabelSettings_kvxsv")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Four" type="Button" parent="BasicButtons/Basic/Column1" unique_id=2072334379]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="BasicButtons/Basic/Column1/Four" unique_id=1760873380]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "4"
+label_settings = SubResource("LabelSettings_kvxsv")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Seven" type="Button" parent="BasicButtons/Basic/Column1" unique_id=77364199]
+layout_mode = 2
+size_flags_vertical = 3
+text = "
+"
+
+[node name="Label" type="Label" parent="BasicButtons/Basic/Column1/Seven" unique_id=975073098]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "7"
+label_settings = SubResource("LabelSettings_kvxsv")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Zero" type="Button" parent="BasicButtons/Basic/Column1" unique_id=990042079]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="BasicButtons/Basic/Column1/Zero" unique_id=2140947297]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+label_settings = SubResource("LabelSettings_kvxsv")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Column2" type="VBoxContainer" parent="BasicButtons/Basic" unique_id=1004564190]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Two" type="Button" parent="BasicButtons/Basic/Column2" unique_id=806317974]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="BasicButtons/Basic/Column2/Two" unique_id=998973149]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "2"
+label_settings = SubResource("LabelSettings_kvxsv")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Five" type="Button" parent="BasicButtons/Basic/Column2" unique_id=1464976608]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="BasicButtons/Basic/Column2/Five" unique_id=840980654]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "5"
+label_settings = SubResource("LabelSettings_kvxsv")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Eight" type="Button" parent="BasicButtons/Basic/Column2" unique_id=1898593934]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="BasicButtons/Basic/Column2/Eight" unique_id=1365825779]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "8"
+label_settings = SubResource("LabelSettings_kvxsv")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Period" type="Button" parent="BasicButtons/Basic/Column2" unique_id=799321179]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="BasicButtons/Basic/Column2/Period" unique_id=1906357425]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "."
+label_settings = SubResource("LabelSettings_kvxsv")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Column3" type="VBoxContainer" parent="BasicButtons/Basic" unique_id=1825725664]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Three" type="Button" parent="BasicButtons/Basic/Column3" unique_id=1105702160]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="BasicButtons/Basic/Column3/Three" unique_id=82667137]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "3"
+label_settings = SubResource("LabelSettings_kvxsv")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Six" type="Button" parent="BasicButtons/Basic/Column3" unique_id=910195357]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="BasicButtons/Basic/Column3/Six" unique_id=249000993]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "6"
+label_settings = SubResource("LabelSettings_kvxsv")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Nine" type="Button" parent="BasicButtons/Basic/Column3" unique_id=1442927129]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="BasicButtons/Basic/Column3/Nine" unique_id=982946402]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "9"
+label_settings = SubResource("LabelSettings_kvxsv")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Clear" type="Button" parent="BasicButtons/Basic/Column3" unique_id=1847618084]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="BasicButtons/Basic/Column3/Clear" unique_id=880845708]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "CC"
+label_settings = SubResource("LabelSettings_kvxsv")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Operations" type="VBoxContainer" parent="BasicButtons" unique_id=1222990427]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.7
+anchor_top = 0.01
+anchor_right = 0.85
+anchor_bottom = 0.8
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Add" type="Button" parent="BasicButtons/Operations" unique_id=1122087454]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="BasicButtons/Operations/Add" unique_id=994461624]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "+"
+label_settings = SubResource("LabelSettings_kvxsv")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Subtract" type="Button" parent="BasicButtons/Operations" unique_id=326914225]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="BasicButtons/Operations/Subtract" unique_id=465856197]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "-"
+label_settings = SubResource("LabelSettings_kvxsv")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Multiply" type="Button" parent="BasicButtons/Operations" unique_id=547056092]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="BasicButtons/Operations/Multiply" unique_id=1710625095]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "*"
+label_settings = SubResource("LabelSettings_kvxsv")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Divide" type="Button" parent="BasicButtons/Operations" unique_id=1712904250]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="BasicButtons/Operations/Divide" unique_id=1435251316]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "/"
+label_settings = SubResource("LabelSettings_kvxsv")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Evaluate" type="Button" parent="BasicButtons/Operations" unique_id=1310833182]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="BasicButtons/Operations/Evaluate" unique_id=1818398810]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "="
+label_settings = SubResource("LabelSettings_kvxsv")
+horizontal_alignment = 1
+vertical_alignment = 1
