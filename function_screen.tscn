@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://d3jaip51s1ff4"]
+
+[ext_resource type="PackedScene" uid="uid://bhlvypkib21gi" path="res://screen.tscn" id="1_iv2tw"]
+[ext_resource type="PackedScene" uid="uid://dhguy4r4r5eoj" path="res://calculator_button.tscn" id="2_1uhfp"]
+
+[node name="FunctionScreen" unique_id=65504639 instance=ExtResource("1_iv2tw")]
+offset_right = 617.0
+
+[node name="Options" type="AspectRatioContainer" parent="." index="5" unique_id=386583902]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.8
+anchor_top = 0.1
+anchor_right = 0.98
+anchor_bottom = 0.4
+ratio = 2.0
+alignment_horizontal = 2
+alignment_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Options" index="0" unique_id=2095971407]
+layout_mode = 2
+
+[node name="Edit" parent="Options/HBoxContainer" index="0" unique_id=1686664645 instance=ExtResource("2_1uhfp")]
+layout_mode = 2
+
+[node name="Delete" parent="Options/HBoxContainer" index="1" unique_id=1869121610 instance=ExtResource("2_1uhfp")]
+layout_mode = 2
+
+[node name="FunctionName" type="Label" parent="." index="6" unique_id=1052203433]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.3
+anchor_bottom = 0.3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "f(x) = "

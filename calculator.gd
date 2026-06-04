@@ -1,5 +1,7 @@
 extends Window
 
+class_name Calculator 
+
 # paranthesis expressions aren't treated as multiplication
 
 var buttons: Array[Button]
@@ -8,34 +10,58 @@ var special_buttons : Dictionary[String, Callable] = {
 	"AllClear" : on_all_clear_pressed,
 	"Basic" : on_basic_operations_pressed,
 	"Special" : on_special_operations_pressed,
+	"Function" : on_function_operations_pressed,
 	"RootOf" : on_root_of_pressed,
+	"SquareRoot" : on_square_root_pressed,
+	"Log" : on_log_pressed,
+	"NaturalLog" : on_natural_log_pressed,
+	"BaseLog" : on_base_log_pressed,
+	"Squared" : on_squared_pressed,
+	"PowerOf" : on_power_of_pressed,
+	"Pi" : on_pi_pressed,
+	"EulersNumber" : on_eulers_number_pressed,
+	"Parenthesis" : on_parenthesis_pressed,
+	"Exponential" : on_exponential_pressed,
+	"Clear" : on_clear_pressed,
+	"Sine" : on_sine_pressed,
+	"Cosine" : on_cosine_pressed,
+	"Tangent" : on_tangent_pressed,
+	"Arcsine" : on_arcsine_pressed,
+	"Arccosine" : on_arccosine_pressed,
+	"Arctangent" : on_arctangent_pressed,
+	"New" : on_new_pressed,
 }
 var keyboard_shortcuts : Dictionary[String, Callable] = {
 	"\n" : on_equals_pressed,
 	"=" : on_equals_pressed,
+	"pi" : on_pi_pressed,
+	"eu" : on_eulers_number_pressed,
 }
 
 var expression = Expression.new()
 var screen_scene = preload("res://screen.tscn")
-signal evaluate
+signal evaluate(input: String)
+signal new_function(name: String, content: String)
 
 @onready var display: ScrollContainer = $Display
 @onready var used_screen : TextEdit = $Display/VBoxContainer/Screen
 @onready var scrollbar : VScrollBar = display.get_v_scroll_bar()
 @onready var basic_operations : Control = $BasicOperations
 @onready var special_operations : Control = $SpecialOperations
+@onready var function_operations : Control = $FunctionOperations
 
 var last_answer: Variant
 var last_scroll_length: float = 0
 var is_taking_input: bool = false
-var current_input_name: String
+var input_index: int = 0
 
-# general use
+#region General Use
 
 func _ready() -> void:
 	append_descendant_buttons(basic_operations)
 	append_descendant_buttons(special_operations)
 	append_descendant_buttons($SectionButtons)
+	append_descendant_buttons(function_operations)
 	
 	for button in buttons:
 		if special_buttons.has(button.name):
@@ -61,6 +87,38 @@ func on_scrollbar_changed() -> void:
 	
 func on_button_pressed(key: String) -> void:
 	used_screen.text += key
+	used_screen.grab_focus()
+
+
+func on_text_changed() -> void:
+	for shortcut in keyboard_shortcuts:
+		if used_screen.text.contains(shortcut):
+			if shortcut == "=" and is_taking_input:
+				continue
+			used_screen.text = used_screen.text.replace(shortcut,"")
+			keyboard_shortcuts[shortcut].call()
+#endregion
+
+#region Display
+func close_all_sections() -> void:
+	basic_operations.visible = false
+	special_operations.visible = false
+	function_operations.visible = false
+
+func on_basic_operations_pressed() -> void:
+	close_all_sections()
+	basic_operations.visible = true
+
+func on_special_operations_pressed() -> void:
+	close_all_sections()
+	special_operations.visible = true
+
+func on_function_operations_pressed() -> void:
+	close_all_sections()
+	function_operations.visible = true
+
+func skip_to_end_line() -> void:
+	used_screen.set_caret_column(used_screen.text.length())
 
 func create_screen() -> void:
 	var new_screen : TextEdit = screen_scene.instantiate()
@@ -71,56 +129,42 @@ func create_screen() -> void:
 	used_screen = new_screen
 	used_screen.text_changed.connect(on_text_changed)
 
-func take_input(varName: String) -> float:
-	#complex input operations can't be stacked
+func take_input(varName: String) -> String:
 	var former_screen: TextEdit = used_screen
+	input_index += 1
+	var index = input_index
+	is_taking_input = true
+	
 	create_screen()
 	var new_input_screen: TextEdit = used_screen
 	new_input_screen.add_theme_color_override("background_color", Color.DIM_GRAY)
 	new_input_screen.add_theme_color_override("font_color", Color.WHITE)
-	is_taking_input = true
 	new_input_screen.text = varName + "="
-	new_input_screen.set_caret_column(new_input_screen.text.find("=")+1)
+	new_input_screen.set_caret_column(new_input_screen.text.find("=") + 1)
 	
-	var input: Variant = await evaluate
-	#account for errors and all clear
+	var input: String = await evaluate
+	while index != input_index:
+		input = await evaluate
+	
+	input_index -= 1
 	new_input_screen.queue_free()
 	used_screen = former_screen
 	former_screen.editable = true
 	former_screen.text_changed.connect(on_text_changed)
 	former_screen.grab_focus()
 	
-	if input is float or input is int:
-		is_taking_input = false
+	if input != "error":
+		if input_index == 0:
+			is_taking_input = false
 		return input
 	else:
+		#assume error or nothing inputed
 		input = await take_input(varName)
 		return input
 
-func on_text_changed() -> void:
-	for shortcut in keyboard_shortcuts:
-		if used_screen.text.contains(shortcut):
-			if shortcut == "=" and is_taking_input:
-				continue
-			used_screen.text = used_screen.text.replace(shortcut,"")
-			keyboard_shortcuts[shortcut].call()
+#endregion
 
-func close_all_sections() -> void:
-	basic_operations.visible = false
-	special_operations.visible = false
-
-# operation display switching
-
-func on_basic_operations_pressed() -> void:
-	close_all_sections()
-	basic_operations.visible = true
-
-func on_special_operations_pressed() -> void:
-	close_all_sections()
-	special_operations.visible = true
-
-# button operations
-
+#region Button Operations
 func on_equals_pressed() -> void:
 	var evaluation_screen: TextEdit = used_screen
 	if is_taking_input:
@@ -132,12 +176,12 @@ func on_equals_pressed() -> void:
 	var error : Error = expression.parse(evaluation_screen.text)
 	if error != OK:
 		evaluation_screen.text = expression.get_error_text()
-		evaluate.emit(expression.get_error_text())
+		evaluate.emit("error")
 	else:
 		last_answer = expression.execute()
+		evaluate.emit(evaluation_screen.text)
 		evaluation_screen.text += " = " + str(last_answer)
-		evaluate.emit(last_answer)
-	
+	skip_to_end_line()
 
 func on_all_clear_pressed() -> void:
 	if is_taking_input:
@@ -149,7 +193,103 @@ func on_all_clear_pressed() -> void:
 			child.queue_free()
 	create_screen()
 
+func on_clear_pressed() -> void:
+	if is_taking_input:
+		var input_text_index: int = used_screen.text.find("=")
+		used_screen.text = used_screen.text.substr(0, input_text_index + 1)
+	else:
+		used_screen.text = ""
+
 func on_root_of_pressed() -> void:
-	var x: float = await take_input("x")
-	var n: float = await  take_input("n")
-	used_screen.text += "pow(" + str(x) + ", 1.0/" + str(n) + ")"
+	var x: String = await take_input("x")
+	var n: String = await  take_input("n")
+	used_screen.text += "pow(" + x + ", 1.0/(" + n + "))"
+	skip_to_end_line()
+
+func on_square_root_pressed() -> void:
+	var x: String = await take_input("x")
+	used_screen.text += "sqrt(" + x + ")"
+	skip_to_end_line()
+
+func on_log_pressed() -> void:
+	var x: String = await take_input("x")
+	used_screen.text += "(log(" + x + ")/log(10))"
+	skip_to_end_line()	
+
+func on_natural_log_pressed() -> void:
+	var x: String = await take_input("x")
+	used_screen.text += "log(" + x + ")"
+	skip_to_end_line()
+	
+func on_base_log_pressed() -> void:
+	var x: String = await take_input("x")
+	var n: String = await take_input("n")
+	used_screen.text += "(log(" + x + ")/log(" + n + "))"
+	skip_to_end_line()
+
+func on_squared_pressed() -> void:
+	var x: String = await take_input("x")
+	used_screen.text += "(" + x + "**2)"
+	skip_to_end_line()
+
+func on_power_of_pressed() -> void:
+	var x: String = await take_input("x")
+	var n: String = await take_input("n")
+	used_screen.text += "(" + x + "**" + n + ")"
+	skip_to_end_line()
+
+func on_pi_pressed() -> void:
+	used_screen.text += "PI"
+	used_screen.grab_focus()
+	skip_to_end_line()
+
+func on_eulers_number_pressed() -> void:
+	used_screen.text += "exp(1)"
+	used_screen.grab_focus()
+	skip_to_end_line()
+
+func on_exponential_pressed() -> void:
+	var n: String = await take_input("n")
+	used_screen.text += "exp(" + n + ")"
+	skip_to_end_line()
+
+func on_parenthesis_pressed() -> void:
+	used_screen.text += "()"
+	used_screen.grab_focus()
+	used_screen.set_caret_column(used_screen.text.length() - 1)
+
+func on_sine_pressed() -> void:
+	var x: String = await take_input("x")
+	used_screen.text += "sin(" + x + ")"
+	skip_to_end_line()
+
+func on_cosine_pressed() -> void:
+	var x: String = await take_input("x")
+	used_screen.text += "cos(" + x + ")"
+	skip_to_end_line()
+
+func on_tangent_pressed() -> void:
+	var x: String = await take_input("x")
+	used_screen.text += "tan(" + x + ")"
+	skip_to_end_line()
+
+func on_arcsine_pressed() -> void:
+	var x: String = await take_input("x")
+	used_screen.text += "asin(" + x + ")"
+	skip_to_end_line()
+
+func on_arccosine_pressed() -> void:
+	var x: String = await take_input("x")
+	used_screen.text += "acos(" + x + ")"
+	skip_to_end_line()
+
+func on_arctangent_pressed() -> void:
+	var x: String = await take_input("x")
+	used_screen.text += "atan(" + x + ")"
+	skip_to_end_line()
+
+func on_new_pressed() -> void:
+	var name: String = await take_input("function name")
+	var contents: String = await take_input(name + "(x)")
+	new_function.emit(name, contents)
+#endregion

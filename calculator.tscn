@@ -66,6 +66,8 @@ theme_override_font_sizes/normal_font_size = 30
 [node name="Function" type="Button" parent="SectionButtons" unique_id=1077307713]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 30
+text = "f(x)"
 
 [node name="Button4" type="Button" parent="SectionButtons" unique_id=589772059]
 layout_mode = 2
@@ -76,104 +78,10 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="BasicOperations" type="Control" parent="." unique_id=936144439]
-visible = false
 layout_mode = 3
 anchor_top = 0.4
 anchor_right = 1.0
 anchor_bottom = 1.0
-
-[node name="Basic" type="HBoxContainer" parent="BasicOperations" unique_id=2089769560]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.05
-anchor_top = 0.01
-anchor_right = 0.65
-anchor_bottom = 0.9
-
-[node name="Column1" type="VBoxContainer" parent="BasicOperations/Basic" unique_id=1938622953]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="One" type="Button" parent="BasicOperations/Basic/Column1" unique_id=1897693732]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 50
-text = "1
-"
-
-[node name="Four" type="Button" parent="BasicOperations/Basic/Column1" unique_id=2072334379]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 50
-text = "4"
-
-[node name="Seven" type="Button" parent="BasicOperations/Basic/Column1" unique_id=77364199]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 50
-text = "7"
-
-[node name="Zero" type="Button" parent="BasicOperations/Basic/Column1" unique_id=990042079]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 50
-text = "0"
-
-[node name="Column2" type="VBoxContainer" parent="BasicOperations/Basic" unique_id=1004564190]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Two" type="Button" parent="BasicOperations/Basic/Column2" unique_id=806317974]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 50
-text = "2"
-
-[node name="Five" type="Button" parent="BasicOperations/Basic/Column2" unique_id=1464976608]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 50
-text = "5"
-
-[node name="Eight" type="Button" parent="BasicOperations/Basic/Column2" unique_id=1898593934]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 50
-text = "8"
-
-[node name="Period" type="Button" parent="BasicOperations/Basic/Column2" unique_id=799321179]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 50
-text = "."
-
-[node name="Column3" type="VBoxContainer" parent="BasicOperations/Basic" unique_id=1825725664]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Three" type="Button" parent="BasicOperations/Basic/Column3" unique_id=1105702160]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 50
-text = "3"
-
-[node name="Six" type="Button" parent="BasicOperations/Basic/Column3" unique_id=910195357]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 50
-text = "6"
-
-[node name="Nine" type="Button" parent="BasicOperations/Basic/Column3" unique_id=1442927129]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 50
-text = "9"
-
-[node name="AllClear" type="Button" parent="BasicOperations/Basic/Column3" unique_id=1847618084]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 50
-text = "AC"
 
 [node name="Operations" type="VBoxContainer" parent="BasicOperations" unique_id=1222990427]
 layout_mode = 1
@@ -215,7 +123,102 @@ size_flags_vertical = 3
 theme_override_font_sizes/font_size = 40
 text = "="
 
+[node name="GridContainer" type="GridContainer" parent="BasicOperations" unique_id=1280088039]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.01
+anchor_right = 0.65
+anchor_bottom = 0.9
+columns = 3
+
+[node name="One" type="Button" parent="BasicOperations/GridContainer" unique_id=1897693732]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 50
+text = "1
+"
+
+[node name="Two" type="Button" parent="BasicOperations/GridContainer" unique_id=806317974]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 50
+text = "2"
+
+[node name="Three" type="Button" parent="BasicOperations/GridContainer" unique_id=1105702160]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 50
+text = "3"
+
+[node name="Four" type="Button" parent="BasicOperations/GridContainer" unique_id=2072334379]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 50
+text = "4"
+
+[node name="Five" type="Button" parent="BasicOperations/GridContainer" unique_id=1464976608]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 50
+text = "5"
+
+[node name="Six" type="Button" parent="BasicOperations/GridContainer" unique_id=910195357]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 50
+text = "6"
+
+[node name="Seven" type="Button" parent="BasicOperations/GridContainer" unique_id=77364199]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 50
+text = "7"
+
+[node name="Eight" type="Button" parent="BasicOperations/GridContainer" unique_id=1898593934]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 50
+text = "8"
+
+[node name="Nine" type="Button" parent="BasicOperations/GridContainer" unique_id=1442927129]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 50
+text = "9"
+
+[node name="Zero" type="Button" parent="BasicOperations/GridContainer" unique_id=990042079]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 50
+text = "0"
+
+[node name="Period" type="Button" parent="BasicOperations/GridContainer" unique_id=799321179]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 50
+text = "."
+
+[node name="Clear" type="Button" parent="BasicOperations/GridContainer" unique_id=1847618084]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 50
+text = "C"
+
 [node name="SpecialOperations" type="Control" parent="." unique_id=529351350]
+visible = false
 layout_mode = 3
 anchor_top = 0.4
 anchor_right = 1.0
@@ -228,7 +231,7 @@ anchor_left = 0.05
 anchor_top = 0.01
 anchor_right = 0.65
 anchor_bottom = 0.9
-columns = 2
+columns = 3
 
 [node name="SquareRoot" parent="SpecialOperations/GridContainer" unique_id=1686664645 instance=ExtResource("3_wfhry")]
 layout_mode = 2
@@ -262,22 +265,25 @@ layout_mode = 2
 
 [node name="CalculatorTextLabel" parent="SpecialOperations/GridContainer/Log" unique_id=1005195791 instance=ExtResource("3_quc1l")]
 layout_mode = 1
+text = "logx"
+
+[node name="BaseLog" parent="SpecialOperations/GridContainer" unique_id=9936561 instance=ExtResource("3_wfhry")]
+layout_mode = 2
+
+[node name="CalculatorTextLabel" parent="SpecialOperations/GridContainer/BaseLog" unique_id=1989296658 instance=ExtResource("3_quc1l")]
+layout_mode = 1
 text = "log[char=2099]x"
 
 [node name="NaturalLog" parent="SpecialOperations/GridContainer" unique_id=759831983 instance=ExtResource("3_wfhry")]
 layout_mode = 2
-text = "ln(x)"
+text = "lnx"
 
-[node name="EulerConstant" parent="SpecialOperations/GridContainer" unique_id=1122389869 instance=ExtResource("3_wfhry")]
-layout_mode = 2
-text = "e"
-
-[node name="Pi" parent="SpecialOperations/GridContainer" unique_id=1649526882 instance=ExtResource("3_wfhry")]
+[node name="Exponential" parent="SpecialOperations/GridContainer" unique_id=858996711 instance=ExtResource("3_wfhry")]
 layout_mode = 2
 
-[node name="CalculatorTextLabel" parent="SpecialOperations/GridContainer/Pi" unique_id=1194101133 instance=ExtResource("3_quc1l")]
+[node name="CalculatorTextLabel" parent="SpecialOperations/GridContainer/Exponential" unique_id=727612997 instance=ExtResource("3_quc1l")]
 layout_mode = 1
-text = "[char=03C0]"
+text = "e[char=207F]"
 
 [node name="Operations" type="VBoxContainer" parent="SpecialOperations" unique_id=1651103325]
 layout_mode = 1
@@ -288,3 +294,117 @@ anchor_right = 0.85
 anchor_bottom = 0.8
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="Pi" parent="SpecialOperations/Operations" unique_id=1649526882 instance=ExtResource("3_wfhry")]
+layout_mode = 2
+
+[node name="CalculatorTextLabel" parent="SpecialOperations/Operations/Pi" unique_id=1194101133 instance=ExtResource("3_quc1l")]
+layout_mode = 1
+text = "[char=03C0]"
+
+[node name="EulersNumber" parent="SpecialOperations/Operations" unique_id=1122389869 instance=ExtResource("3_wfhry")]
+layout_mode = 2
+text = "e"
+
+[node name="Parenthesis" parent="SpecialOperations/Operations" unique_id=1875124584 instance=ExtResource("3_wfhry")]
+layout_mode = 2
+text = "( )"
+
+[node name="AllClear" parent="SpecialOperations/Operations" unique_id=436207858 instance=ExtResource("3_wfhry")]
+layout_mode = 2
+text = "AC"
+
+[node name="FunctionOperations" type="Control" parent="." unique_id=1110869029]
+visible = false
+layout_mode = 3
+anchor_top = 0.4
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="GridContainer" type="GridContainer" parent="FunctionOperations" unique_id=1312682141]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.01
+anchor_right = 0.65
+anchor_bottom = 0.9
+columns = 3
+
+[node name="Sine" parent="FunctionOperations/GridContainer" unique_id=1312497713 instance=ExtResource("3_wfhry")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "sinx"
+
+[node name="Cosine" parent="FunctionOperations/GridContainer" unique_id=1560305341 instance=ExtResource("3_wfhry")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "cosx
+"
+
+[node name="Tangent" parent="FunctionOperations/GridContainer" unique_id=313374935 instance=ExtResource("3_wfhry")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "tanx
+"
+
+[node name="Arcsine" parent="FunctionOperations/GridContainer" unique_id=233300510 instance=ExtResource("3_wfhry")]
+layout_mode = 2
+
+[node name="CalculatorTextLabel" parent="FunctionOperations/GridContainer/Arcsine" unique_id=1455753654 instance=ExtResource("3_quc1l")]
+layout_mode = 1
+theme_override_font_sizes/normal_font_size = 29
+text = "sin[char=207B][char=00B9]x"
+
+[node name="Arccosine" parent="FunctionOperations/GridContainer" unique_id=1891363987 instance=ExtResource("3_wfhry")]
+layout_mode = 2
+
+[node name="CalculatorTextLabel" parent="FunctionOperations/GridContainer/Arccosine" unique_id=1654616474 instance=ExtResource("3_quc1l")]
+layout_mode = 1
+theme_override_font_sizes/normal_font_size = 29
+text = "cos[char=207B][char=00B9]x"
+
+[node name="Arctangent" parent="FunctionOperations/GridContainer" unique_id=1660370283 instance=ExtResource("3_wfhry")]
+layout_mode = 2
+
+[node name="CalculatorTextLabel" parent="FunctionOperations/GridContainer/Arctangent" unique_id=1729821045 instance=ExtResource("3_quc1l")]
+layout_mode = 1
+theme_override_font_sizes/normal_font_size = 29
+text = "tan[char=207B][char=00B9]x"
+
+[node name="CalculatorButton" parent="FunctionOperations/GridContainer" unique_id=1206787053 instance=ExtResource("3_wfhry")]
+layout_mode = 2
+
+[node name="CalculatorButton2" parent="FunctionOperations/GridContainer" unique_id=1138567549 instance=ExtResource("3_wfhry")]
+layout_mode = 2
+
+[node name="CalculatorButton3" parent="FunctionOperations/GridContainer" unique_id=755756612 instance=ExtResource("3_wfhry")]
+layout_mode = 2
+
+[node name="Operations" type="VBoxContainer" parent="FunctionOperations" unique_id=700489413]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.7
+anchor_top = 0.01
+anchor_right = 0.85
+anchor_bottom = 0.8
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="FunctionOperations/Operations" unique_id=1112427475]
+layout_mode = 2
+text = "Functions"
+horizontal_alignment = 1
+
+[node name="New" parent="FunctionOperations/Operations" unique_id=1747804092 instance=ExtResource("3_wfhry")]
+layout_mode = 2
+text = "new"
+
+[node name="Insert" parent="FunctionOperations/Operations" unique_id=1010698078 instance=ExtResource("3_wfhry")]
+layout_mode = 2
+text = "insert
+"
+
+[node name="Edit" parent="FunctionOperations/Operations" unique_id=1314173241 instance=ExtResource("3_wfhry")]
+layout_mode = 2
+text = "edit
+"

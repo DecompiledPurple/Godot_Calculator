@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://e13k6nfytm62"]
 
 [ext_resource type="PackedScene" uid="uid://bt6q6c7nhcaw5" path="res://calculator.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://dvpmk43goql33" path="res://functions_display.tscn" id="2_0xm2m"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_7dm0k"]
 
@@ -16,5 +17,11 @@ mesh = SubResource("BoxMesh_7dm0k")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=604623665]
 
-[node name="Window" parent="." unique_id=294026827 instance=ExtResource("1_ig7tw")]
+[node name="Calculator" parent="." unique_id=294026827 instance=ExtResource("1_ig7tw")]
 size = Vector2i(105, 157)
+
+[node name="FunctionsDisplay" parent="." unique_id=756579373 node_paths=PackedStringArray("target_calculator") instance=ExtResource("2_0xm2m")]
+position = Vector2i(150, 36)
+size = Vector2i(93, 140)
+content_scale_stretch = 0
+target_calculator = NodePath("../Calculator")

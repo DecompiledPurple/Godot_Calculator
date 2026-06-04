@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://dvpmk43goql33"]
+
+[ext_resource type="Script" uid="uid://iqhetv13idwa" path="res://functions_display.gd" id="1_og3hk"]
+
+[node name="FunctionsDisplay" type="Window" unique_id=756579373]
+oversampling_override = 1.0
+position = Vector2i(0, 36)
+size = Vector2i(420, 630)
+content_scale_size = Vector2i(420, 630)
+content_scale_mode = 2
+content_scale_aspect = 4
+content_scale_stretch = 1
+script = ExtResource("1_og3hk")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=1052935535]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Screens" type="VBoxContainer" parent="ScrollContainer" unique_id=717585309]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
