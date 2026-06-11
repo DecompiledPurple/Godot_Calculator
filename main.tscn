@@ -21,7 +21,6 @@ mesh = SubResource("BoxMesh_7dm0k")
 size = Vector2i(105, 157)
 
 [node name="FunctionsDisplay" parent="." unique_id=756579373 node_paths=PackedStringArray("target_calculator") instance=ExtResource("2_0xm2m")]
-position = Vector2i(150, 36)
 size = Vector2i(93, 140)
 content_scale_stretch = 0
 target_calculator = NodePath("../Calculator")

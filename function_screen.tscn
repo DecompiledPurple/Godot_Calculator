@@ -1,36 +1,90 @@
 [gd_scene format=3 uid="uid://d3jaip51s1ff4"]
 
-[ext_resource type="PackedScene" uid="uid://bhlvypkib21gi" path="res://screen.tscn" id="1_iv2tw"]
+[ext_resource type="Script" uid="uid://cbwkmnif6avmj" path="res://function_screen.gd" id="1_iv2tw"]
 [ext_resource type="PackedScene" uid="uid://dhguy4r4r5eoj" path="res://calculator_button.tscn" id="2_1uhfp"]
 
-[node name="FunctionScreen" unique_id=65504639 instance=ExtResource("1_iv2tw")]
-offset_right = 617.0
+[sub_resource type="FontVariation" id="FontVariation_iv2tw"]
+baseline_offset = 0.5
 
-[node name="Options" type="AspectRatioContainer" parent="." index="5" unique_id=386583902]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x3hvq"]
+bg_color = Color(1, 1, 1, 1)
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7cosj"]
+bg_color = Color(0.9254902, 0.9254902, 0.9254902, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vouji"]
+bg_color = Color(0.9254902, 0.9254902, 0.9254902, 1)
+
+[node name="FunctionScreen" type="ColorRect" unique_id=400539765]
+custom_minimum_size = Vector2(0, 100)
+offset_right = 420.0
+offset_bottom = 100.0
+script = ExtResource("1_iv2tw")
+
+[node name="FunctionName" type="Label" parent="." unique_id=1052203433]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.8
-anchor_top = 0.1
-anchor_right = 0.98
-anchor_bottom = 0.4
-ratio = 2.0
-alignment_horizontal = 2
-alignment_vertical = 0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Options" index="0" unique_id=2095971407]
-layout_mode = 2
-
-[node name="Edit" parent="Options/HBoxContainer" index="0" unique_id=1686664645 instance=ExtResource("2_1uhfp")]
-layout_mode = 2
-
-[node name="Delete" parent="Options/HBoxContainer" index="1" unique_id=1869121610 instance=ExtResource("2_1uhfp")]
-layout_mode = 2
-
-[node name="FunctionName" type="Label" parent="." index="6" unique_id=1052203433]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.3
-anchor_bottom = 0.3
+anchor_right = 0.2
+anchor_bottom = 0.5
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
 text = "f(x) = "
+autowrap_mode = 3
+
+[node name="Options" type="AspectRatioContainer" parent="." unique_id=386583902]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.01
+anchor_top = 0.5
+anchor_right = 0.19
+anchor_bottom = 1.0
+ratio = 2.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Options" unique_id=2095971407]
+layout_mode = 2
+
+[node name="Edit" parent="Options/HBoxContainer" unique_id=1686664645 instance=ExtResource("2_1uhfp")]
+layout_mode = 2
+mouse_filter = 1
+theme_override_font_sizes/font_size = 15
+text = "Edit"
+
+[node name="Delete" parent="Options/HBoxContainer" unique_id=1869121610 instance=ExtResource("2_1uhfp")]
+layout_mode = 2
+mouse_filter = 1
+theme_override_font_sizes/font_size = 15
+text = "Del"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=1393615580]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.2
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Screen" type="LineEdit" parent="ScrollContainer" unique_id=65504639]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_uneditable_color = Color(0.27058825, 0.27058825, 0.27058825, 1)
+theme_override_colors/font_selected_color = Color(0.46618086, 0.4661808, 0.4661808, 0.23921569)
+theme_override_colors/selection_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = SubResource("FontVariation_iv2tw")
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxFlat_x3hvq")
+theme_override_styles/read_only = SubResource("StyleBoxFlat_7cosj")
+theme_override_styles/focus = SubResource("StyleBoxFlat_vouji")
+alignment = 1
+editable = false
+expand_to_text_length = true
+context_menu_enabled = false
+emoji_menu_enabled = false
+shortcut_keys_enabled = false
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="pressed" from="Options/HBoxContainer/Edit" to="." method="_on_edit_pressed"]
+[connection signal="pressed" from="Options/HBoxContainer/Delete" to="." method="_on_delete_pressed"]

@@ -1,18 +1,30 @@
 [gd_scene format=3 uid="uid://bhlvypkib21gi"]
 
-[node name="Screen" type="TextEdit" unique_id=65504639]
-offset_right = 341.0
-offset_bottom = 154.0
-size_flags_horizontal = 3
-theme_override_colors/caret_color = Color(0, 0, 0, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x3hvq"]
+bg_color = Color(1, 1, 1, 1)
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7cosj"]
+bg_color = Color(0.92389965, 0.92389965, 0.92389965, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vouji"]
+bg_color = Color(1, 1, 1, 1)
+border_width_top = 5
+border_width_bottom = 5
+border_color = Color(0.23633423, 0.23633423, 0.2363342, 1)
+
+[node name="Screen" type="LineEdit" unique_id=1136783118]
+anchors_preset = -1
+anchor_right = 0.4
+anchor_bottom = 0.3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_readonly_color = Color(0, 0, 0, 1)
-theme_override_colors/background_color = Color(0.8047426, 0.80474263, 0.8047426, 1)
-theme_override_font_sizes/font_size = 50
+theme_override_colors/font_uneditable_color = Color(0.27058825, 0.27058825, 0.27058825, 1)
+theme_override_colors/font_selected_color = Color(0.46618086, 0.4661808, 0.4661808, 0.23921569)
+theme_override_colors/selection_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxFlat_x3hvq")
+theme_override_styles/read_only = SubResource("StyleBoxFlat_7cosj")
+theme_override_styles/focus = SubResource("StyleBoxFlat_vouji")
 context_menu_enabled = false
 emoji_menu_enabled = false
 shortcut_keys_enabled = false
-autowrap_mode = 1
-virtual_keyboard_enabled = false
-scroll_smooth = true
-scroll_fit_content_height = true

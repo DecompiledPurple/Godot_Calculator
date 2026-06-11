@@ -30,6 +30,8 @@ var special_buttons : Dictionary[String, Callable] = {
 	"Arccosine" : on_arccosine_pressed,
 	"Arctangent" : on_arctangent_pressed,
 	"New" : on_new_pressed,
+	"Insert" : on_insert_pressed,
+	
 }
 var keyboard_shortcuts : Dictionary[String, Callable] = {
 	"\n" : on_equals_pressed,
@@ -40,11 +42,13 @@ var keyboard_shortcuts : Dictionary[String, Callable] = {
 
 var expression = Expression.new()
 var screen_scene = preload("res://screen.tscn")
-signal evaluate(input: String)
+
+signal _evaluate(input: String)
 signal new_function(name: String, content: String)
+signal insert_function(function_name: String, input_value: int)
 
 @onready var display: ScrollContainer = $Display
-@onready var used_screen : TextEdit = $Display/VBoxContainer/Screen
+@onready var used_screen : LineEdit = $Display/VBoxContainer/Screen
 @onready var scrollbar : VScrollBar = display.get_v_scroll_bar()
 @onready var basic_operations : Control = $BasicOperations
 @onready var special_operations : Control = $SpecialOperations
@@ -70,6 +74,7 @@ func _ready() -> void:
 			button.pressed.connect(on_button_pressed.bind(button.text))
 	
 	used_screen.text_changed.connect(on_text_changed)
+	used_screen.text_submitted.connect(on_equals_pressed)
 	scrollbar.changed.connect(on_scrollbar_changed)
 
 func append_descendant_buttons(node: Node) -> void:
@@ -90,7 +95,7 @@ func on_button_pressed(key: String) -> void:
 	used_screen.grab_focus()
 
 
-func on_text_changed() -> void:
+func on_text_changed(_text_added: String) -> void:
 	for shortcut in keyboard_shortcuts:
 		if used_screen.text.contains(shortcut):
 			if shortcut == "=" and is_taking_input:
@@ -121,36 +126,42 @@ func skip_to_end_line() -> void:
 	used_screen.set_caret_column(used_screen.text.length())
 
 func create_screen() -> void:
-	var new_screen : TextEdit = screen_scene.instantiate()
+	var new_screen : LineEdit = screen_scene.instantiate()
 	$Display/VBoxContainer.add_child(new_screen)
 	new_screen.grab_focus()
 	used_screen.disconnect("text_changed", on_text_changed)
+	used_screen.disconnect("text_submitted", on_equals_pressed)
 	used_screen.editable = false
 	used_screen = new_screen
 	used_screen.text_changed.connect(on_text_changed)
+	used_screen.text_submitted.connect(on_equals_pressed)
 
-func take_input(varName: String) -> String:
-	var former_screen: TextEdit = used_screen
+func take_input(var_name: String, override_conent: String = "") -> String:
+	var former_screen: LineEdit = used_screen
 	input_index += 1
 	var index = input_index
 	is_taking_input = true
 	
 	create_screen()
-	var new_input_screen: TextEdit = used_screen
-	new_input_screen.add_theme_color_override("background_color", Color.DIM_GRAY)
+	var new_input_screen: LineEdit = used_screen
+	var style_box: StyleBox = StyleBoxFlat.new()
+	style_box.bg_color = Color.WEB_GRAY
+	new_input_screen.add_theme_stylebox_override("focus", style_box)
+	new_input_screen.add_theme_stylebox_override("normal", style_box)
 	new_input_screen.add_theme_color_override("font_color", Color.WHITE)
-	new_input_screen.text = varName + "="
+	new_input_screen.text = var_name + "=" + override_conent
 	new_input_screen.set_caret_column(new_input_screen.text.find("=") + 1)
 	
-	var input: String = await evaluate
+	var input: String = await _evaluate
 	while index != input_index:
-		input = await evaluate
+		input = await _evaluate
 	
 	input_index -= 1
 	new_input_screen.queue_free()
 	used_screen = former_screen
 	former_screen.editable = true
 	former_screen.text_changed.connect(on_text_changed)
+	former_screen.text_submitted.connect(on_equals_pressed)
 	former_screen.grab_focus()
 	
 	if input != "error":
@@ -159,37 +170,42 @@ func take_input(varName: String) -> String:
 		return input
 	else:
 		#assume error or nothing inputed
-		input = await take_input(varName)
+		input = await take_input(var_name)
 		return input
 
+func parse_expression(text_input: String) -> Variant:
+	var error: Error = expression.parse(text_input)
+	if not error == OK:
+		return expression.get_error_text()
+	else:
+		return expression.execute()
 #endregion
 
 #region Button Operations
-func on_equals_pressed() -> void:
-	var evaluation_screen: TextEdit = used_screen
+func on_equals_pressed(text_input: String = used_screen.text) -> void:
+	var evaluation_screen: LineEdit = used_screen
 	if is_taking_input:
-		var cut_index: int = evaluation_screen.text.find("=")
-		evaluation_screen.text = evaluation_screen.text.substr(cut_index+1)
+		var cut_index: int = text_input.find("=")
+		text_input = text_input.substr(cut_index+1)
 	else:
 		create_screen()
-		
-	var error : Error = expression.parse(evaluation_screen.text)
-	if error != OK:
-		evaluation_screen.text = expression.get_error_text()
-		evaluate.emit("error")
+	
+	var answer: Variant = parse_expression(text_input)
+	
+	if answer is String:
+		evaluation_screen.text = answer
+		_evaluate.emit("error")
 	else:
-		last_answer = expression.execute()
-		evaluate.emit(evaluation_screen.text)
-		evaluation_screen.text += " = " + str(last_answer)
+		last_answer = answer
+		_evaluate.emit(text_input)
+		evaluation_screen.text = "= " + str(answer)
 	skip_to_end_line()
 
 func on_all_clear_pressed() -> void:
 	if is_taking_input:
 		return
 	for child in $Display/VBoxContainer.get_children():
-		if child is TextEdit:
-			
-			#$Display/VBoxContainer.remove_child(child)
+		if child is LineEdit:
 			child.queue_free()
 	create_screen()
 
@@ -289,7 +305,13 @@ func on_arctangent_pressed() -> void:
 	skip_to_end_line()
 
 func on_new_pressed() -> void:
-	var name: String = await take_input("function name")
-	var contents: String = await take_input(name + "(x)")
-	new_function.emit(name, contents)
+	var function_name: String = await take_input("function name")
+	var contents: String = await take_input(function_name + "(x)")
+	new_function.emit(function_name, contents)
+
+func on_insert_pressed() -> void:
+	var function_name: String = await take_input("function name")
+	var input_calculation: String = await take_input(function_name + "(x) -> x")
+	var input_value: float = parse_expression(input_calculation) # expression check already.
+	insert_function.emit(function_name, input_value)
 #endregion

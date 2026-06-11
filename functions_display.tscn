@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dvpmk43goql33"]
 
 [ext_resource type="Script" uid="uid://iqhetv13idwa" path="res://functions_display.gd" id="1_og3hk"]
+[ext_resource type="PackedScene" uid="uid://d3jaip51s1ff4" path="res://function_screen.tscn" id="2_7vrd7"]
 
 [node name="FunctionsDisplay" type="Window" unique_id=756579373]
 oversampling_override = 1.0
@@ -19,9 +20,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
 
 [node name="Screens" type="VBoxContainer" parent="ScrollContainer" unique_id=717585309]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
+
+[node name="FunctionScreen" parent="ScrollContainer/Screens" unique_id=400539765 instance=ExtResource("2_7vrd7")]
+layout_mode = 2
