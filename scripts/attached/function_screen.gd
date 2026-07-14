@@ -16,6 +16,7 @@ func _on_edit_pressed() -> void:
 	edit_pressed.emit(name, content)
 
 func _on_delete_pressed() -> void:
+	CalculatorFunctions.math_functions.erase(name)
 	delete_pressed.emit()
 	queue_free()
 
@@ -26,5 +27,6 @@ func _on_mouse_exited() -> void:
 	options.visible = false
 
 func change_content(new_content: String) -> void:
+	CalculatorFunctions.math_functions[name] = new_content
 	content = new_content
 	screen.text = new_content

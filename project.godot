@@ -15,6 +15,11 @@ run/main_scene="uid://e13k6nfytm62"
 config/features=PackedStringArray("4.6", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+CalculatorFunctions="*uid://cdsgn3bqt4hx4"
+CalculatorSettings="*uid://dei5jsq0ggyqq"
+
 [dotnet]
 
 project/assembly_name="Calculator"

@@ -31,8 +31,10 @@ var special_buttons : Dictionary[String, Callable] = {
 	"Arctangent" : on_arctangent_pressed,
 	"New" : on_new_pressed,
 	"Insert" : on_insert_pressed,
-	
+	"Graph" : on_graph_pressed,
+	"Limit" : on_limit_pressed,
 }
+
 var keyboard_shortcuts : Dictionary[String, Callable] = {
 	"\n" : on_equals_pressed,
 	"=" : on_equals_pressed,
@@ -41,11 +43,12 @@ var keyboard_shortcuts : Dictionary[String, Callable] = {
 }
 
 var expression = Expression.new()
-var screen_scene = preload("res://screen.tscn")
+var screen_scene = preload("res://Scenes/screen.tscn")
 
 signal _evaluate(input: String)
 signal new_function(name: String, content: String)
-signal insert_function(function_name: String, input_value: int)
+signal insert_function(function_name: String, input_value: String)
+signal graph_function(function_name: String)
 
 @onready var display: ScrollContainer = $Display
 @onready var used_screen : LineEdit = $Display/VBoxContainer/Screen
@@ -54,9 +57,10 @@ signal insert_function(function_name: String, input_value: int)
 @onready var special_operations : Control = $SpecialOperations
 @onready var function_operations : Control = $FunctionOperations
 
+var skip_error_check: bool = false
+
 var last_answer: Variant
 var last_scroll_length: float = 0
-var is_taking_input: bool = false
 var input_index: int = 0
 
 #region General Use
@@ -88,6 +92,7 @@ func on_scrollbar_changed() -> void:
 	if scrollbar.max_value == last_scroll_length:
 		return
 	last_scroll_length = scrollbar.max_value
+	@warning_ignore("narrowing_conversion")
 	display.scroll_vertical = scrollbar.max_value
 	
 func on_button_pressed(key: String) -> void:
@@ -98,7 +103,7 @@ func on_button_pressed(key: String) -> void:
 func on_text_changed(_text_added: String) -> void:
 	for shortcut in keyboard_shortcuts:
 		if used_screen.text.contains(shortcut):
-			if shortcut == "=" and is_taking_input:
+			if shortcut == "=" and CalculatorFunctions.is_taking_input:
 				continue
 			used_screen.text = used_screen.text.replace(shortcut,"")
 			keyboard_shortcuts[shortcut].call()
@@ -136,11 +141,13 @@ func create_screen() -> void:
 	used_screen.text_changed.connect(on_text_changed)
 	used_screen.text_submitted.connect(on_equals_pressed)
 
-func take_input(var_name: String, override_conent: String = "") -> String:
+func take_input(var_name: String, skip_error_handling: bool = false, override_content: String = "") -> String:
 	var former_screen: LineEdit = used_screen
 	input_index += 1
 	var index = input_index
-	is_taking_input = true
+	CalculatorFunctions.is_taking_input = true
+	if skip_error_handling:
+		skip_error_check = true
 	
 	create_screen()
 	var new_input_screen: LineEdit = used_screen
@@ -149,8 +156,11 @@ func take_input(var_name: String, override_conent: String = "") -> String:
 	new_input_screen.add_theme_stylebox_override("focus", style_box)
 	new_input_screen.add_theme_stylebox_override("normal", style_box)
 	new_input_screen.add_theme_color_override("font_color", Color.WHITE)
-	new_input_screen.text = var_name + "=" + override_conent
 	new_input_screen.set_caret_column(new_input_screen.text.find("=") + 1)
+	
+	new_input_screen.text = var_name + "=" 
+	new_input_screen.text += override_content
+	skip_to_end_line()
 	
 	var input: String = await _evaluate
 	while index != input_index:
@@ -164,9 +174,10 @@ func take_input(var_name: String, override_conent: String = "") -> String:
 	former_screen.text_submitted.connect(on_equals_pressed)
 	former_screen.grab_focus()
 	
-	if input != "error":
+	if not input == "error" or skip_error_handling:
 		if input_index == 0:
-			is_taking_input = false
+			CalculatorFunctions.is_taking_input = false
+			skip_error_check = false
 		return input
 	else:
 		#assume error or nothing inputed
@@ -178,31 +189,34 @@ func parse_expression(text_input: String) -> Variant:
 	if not error == OK:
 		return expression.get_error_text()
 	else:
-		return expression.execute()
+		return expression.execute([], CalculatorFunctions)
 #endregion
 
 #region Button Operations
 func on_equals_pressed(text_input: String = used_screen.text) -> void:
 	var evaluation_screen: LineEdit = used_screen
-	if is_taking_input:
+	if CalculatorFunctions.is_taking_input:
 		var cut_index: int = text_input.find("=")
 		text_input = text_input.substr(cut_index+1)
 	else:
 		create_screen()
 	
-	var answer: Variant = parse_expression(text_input)
-	
-	if answer is String:
-		evaluation_screen.text = answer
-		_evaluate.emit("error")
+	if not skip_error_check:
+		var answer: Variant = parse_expression(text_input)
+		
+		if answer is String:
+			evaluation_screen.text = answer
+			_evaluate.emit("error")
+		else:
+			last_answer = answer
+			_evaluate.emit(text_input)
+			evaluation_screen.text = "= " + str(answer)
 	else:
-		last_answer = answer
-		_evaluate.emit(text_input)
-		evaluation_screen.text = "= " + str(answer)
+			_evaluate.emit(text_input)
 	skip_to_end_line()
 
 func on_all_clear_pressed() -> void:
-	if is_taking_input:
+	if CalculatorFunctions.is_taking_input:
 		return
 	for child in $Display/VBoxContainer.get_children():
 		if child is LineEdit:
@@ -210,7 +224,7 @@ func on_all_clear_pressed() -> void:
 	create_screen()
 
 func on_clear_pressed() -> void:
-	if is_taking_input:
+	if CalculatorFunctions.is_taking_input:
 		var input_text_index: int = used_screen.text.find("=")
 		used_screen.text = used_screen.text.substr(0, input_text_index + 1)
 	else:
@@ -245,13 +259,13 @@ func on_base_log_pressed() -> void:
 
 func on_squared_pressed() -> void:
 	var x: String = await take_input("x")
-	used_screen.text += "(" + x + "**2)"
+	used_screen.text += "(" + x + ")**2"
 	skip_to_end_line()
 
 func on_power_of_pressed() -> void:
 	var x: String = await take_input("x")
 	var n: String = await take_input("n")
-	used_screen.text += "(" + x + "**" + n + ")"
+	used_screen.text += "(" + x + ")**" + n
 	skip_to_end_line()
 
 func on_pi_pressed() -> void:
@@ -305,13 +319,31 @@ func on_arctangent_pressed() -> void:
 	skip_to_end_line()
 
 func on_new_pressed() -> void:
-	var function_name: String = await take_input("function name")
-	var contents: String = await take_input(function_name + "(x)")
+	var skip_errors: bool = true
+	var function_name: String = await take_input("function name", skip_errors)
+	var contents: String = await take_input(function_name + "(x)", skip_errors)
 	new_function.emit(function_name, contents)
 
 func on_insert_pressed() -> void:
-	var function_name: String = await take_input("function name")
-	var input_calculation: String = await take_input(function_name + "(x) -> x")
-	var input_value: float = parse_expression(input_calculation) # expression check already.
-	insert_function.emit(function_name, input_value)
+	var skip_errors: bool = true
+	var function_name: String = await take_input("function name", skip_errors)
+	var input_calculation: String = await take_input(function_name + "(x) -> x", skip_errors)
+	insert_function.emit(function_name, input_calculation)
+
+func on_graph_pressed() -> void:
+	var skip_errors: bool = true
+	var function_name: String = await take_input("function name", skip_errors)
+	graph_function.emit(function_name)
+
+func on_limit_pressed() -> void:
+	var skip_errors: bool = true
+	var function_name: String = await take_input("function name", skip_errors)
+	var n: String = await take_input("n")
+	used_screen.text = "lim(\"" + function_name + "\",\"" + n + "\")"
+	skip_to_end_line()
+
 #endregion
+
+
+func _on_close_requested() -> void:
+	visible = false

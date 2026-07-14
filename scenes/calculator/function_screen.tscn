@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://d3jaip51s1ff4"]
 
-[ext_resource type="Script" uid="uid://cbwkmnif6avmj" path="res://function_screen.gd" id="1_iv2tw"]
-[ext_resource type="PackedScene" uid="uid://dhguy4r4r5eoj" path="res://calculator_button.tscn" id="2_1uhfp"]
+[ext_resource type="Script" uid="uid://cbwkmnif6avmj" path="res://scripts/attached/function_screen.gd" id="1_iv2tw"]
+[ext_resource type="PackedScene" uid="uid://dhguy4r4r5eoj" path="res://scenes/calculator/calculator_button.tscn" id="2_1uhfp"]
 
 [sub_resource type="FontVariation" id="FontVariation_iv2tw"]
 baseline_offset = 0.5

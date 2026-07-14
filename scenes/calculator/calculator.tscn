@@ -1,9 +1,13 @@
 [gd_scene format=3 uid="uid://bt6q6c7nhcaw5"]
 
-[ext_resource type="Script" uid="uid://bf0km6bdrxr0q" path="res://calculator.gd" id="1_2r0k0"]
-[ext_resource type="PackedScene" uid="uid://bhlvypkib21gi" path="res://screen.tscn" id="2_wfhry"]
-[ext_resource type="PackedScene" uid="uid://o0ip1x185mx" path="res://calculator_text_label.tscn" id="3_quc1l"]
-[ext_resource type="PackedScene" uid="uid://dhguy4r4r5eoj" path="res://calculator_button.tscn" id="3_wfhry"]
+[ext_resource type="Script" uid="uid://bf0km6bdrxr0q" path="res://scripts/attached/calculator.gd" id="1_2r0k0"]
+[ext_resource type="PackedScene" uid="uid://bhlvypkib21gi" path="res://scenes/screen.tscn" id="2_wfhry"]
+[ext_resource type="PackedScene" uid="uid://o0ip1x185mx" path="res://scenes/calculator/calculator_text_label.tscn" id="3_quc1l"]
+[ext_resource type="PackedScene" uid="uid://dhguy4r4r5eoj" path="res://scenes/calculator/calculator_button.tscn" id="3_wfhry"]
+
+[sub_resource type="GDScript" id="GDScript_rhymq"]
+script/source = "extends Node
+"
 
 [node name="Calculator" type="Window" unique_id=294026827]
 oversampling_override = 1.0
@@ -78,6 +82,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="BasicOperations" type="Control" parent="." unique_id=936144439]
+visible = false
 layout_mode = 3
 anchor_top = 0.4
 anchor_right = 1.0
@@ -315,7 +320,6 @@ layout_mode = 2
 text = "AC"
 
 [node name="FunctionOperations" type="Control" parent="." unique_id=1110869029]
-visible = false
 layout_mode = 3
 anchor_top = 0.4
 anchor_right = 1.0
@@ -371,8 +375,23 @@ layout_mode = 1
 theme_override_font_sizes/normal_font_size = 29
 text = "tan[char=207B][char=00B9]x"
 
-[node name="CalculatorButton" parent="FunctionOperations/GridContainer" unique_id=1206787053 instance=ExtResource("3_wfhry")]
+[node name="Limit" parent="FunctionOperations/GridContainer" unique_id=1206787053 instance=ExtResource("3_wfhry")]
 layout_mode = 2
+
+[node name="CalculatorTextLabel" parent="FunctionOperations/GridContainer/Limit" unique_id=181915637 instance=ExtResource("3_quc1l")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -41.0
+offset_top = -40.5
+offset_right = 41.0
+offset_bottom = 40.5
+theme_override_font_sizes/normal_font_size = 25
+text = "limf(x)
+x[char=2192]n"
 
 [node name="CalculatorButton2" parent="FunctionOperations/GridContainer" unique_id=1138567549 instance=ExtResource("3_wfhry")]
 layout_mode = 2
@@ -408,3 +427,13 @@ text = "insert
 layout_mode = 2
 text = "edit
 "
+
+[node name="Graph" parent="FunctionOperations/Operations" unique_id=964616172 instance=ExtResource("3_wfhry")]
+layout_mode = 2
+text = "graph
+"
+
+[node name="CalculatorFunctions" type="Node" parent="." unique_id=1851393404]
+script = SubResource("GDScript_rhymq")
+
+[connection signal="close_requested" from="." to="." method="_on_close_requested"]

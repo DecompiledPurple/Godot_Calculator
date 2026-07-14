@@ -1,0 +1,91 @@
+[gd_scene format=3 uid="uid://e13k6nfytm62"]
+
+[ext_resource type="PackedScene" uid="uid://bt6q6c7nhcaw5" path="res://scenes/calculator/calculator.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://dvpmk43goql33" path="res://scenes/calculator/functions_display.tscn" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://copafafojtgnw" path="res://scenes/main_control.gd" id="2_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://chljyoq14m8gt" path="res://scenes/calculator/graph.tscn" id="3_8gbba"]
+[ext_resource type="PackedScene" uid="uid://biendfa4dwkhn" path="res://scenes/graph_settings.tscn" id="3_kry3j"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_7dm0k"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_8gbba"]
+viewport_path = NodePath("Sprite3D/SubViewport")
+
+[node name="Node" type="Node" unique_id=1103378696]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=795961096]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+current = true
+fov = 108.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=893439764]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.93147, -3.705843)
+mesh = SubResource("BoxMesh_7dm0k")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=2036699073]
+texture = SubResource("ViewportTexture_8gbba")
+
+[node name="SubViewport" type="SubViewport" parent="Sprite3D" unique_id=173437799]
+disable_3d = true
+size = Vector2i(1000, 1000)
+
+[node name="Graph" parent="Sprite3D/SubViewport" unique_id=363277246 node_paths=PackedStringArray("target_calculator") instance=ExtResource("3_8gbba")]
+target_calculator = NodePath("../../../MainControl/Calculator")
+
+[node name="MainControl" type="Control" parent="." unique_id=48407842]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_tbgi4")
+
+[node name="GraphSettings" parent="MainControl" unique_id=1280518401 node_paths=PackedStringArray("window_items") instance=ExtResource("3_kry3j")]
+visible = false
+top_level = true
+layout_mode = 1
+window_items = [NodePath("../Calculator"), NodePath("../FunctionsDisplay")]
+
+[node name="Calculator" parent="MainControl" unique_id=294026827 instance=ExtResource("1_ig7tw")]
+size = Vector2i(105, 157)
+
+[node name="FunctionsDisplay" parent="MainControl" unique_id=756579373 node_paths=PackedStringArray("target_calculator") instance=ExtResource("2_0xm2m")]
+size = Vector2i(93, 140)
+content_scale_stretch = 0
+target_calculator = NodePath("../Calculator")
+
+[node name="SettingsContainer" type="HBoxContainer" parent="MainControl" unique_id=1252201489]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.3
+anchor_bottom = 0.07
+
+[node name="ShowGraphSettings" type="Button" parent="MainControl/SettingsContainer" unique_id=1424932513]
+layout_mode = 2
+text = "Graph Settings"
+
+[node name="ShowGraphSettings2" type="Button" parent="MainControl/SettingsContainer" unique_id=425708889]
+layout_mode = 2
+text = "Visualize"
+
+[node name="WindowsContainer" type="HBoxContainer" parent="MainControl" unique_id=1102050839]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.7
+anchor_right = 1.0
+anchor_bottom = 0.07
+alignment = 2
+
+[node name="ShowCalculator" type="Button" parent="MainControl/WindowsContainer" unique_id=440487357]
+layout_mode = 2
+text = "Show Calculator"
+
+[node name="ShowFunctionsDisplay" type="Button" parent="MainControl/WindowsContainer" unique_id=671256841]
+layout_mode = 2
+text = "Show Functions"
+
+[connection signal="pressed" from="MainControl/SettingsContainer/ShowGraphSettings" to="MainControl" method="_on_show_graph_settings_pressed"]
+[connection signal="pressed" from="MainControl/SettingsContainer/ShowGraphSettings2" to="MainControl" method="_on_show_graph_settings_pressed"]
+[connection signal="pressed" from="MainControl/WindowsContainer/ShowCalculator" to="MainControl" method="_on_show_calculator_pressed"]
+[connection signal="pressed" from="MainControl/WindowsContainer/ShowFunctionsDisplay" to="MainControl" method="_on_show_functions_display_pressed"]

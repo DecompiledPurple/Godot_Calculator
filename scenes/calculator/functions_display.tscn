@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://dvpmk43goql33"]
 
-[ext_resource type="Script" uid="uid://iqhetv13idwa" path="res://functions_display.gd" id="1_og3hk"]
-[ext_resource type="PackedScene" uid="uid://d3jaip51s1ff4" path="res://function_screen.tscn" id="2_7vrd7"]
+[ext_resource type="Script" uid="uid://iqhetv13idwa" path="res://scripts/attached/functions_display.gd" id="1_og3hk"]
 
 [node name="FunctionsDisplay" type="Window" unique_id=756579373]
 oversampling_override = 1.0
@@ -25,5 +24,4 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="FunctionScreen" parent="ScrollContainer/Screens" unique_id=400539765 instance=ExtResource("2_7vrd7")]
-layout_mode = 2
+[connection signal="close_requested" from="." to="." method="_on_close_requested"]
