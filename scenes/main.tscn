@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://copafafojtgnw" path="res://scenes/main_control.gd" id="2_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://chljyoq14m8gt" path="res://scenes/calculator/graph.tscn" id="3_8gbba"]
 [ext_resource type="PackedScene" uid="uid://biendfa4dwkhn" path="res://scenes/graph_settings.tscn" id="3_kry3j"]
+[ext_resource type="PackedScene" uid="uid://dohmmb2hcseey" path="res://scenes/limit_visual.tscn" id="6_tefeu"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_7dm0k"]
 
@@ -29,8 +30,10 @@ texture = SubResource("ViewportTexture_8gbba")
 disable_3d = true
 size = Vector2i(1000, 1000)
 
-[node name="Graph" parent="Sprite3D/SubViewport" unique_id=363277246 node_paths=PackedStringArray("target_calculator") instance=ExtResource("3_8gbba")]
+[node name="Graph" parent="Sprite3D/SubViewport" unique_id=363277246 node_paths=PackedStringArray("target_calculator", "visualize_button", "limit_visual") instance=ExtResource("3_8gbba")]
 target_calculator = NodePath("../../../MainControl/Calculator")
+visualize_button = NodePath("../../../MainControl/SettingsContainer/OptionButton")
+limit_visual = NodePath("../../../MainControl/LimitVisual")
 
 [node name="MainControl" type="Control" parent="." unique_id=48407842]
 layout_mode = 3
@@ -58,34 +61,46 @@ target_calculator = NodePath("../Calculator")
 [node name="SettingsContainer" type="HBoxContainer" parent="MainControl" unique_id=1252201489]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 0.3
+anchor_right = 0.25
 anchor_bottom = 0.07
 
 [node name="ShowGraphSettings" type="Button" parent="MainControl/SettingsContainer" unique_id=1424932513]
 layout_mode = 2
+size_flags_horizontal = 3
 text = "Graph Settings"
 
-[node name="ShowGraphSettings2" type="Button" parent="MainControl/SettingsContainer" unique_id=425708889]
+[node name="OptionButton" type="OptionButton" parent="MainControl/SettingsContainer" unique_id=1098831298]
 layout_mode = 2
-text = "Visualize"
+size_flags_horizontal = 3
+selected = 0
+item_count = 2
+popup/item_0/text = "Visualize"
+popup/item_0/id = 0
+popup/item_1/text = "Limits"
+popup/item_1/id = 1
 
 [node name="WindowsContainer" type="HBoxContainer" parent="MainControl" unique_id=1102050839]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.7
+anchor_left = 0.75
 anchor_right = 1.0
 anchor_bottom = 0.07
 alignment = 2
 
 [node name="ShowCalculator" type="Button" parent="MainControl/WindowsContainer" unique_id=440487357]
 layout_mode = 2
+size_flags_horizontal = 3
 text = "Show Calculator"
 
 [node name="ShowFunctionsDisplay" type="Button" parent="MainControl/WindowsContainer" unique_id=671256841]
 layout_mode = 2
+size_flags_horizontal = 3
 text = "Show Functions"
 
+[node name="LimitVisual" parent="MainControl" unique_id=946458890 instance=ExtResource("6_tefeu")]
+visible = false
+layout_mode = 1
+
 [connection signal="pressed" from="MainControl/SettingsContainer/ShowGraphSettings" to="MainControl" method="_on_show_graph_settings_pressed"]
-[connection signal="pressed" from="MainControl/SettingsContainer/ShowGraphSettings2" to="MainControl" method="_on_show_graph_settings_pressed"]
 [connection signal="pressed" from="MainControl/WindowsContainer/ShowCalculator" to="MainControl" method="_on_show_calculator_pressed"]
 [connection signal="pressed" from="MainControl/WindowsContainer/ShowFunctionsDisplay" to="MainControl" method="_on_show_functions_display_pressed"]

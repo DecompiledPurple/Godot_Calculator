@@ -185,11 +185,16 @@ func take_input(var_name: String, skip_error_handling: bool = false, override_co
 		return input
 
 func parse_expression(text_input: String) -> Variant:
+	text_input = "1.0 * " + text_input
+	# we multiply by a float to avoid rounding errors when dividing two integers
 	var error: Error = expression.parse(text_input)
 	if not error == OK:
 		return expression.get_error_text()
 	else:
-		return expression.execute([], CalculatorFunctions)
+		var answer: Variant = expression.execute([], CalculatorFunctions)
+		print(text_input)
+		print(answer)
+		return answer
 #endregion
 
 #region Button Operations
@@ -203,7 +208,6 @@ func on_equals_pressed(text_input: String = used_screen.text) -> void:
 	
 	if not skip_error_check:
 		var answer: Variant = parse_expression(text_input)
-		
 		if answer is String:
 			evaluation_screen.text = answer
 			_evaluate.emit("error")

@@ -1,0 +1,268 @@
+[gd_scene format=3 uid="uid://dohmmb2hcseey"]
+
+[ext_resource type="Script" uid="uid://n6bqppgv3lgw" path="res://scripts/attached/limit_visual.gd" id="1_78epr"]
+
+[node name="LimitVisual" type="Control" unique_id=946458890]
+layout_mode = 3
+anchor_left = 0.8
+anchor_top = 0.05
+anchor_right = 1.0
+anchor_bottom = 0.95
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_78epr")
+
+[node name="NVariable" type="ReferenceRect" parent="." unique_id=326872274]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.22
+anchor_top = 0.85
+anchor_right = 0.85
+anchor_bottom = 0.9
+grow_horizontal = 2
+grow_vertical = 0
+border_color = Color(0.38431373, 0.38431373, 0.38431373, 1)
+border_width = 5.0
+editor_only = false
+
+[node name="Label" type="Label" parent="NVariable" unique_id=1650078470]
+z_index = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.2
+anchor_bottom = 1.0
+grow_vertical = 2
+text = "n ="
+vertical_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="NVariable" unique_id=1436841807]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1764706, 0.1764706, 0.1764706, 1)
+
+[node name="NSpinBox" type="SpinBox" parent="NVariable" unique_id=20100017]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+max_value = 999.0
+step = 0.0
+
+[node name="HSlider" type="HSlider" parent="." unique_id=804772740]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.22
+anchor_top = 0.9
+anchor_right = 0.85
+anchor_bottom = 1.0
+offset_left = -0.35998535
+offset_top = 15.720032
+offset_right = -0.35998535
+offset_bottom = 15.720032
+grow_horizontal = 2
+grow_vertical = 2
+min_value = -1.0
+max_value = 2.0
+step = 0.0
+
+[node name="HLabel" type="Label" parent="." unique_id=2010540439]
+z_index = 1
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 48.399963
+offset_top = -52.599976
+offset_right = 104.39996
+offset_bottom = -29.599976
+grow_vertical = 0
+text = "h=10^0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RightLimitDisplay" type="ReferenceRect" parent="." unique_id=1202518080]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.73
+anchor_right = 0.85
+anchor_bottom = 0.83
+grow_horizontal = 2
+grow_vertical = 0
+border_color = Color(0.38431373, 0.38431373, 0.38431373, 1)
+border_width = 5.0
+editor_only = false
+
+[node name="ColorRect" type="ColorRect" parent="RightLimitDisplay" unique_id=1207518152]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1764706, 0.1764706, 0.1764706, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RightLimitDisplay" unique_id=1567338540]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Expression" type="RichTextLabel" parent="RightLimitDisplay/HBoxContainer" unique_id=15428463]
+layout_mode = 2
+size_flags_horizontal = 2
+bbcode_enabled = true
+text = "limf(x) [char=2248]
+x[char=2192]n[char=207A]
+"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Expression2" type="RichTextLabel" parent="RightLimitDisplay/HBoxContainer" unique_id=1513028514]
+layout_mode = 2
+size_flags_horizontal = 2
+bbcode_enabled = true
+text = "limf(n+h) =
+h[char=2192]0[char=207A]
+"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Answer" type="RichTextLabel" parent="RightLimitDisplay/HBoxContainer" unique_id=1544708013]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "2.5"
+fit_content = true
+autowrap_mode = 0
+
+[node name="LeftLimitDisplay" type="ReferenceRect" parent="." unique_id=342693968]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.61
+anchor_right = 0.85
+anchor_bottom = 0.71
+grow_horizontal = 2
+grow_vertical = 0
+border_color = Color(0.38431373, 0.38431373, 0.38431373, 1)
+border_width = 5.0
+editor_only = false
+
+[node name="ColorRect" type="ColorRect" parent="LeftLimitDisplay" unique_id=452011363]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1764706, 0.1764706, 0.1764706, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LeftLimitDisplay" unique_id=1513982593]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Expression" type="RichTextLabel" parent="LeftLimitDisplay/HBoxContainer" unique_id=574423933]
+layout_mode = 2
+size_flags_horizontal = 2
+bbcode_enabled = true
+text = "limf(x) [char=2248]
+x[char=2192]n[char=207B]
+"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Expression2" type="RichTextLabel" parent="LeftLimitDisplay/HBoxContainer" unique_id=1385030385]
+layout_mode = 2
+size_flags_horizontal = 2
+bbcode_enabled = true
+text = "limf(n-h) =
+h[char=2192]0[char=207A]"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Answer" type="RichTextLabel" parent="LeftLimitDisplay/HBoxContainer" unique_id=1082994957]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "2.5"
+fit_content = true
+autowrap_mode = 0
+
+[node name="MainLimitDisplay" type="ReferenceRect" parent="." unique_id=1138360119]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.49
+anchor_right = 0.85
+anchor_bottom = 0.59
+grow_horizontal = 2
+grow_vertical = 0
+border_color = Color(0.38431373, 0.38431373, 0.38431373, 1)
+border_width = 5.0
+editor_only = false
+
+[node name="ColorRect" type="ColorRect" parent="MainLimitDisplay" unique_id=416268402]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1764706, 0.1764706, 0.1764706, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainLimitDisplay" unique_id=197358432]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Expression" type="RichTextLabel" parent="MainLimitDisplay/HBoxContainer" unique_id=434944633]
+layout_mode = 2
+size_flags_horizontal = 2
+bbcode_enabled = true
+text = "limf(x) [char=2248]
+x[char=2192]n[char=207B]
+"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Answer" type="RichTextLabel" parent="MainLimitDisplay/HBoxContainer" unique_id=349913199]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+text = "?"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Settings" type="GridContainer" parent="." unique_id=1308196596]
+layout_mode = 0
+offset_left = 0.39996338
+offset_top = 63.6
+offset_right = 195.39996
+offset_bottom = 269.6
+columns = 2
+
+[node name="Label" type="Label" parent="Settings" unique_id=85085680]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Hide Limit Answer"
+
+[node name="HideLimitAnswer" type="CheckBox" parent="Settings" unique_id=2067738094]
+layout_mode = 2
+size_flags_horizontal = 8
+button_pressed = true
+
+[connection signal="value_changed" from="NVariable/NSpinBox" to="." method="_on_n_spin_box_value_changed"]
+[connection signal="value_changed" from="HSlider" to="." method="_on_h_slider_value_changed"]
+[connection signal="pressed" from="Settings/HideLimitAnswer" to="." method="_on_hide_limit_answer_pressed"]
