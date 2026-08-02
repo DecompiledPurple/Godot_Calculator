@@ -14,11 +14,12 @@ func _ready() -> void:
 func function_that_returns_3() -> Variant:
 	return 3
 
-func lim(function_name: String, x_approached: Variant):
+func lim(function_name: String, x_approached: Variant) -> Variant:
+	if not math_functions.has(function_name):
+		return "no function found"
 	var h: float = 0.01
 	var index: int = 0
 	var tolerance: float = 0.01
-	# might have to error check x
 	if x_approached is String:
 		x_approached = x_approached.to_float()
 	var left_approach: float = fun(function_name, x_approached - h)
@@ -31,11 +32,22 @@ func lim(function_name: String, x_approached: Variant):
 		left_approach = fun(function_name, x_approached - h)
 		right_approach = fun(function_name, x_approached + h) 
 		difference = abs(left_approach - right_approach)
+	# check for oscillations
+	h/= 10
+	var left_approach2: float = fun(function_name, x_approached - h)
+	var right_approach2: float = fun(function_name, x_approached + h)
+	var left_difference: float = abs(left_approach - left_approach2)
+	var right_difference: float = abs(right_approach - right_approach2)
+	if left_difference > tolerance or right_difference > tolerance:
+		print("DNE: oscillation")
+		return "DNE"
+	
 	var average: float = (right_approach + left_approach)/2
 	var result: float = round(average * 1000)/1000
 	if difference <= tolerance:
 		return result
 	else:
+		print("exhausted agreement process. DNE or slope it too large")
 		return "DNE"
 
 func fun(function_name: String, input: Variant) -> Variant:

@@ -192,8 +192,6 @@ func parse_expression(text_input: String) -> Variant:
 		return expression.get_error_text()
 	else:
 		var answer: Variant = expression.execute([], CalculatorFunctions)
-		print(text_input)
-		print(answer)
 		return answer
 #endregion
 
