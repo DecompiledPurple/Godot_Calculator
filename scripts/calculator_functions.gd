@@ -53,6 +53,19 @@ func lim(function_name: String, x_approached: Variant) -> Variant:
 		print("exhausted agreement process. DNE or slope is too large")
 		return "DNE"
 
+func deriv(function_name: String, input: Variant) -> Variant:
+	if not math_functions.has(function_name):
+		print("no function found")
+		return
+	# we can write out the definition of the derivative
+	#math_functions["derivative_function"] = "(fun(\"" + function_name + "\"," + str(input) + ") - fun(\"" + function_name + "\"," + str(input) + " - x))/x"
+	var function_string1: String = math_functions[function_name].replace("x", str(input))
+	var function_string2: String = math_functions[function_name].replace("x", "(" + str(input) + " + x" + ")")
+	math_functions["derivative_function"] = "(" + function_string2 + " - " + function_string1 + ")/x"
+	
+	var answer: Variant = lim("derivative_function", 0)
+	return answer
+
 func fun(function_name: String, input: Variant) -> Variant:
 	if not is_taking_input:
 		var error1: Error = expression.parse(str(input) + "* 1.0")
@@ -70,7 +83,6 @@ func fun(function_name: String, input: Variant) -> Variant:
 	function_content = function_content.replace("\"x\"", "\"" + str(input) + "\"")
 	var error2: Error = expression.parse(function_content + "*1.0", ["x"])
 	if not error2 == OK:
-		print("error in parsing inserted function")
 		return "error"
 	else:
 		var output = expression.execute([input], self)

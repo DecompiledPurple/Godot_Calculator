@@ -28,6 +28,13 @@ project/assembly_name="Calculator"
 
 enabled=PackedStringArray("res://addons/fold_functions/plugin.cfg", "res://addons/godot_vim/plugin.cfg")
 
+[file_customization]
+
+folder_colors={
+"res://scenes/": "orange",
+"res://scripts/": "teal"
+}
+
 [physics]
 
 3d/physics_engine="Jolt Physics"

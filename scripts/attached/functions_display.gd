@@ -12,6 +12,8 @@ func _ready():
 	target_calculator.insert_function.connect(on_insert_function)
 
 func on_new_function(function_name: String, content: String) -> void:
+	if function_name == "derivative_function":
+		function_name = "f" # default to name f since we need the name for the deriv() method
 	if screens.has_node(function_name):
 		var function_screen: FunctionScreen = screens.get_node(function_name)
 		function_screen.change_content(content)
