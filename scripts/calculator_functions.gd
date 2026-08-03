@@ -1,5 +1,6 @@
 extends Node
 
+var calculator: Calculator
 var expression: Expression = Expression.new()
 var math_functions: Dictionary[String, String] = {
 	"test" = "(x**2-4)/(x-2)"
@@ -40,6 +41,7 @@ func lim(function_name: String, x_approached: Variant) -> Variant:
 	var right_difference: float = abs(right_approach - right_approach2)
 	if left_difference > tolerance or right_difference > tolerance:
 		print("DNE: oscillation")
+		calculator.send_forced_error("DNE: oscillation")
 		return "DNE"
 	
 	var average: float = (right_approach + left_approach)/2
@@ -47,7 +49,8 @@ func lim(function_name: String, x_approached: Variant) -> Variant:
 	if difference <= tolerance:
 		return result
 	else:
-		print("exhausted agreement process. DNE or slope it too large")
+		calculator.send_forced_error("DNE")
+		print("exhausted agreement process. DNE or slope is too large")
 		return "DNE"
 
 func fun(function_name: String, input: Variant) -> Variant:

@@ -10,8 +10,8 @@ const GRAPH_WIDTH: int = 5
 const AXIS_WIDTH: int = 3
 const LINE_WIDTH: int = 2
 
-const Y_SIZE: int = 1000
-const X_SIZE: int = 1000
+const Y_SIZE: float = 1000
+const X_SIZE: float= 1000
 
 const LINE_LENGTH_TOLERANCE: float = 5000.0
 const COORDINATE_COLOR: Color = Color.BLACK
@@ -33,7 +33,7 @@ var empty_visual: Visual = Visual.new()
 
 @export var target_calculator: Calculator 
 @export var visualize_button: OptionButton
-@export var limit_visual: LimitVisual
+@export var limit_visual: Visual
 
 @onready var visual_list: Array[Visual] = [
 	empty_visual,
@@ -41,7 +41,6 @@ var empty_visual: Visual = Visual.new()
 ]
 var current_function_name: String 
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	limit_visual.graph_controller = self
 	
@@ -69,13 +68,11 @@ func on_graph(function_name: String) -> void:
 func draw_base_graph() -> void:
 	#draw_circle(Vector2.ZERO, 200, background_color, true)
 	# draw_circle(Vector2(500,500), 50, Color.REBECCA_PURPLE)
-	draw_line(Vector2(0, Y_SIZE/2), Vector2(X_SIZE, Y_SIZE/2), background_color,
-	 GRAPH_WIDTH)
+	draw_line(Vector2(0, Y_SIZE/2), Vector2(X_SIZE, Y_SIZE/2), background_color, GRAPH_WIDTH)
 	draw_line(Vector2(X_SIZE/2, 0), Vector2(X_SIZE/2, Y_SIZE), background_color, GRAPH_WIDTH)
 	
 	for index in range(0, X_SIZE):
 		var current_step: int = index * SCALE
-		var x: int = current_step - MAXIMUM_RANGE/(2*SCALE)
 		draw_line(Vector2(current_step,0), Vector2(current_step, Y_SIZE), background_color, LINE_WIDTH)
 		draw_line(Vector2(current_step, Y_SIZE/2 - Y_SIZE/100), Vector2(current_step, Y_SIZE/2 + Y_SIZE/100), background_color, AXIS_WIDTH)
 		draw_line(Vector2(0, current_step), Vector2(X_SIZE, current_step), background_color, LINE_WIDTH)

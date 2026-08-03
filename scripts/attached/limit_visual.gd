@@ -1,15 +1,10 @@
 extends Visual
 
-class_name LimitVisual
-
 const DECIMAL_POINT_ROUND: int = 3
 const LEFT_LIMIT_COLOR: Color = Color.RED
 const RIGHT_LIMIT_COLOR: Color = Color.BLUE
 const LIMIT_CIRCLE_SIZE: int = 5
 const LIMIT_COORDINATE_OFFSET: Vector2 = Vector2(0.5,0.5) * CalculatorSettings.SCALE
-
-signal h_variable_changed(new_h: float)
-signal n_variable_changed(new_n: float)
 
 @onready var h_slider: HSlider = $HSlide
 @onready var h_label: Label = $HLabel
@@ -28,12 +23,12 @@ func _ready() -> void:
 
 func _on_n_spin_box_value_changed(value: float) -> void:
 	n_variable = value
-	n_variable_changed.emit(value)
+	graph_controller.queue_redraw()
 
 func _on_h_slider_value_changed(value: float) -> void:
 	h_variable = 9**(-value)
-	h_variable_changed.emit(h_variable)
 	h_label.text = "10^(" + str(-value) + ")"
+	graph_controller.queue_redraw()
 
 func update_left_limit_label(y_value: float) -> void:
 	y_value = CalculatorFunctions.round_to_placement(y_value, DECIMAL_POINT_ROUND)
@@ -78,8 +73,7 @@ func limit_visual_draw() -> void:
 	update_main_limit_label(center_y)
 	
 	if limit_exists and not hide_limit_answer:
-		var center_position: Vector2 = position_to_graph(n_variable
-		 ,center_y)
+		var center_position: Vector2 = position_to_graph(n_variable,center_y)
 		graph_controller.draw_circle(center_position, 2, Color.PURPLE)
 	
 func on_limit_visual_entered() -> void:

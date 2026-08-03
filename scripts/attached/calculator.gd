@@ -62,6 +62,8 @@ var skip_error_check: bool = false
 var last_answer: Variant
 var last_scroll_length: float = 0
 var input_index: int = 0
+var forced_error_occurred: bool = false
+var forced_error_message: String 
 
 #region General Use
 
@@ -80,6 +82,7 @@ func _ready() -> void:
 	used_screen.text_changed.connect(on_text_changed)
 	used_screen.text_submitted.connect(on_equals_pressed)
 	scrollbar.changed.connect(on_scrollbar_changed)
+	CalculatorFunctions.calculator = self
 
 func append_descendant_buttons(node: Node) -> void:
 	for child in node.get_children():
@@ -108,6 +111,10 @@ func on_text_changed(_text_added: String) -> void:
 			used_screen.text = used_screen.text.replace(shortcut,"")
 			keyboard_shortcuts[shortcut].call()
 #endregion
+
+func send_forced_error(error_message: String) -> void:
+	forced_error_occurred = true
+	forced_error_message += error_message
 
 #region Display
 func close_all_sections() -> void:
@@ -206,7 +213,11 @@ func on_equals_pressed(text_input: String = used_screen.text) -> void:
 	
 	if not skip_error_check:
 		var answer: Variant = parse_expression(text_input)
-		if answer is String:
+		if forced_error_occurred:
+			evaluation_screen.text = forced_error_message
+			_evaluate.emit(forced_error_message)
+			forced_error_occurred = false
+		elif answer is String:
 			evaluation_screen.text = answer
 			_evaluate.emit("error")
 		else:
@@ -345,7 +356,6 @@ func on_limit_pressed() -> void:
 	skip_to_end_line()
 
 #endregion
-
 
 func _on_close_requested() -> void:
 	visible = false
