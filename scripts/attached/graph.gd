@@ -71,7 +71,7 @@ func draw_base_graph() -> void:
 	draw_line(Vector2(0, Y_SIZE/2), Vector2(X_SIZE, Y_SIZE/2), background_color, GRAPH_WIDTH)
 	draw_line(Vector2(X_SIZE/2, 0), Vector2(X_SIZE/2, Y_SIZE), background_color, GRAPH_WIDTH)
 	
-	for index in range(0, X_SIZE):
+	for index in range(0, X_SIZE/SCALE):
 		var current_step: int = index * SCALE
 		draw_line(Vector2(current_step,0), Vector2(current_step, Y_SIZE), background_color, LINE_WIDTH)
 		draw_line(Vector2(current_step, Y_SIZE/2 - Y_SIZE/100), Vector2(current_step, Y_SIZE/2 + Y_SIZE/100), background_color, AXIS_WIDTH)
@@ -87,7 +87,7 @@ func draw_current_graph() -> void:
 	for x: float in graph_range:
 		x *= FUNCTION_ACCURACCY
 		var y: Variant = CalculatorFunctions.fun(current_function_name, x)
-		if y is String or is_inf(y): # implied error
+		if y == null or y is String or is_inf(y): # implied error
 			skip_line = true
 			continue
 		var point_position: Vector2 = position_to_graph(x, y)

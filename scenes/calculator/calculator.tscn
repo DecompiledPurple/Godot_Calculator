@@ -393,8 +393,9 @@ theme_override_font_sizes/normal_font_size = 25
 text = "limf(x)
 x[char=2192]n"
 
-[node name="CalculatorButton2" parent="FunctionOperations/GridContainer" unique_id=1138567549 instance=ExtResource("3_wfhry")]
+[node name="Derivative" parent="FunctionOperations/GridContainer" unique_id=1138567549 instance=ExtResource("3_wfhry")]
 layout_mode = 2
+text = "f'(x)"
 
 [node name="CalculatorButton3" parent="FunctionOperations/GridContainer" unique_id=755756612 instance=ExtResource("3_wfhry")]
 layout_mode = 2

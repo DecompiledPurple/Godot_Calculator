@@ -33,6 +33,7 @@ var special_buttons : Dictionary[String, Callable] = {
 	"Insert" : on_insert_pressed,
 	"Graph" : on_graph_pressed,
 	"Limit" : on_limit_pressed,
+	"Derivative" : on_derivative_pressed,
 }
 
 var keyboard_shortcuts : Dictionary[String, Callable] = {
@@ -352,9 +353,15 @@ func on_limit_pressed() -> void:
 	var skip_errors: bool = true
 	var function_name: String = await take_input("function name", skip_errors)
 	var n: String = await take_input("n")
-	used_screen.text = "lim(\"" + function_name + "\",\"" + n + "\")"
+	used_screen.text = "lim(\"" + function_name + "\"," + n + ")"
 	skip_to_end_line()
 
+func on_derivative_pressed() -> void:
+	var skip_errors: bool = true
+	var function_name: String = await take_input("function name", skip_errors)
+	var x: String = await take_input("x")
+	used_screen.text = "deriv(\"" + function_name + "\"," + x + ")"
+	skip_to_end_line()
 #endregion
 
 func _on_close_requested() -> void:

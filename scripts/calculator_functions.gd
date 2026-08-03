@@ -41,6 +41,7 @@ func lim(function_name: String, x_approached: Variant) -> Variant:
 	var right_difference: float = abs(right_approach - right_approach2)
 	if left_difference > tolerance or right_difference > tolerance:
 		print("DNE: oscillation")
+		print("function: " + math_functions[function_name])
 		calculator.send_forced_error("DNE: oscillation")
 		return "DNE"
 	
@@ -61,7 +62,7 @@ func deriv(function_name: String, input: Variant) -> Variant:
 	#math_functions["derivative_function"] = "(fun(\"" + function_name + "\"," + str(input) + ") - fun(\"" + function_name + "\"," + str(input) + " - x))/x"
 	var function_string1: String = math_functions[function_name].replace("x", str(input))
 	var function_string2: String = math_functions[function_name].replace("x", "(" + str(input) + " + x" + ")")
-	math_functions["derivative_function"] = "(" + function_string2 + " - " + function_string1 + ")/x"
+	math_functions["derivative_function"] = "((" + function_string2 + ") - (" + function_string1 + "))/x"
 	
 	var answer: Variant = lim("derivative_function", 0)
 	return answer
