@@ -4,7 +4,7 @@ const DECIMAL_POINT_ROUND: int = 3
 const LEFT_LIMIT_COLOR: Color = Color.RED
 const RIGHT_LIMIT_COLOR: Color = Color.BLUE
 const LIMIT_CIRCLE_SIZE: int = 5
-const LIMIT_COORDINATE_OFFSET: Vector2 = Vector2(0.5,0.5) * CalculatorSettings.SCALE
+const LIMIT_COORDINATE_OFFSET: Vector2 = Vector2(0.5, -0.5) * CalculatorSettings.SCALE
 
 @onready var h_slider: HSlider = $HSlide
 @onready var h_label: Label = $HLabel
@@ -13,20 +13,20 @@ const LIMIT_COORDINATE_OFFSET: Vector2 = Vector2(0.5,0.5) * CalculatorSettings.S
 @onready var main_limit_answer: RichTextLabel = $MainLimitDisplay/HBoxContainer/Answer
 @onready var hide_limit_answer_button: CheckBox  = $Settings/HideLimitAnswer
 
-var graph_controller:Node2D # set by graph
+var h_variable: float = 0
+var n_variable: float = 0
 var hide_limit_answer: bool = true
 var limit_answer: Variant = 0
 
 func _ready() -> void:
 	visual_draw = Callable(self, "limit_visual_draw")
-	on_visual_entered = Callable(self, "on_limit_visual_entered")
 
 func _on_n_spin_box_value_changed(value: float) -> void:
 	n_variable = value
 	graph_controller.queue_redraw()
 
 func _on_h_slider_value_changed(value: float) -> void:
-	h_variable = 9**(-value)
+	h_variable = 10**(-value)
 	h_label.text = "10^(" + str(-value) + ")"
 	graph_controller.queue_redraw()
 
@@ -75,7 +75,3 @@ func limit_visual_draw() -> void:
 	if limit_exists and not hide_limit_answer:
 		var center_position: Vector2 = position_to_graph(n_variable,center_y)
 		graph_controller.draw_circle(center_position, 2, Color.PURPLE)
-	
-func on_limit_visual_entered() -> void:
-	visible = true
-	graph_controller.queue_redraw()

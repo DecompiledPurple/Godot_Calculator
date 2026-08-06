@@ -1,0 +1,243 @@
+[gd_scene format=3 uid="uid://ck114u76qi0x6"]
+
+[ext_resource type="Script" uid="uid://fiuitbwancku" path="res://scenes/derivative_visual.gd" id="1_s5mry"]
+
+[node name="DerivateVisual" type="Control" unique_id=946458890]
+layout_mode = 3
+anchor_left = 0.8
+anchor_top = 0.05
+anchor_right = 1.0
+anchor_bottom = 0.95
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_s5mry")
+
+[node name="HSlider" type="HSlider" parent="." unique_id=804772740]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.22
+anchor_top = 0.9
+anchor_right = 0.85
+anchor_bottom = 1.0
+offset_left = -0.35998535
+offset_top = 15.720032
+offset_right = -0.35998535
+offset_bottom = 15.720032
+grow_horizontal = 2
+grow_vertical = 2
+min_value = -1.0
+max_value = 2.0
+step = 0.1
+
+[node name="HLabel" type="Label" parent="." unique_id=2010540439]
+z_index = 1
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 48.399963
+offset_top = -52.599976
+offset_right = 104.39996
+offset_bottom = -29.599976
+grow_vertical = 0
+text = "h=10^0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="XSlider" type="HSlider" parent="." unique_id=1255329362]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.22
+anchor_top = 0.9
+anchor_right = 0.85
+anchor_bottom = 1.0
+offset_left = -0.35998535
+offset_top = -20.279968
+offset_right = -0.35998535
+offset_bottom = -31.279968
+grow_horizontal = 2
+grow_vertical = 2
+min_value = -10.0
+max_value = 10.0
+step = 0.01
+
+[node name="Settings" type="GridContainer" parent="." unique_id=1308196596]
+layout_mode = 0
+offset_left = 0.39996338
+offset_top = 63.6
+offset_right = 195.39996
+offset_bottom = 269.6
+columns = 2
+
+[node name="Label" type="Label" parent="Settings" unique_id=85085680]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Hide Derivative Answer"
+
+[node name="HideDerivativeAnswer" type="CheckBox" parent="Settings" unique_id=2067738094]
+layout_mode = 2
+size_flags_horizontal = 8
+button_pressed = true
+
+[node name="Label2" type="Label" parent="Settings" unique_id=867292541]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Hide Slope"
+
+[node name="HideSlope" type="CheckBox" parent="Settings" unique_id=1801645433]
+layout_mode = 2
+size_flags_horizontal = 8
+button_pressed = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1337149574]
+layout_mode = 0
+offset_left = 0.4
+offset_top = 360.6
+offset_right = 195.4
+offset_bottom = 463.6
+
+[node name="DerivativeDisplay" type="ReferenceRect" parent="VBoxContainer" unique_id=1138360119]
+layout_mode = 2
+size_flags_vertical = 3
+border_color = Color(0.38431373, 0.38431373, 0.38431373, 1)
+border_width = 5.0
+editor_only = false
+
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer/DerivativeDisplay" unique_id=416268402]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1764706, 0.1764706, 0.1764706, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/DerivativeDisplay" unique_id=197358432]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Expression" type="RichTextLabel" parent="VBoxContainer/DerivativeDisplay/HBoxContainer" unique_id=434944633]
+layout_mode = 2
+size_flags_horizontal = 2
+bbcode_enabled = true
+text = "f'(x) =
+"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Answer" type="RichTextLabel" parent="VBoxContainer/DerivativeDisplay/HBoxContainer" unique_id=349913199]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+text = "?"
+fit_content = true
+autowrap_mode = 0
+
+[node name="DerivativeApproximationDisplay" type="ReferenceRect" parent="VBoxContainer" unique_id=342693968]
+layout_mode = 2
+size_flags_vertical = 3
+border_color = Color(0.38431373, 0.38431373, 0.38431373, 1)
+border_width = 5.0
+editor_only = false
+
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer/DerivativeApproximationDisplay" unique_id=452011363]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1764706, 0.1764706, 0.1764706, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/DerivativeApproximationDisplay" unique_id=1513982593]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Expression" type="RichTextLabel" parent="VBoxContainer/DerivativeApproximationDisplay/HBoxContainer" unique_id=574423933]
+layout_mode = 2
+size_flags_horizontal = 2
+bbcode_enabled = true
+text = "f'(x) [char=2248]
+"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Expression2" type="RichTextLabel" parent="VBoxContainer/DerivativeApproximationDisplay/HBoxContainer" unique_id=1385030385]
+layout_mode = 2
+size_flags_horizontal = 2
+bbcode_enabled = true
+text = "lim[(f(x+h)-f(x))/h]
+h[char=2192]0"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Answer" type="RichTextLabel" parent="VBoxContainer/DerivativeApproximationDisplay/HBoxContainer" unique_id=1082994957]
+layout_mode = 2
+size_flags_horizontal = 2
+fit_content = true
+autowrap_mode = 0
+
+[node name="XVariable" type="ReferenceRect" parent="." unique_id=851500602]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.22
+anchor_top = 0.85
+anchor_right = 0.85
+anchor_bottom = 0.9
+offset_left = -0.2880249
+offset_top = -8.119995
+offset_right = 1.5599823
+offset_bottom = -10.279968
+grow_horizontal = 2
+grow_vertical = 0
+border_color = Color(0.38431373, 0.38431373, 0.38431373, 1)
+border_width = 5.0
+editor_only = false
+
+[node name="Label" type="Label" parent="XVariable" unique_id=1723248504]
+z_index = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.2
+anchor_bottom = 1.0
+grow_vertical = 2
+text = "x ="
+vertical_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="XVariable" unique_id=1602959695]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1764706, 0.1764706, 0.1764706, 1)
+
+[node name="XSpinBox" type="SpinBox" parent="XVariable" unique_id=2037392860]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -0.049987793
+offset_top = -4.0
+offset_right = -0.049987793
+grow_horizontal = 0
+grow_vertical = 2
+min_value = -999.0
+max_value = 999.0
+step = 0.0
+
+[connection signal="value_changed" from="HSlider" to="." method="_on_h_slider_value_changed"]
+[connection signal="value_changed" from="XSlider" to="." method="_on_x_slider_value_changed"]
+[connection signal="pressed" from="Settings/HideDerivativeAnswer" to="." method="_on_hide_derivative_answer_pressed"]
+[connection signal="pressed" from="Settings/HideSlope" to="." method="_on_hide_slope_pressed"]
+[connection signal="value_changed" from="XVariable/XSpinBox" to="." method="_on_x_spin_box_value_changed"]

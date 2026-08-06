@@ -122,6 +122,23 @@ size_flags_vertical = 3
 theme_override_font_sizes/font_size = 40
 text = "/"
 
+[node name="Arccosine" parent="BasicOperations/Operations/Divide" unique_id=1891363987 instance=ExtResource("3_wfhry")]
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = -187.0
+offset_top = 114.0
+offset_right = -106.0
+offset_bottom = 223.0
+
+[node name="CalculatorTextLabel" parent="BasicOperations/Operations/Divide/Arccosine" unique_id=1654616474 instance=ExtResource("3_quc1l")]
+layout_mode = 1
+theme_override_font_sizes/normal_font_size = 29
+text = "cos[char=207B][char=00B9]x"
+
 [node name="Evaluate" type="Button" parent="BasicOperations/Operations" unique_id=1310833182]
 layout_mode = 2
 size_flags_vertical = 3
@@ -359,14 +376,6 @@ layout_mode = 1
 theme_override_font_sizes/normal_font_size = 29
 text = "sin[char=207B][char=00B9]x"
 
-[node name="Arccosine" parent="FunctionOperations/GridContainer" unique_id=1891363987 instance=ExtResource("3_wfhry")]
-layout_mode = 2
-
-[node name="CalculatorTextLabel" parent="FunctionOperations/GridContainer/Arccosine" unique_id=1654616474 instance=ExtResource("3_quc1l")]
-layout_mode = 1
-theme_override_font_sizes/normal_font_size = 29
-text = "cos[char=207B][char=00B9]x"
-
 [node name="Arctangent" parent="FunctionOperations/GridContainer" unique_id=1660370283 instance=ExtResource("3_wfhry")]
 layout_mode = 2
 
@@ -395,6 +404,7 @@ x[char=2192]n"
 
 [node name="Derivative" parent="FunctionOperations/GridContainer" unique_id=1138567549 instance=ExtResource("3_wfhry")]
 layout_mode = 2
+theme_override_font_sizes/font_size = 29
 text = "f'(x)"
 
 [node name="CalculatorButton3" parent="FunctionOperations/GridContainer" unique_id=755756612 instance=ExtResource("3_wfhry")]

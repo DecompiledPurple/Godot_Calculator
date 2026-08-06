@@ -16,34 +16,29 @@ const X_SIZE: float= 1000
 const LINE_LENGTH_TOLERANCE: float = 5000.0
 const COORDINATE_COLOR: Color = Color.BLACK
 var FONT: Font = ThemeDB.fallback_font
-# visual constants
-# limit visual
-const LEFT_LIMIT_COLOR: Color = Color.RED
-const RIGHT_LIMIT_COLOR: Color = Color.BLUE
-const LIMIT_CIRCLE_SIZE: int = 5
-const LIMIT_COORDINATE_OFFSET: Vector2 = Vector2(0.5,0.5) * SCALE
 
 var background_color: Color = Color.BLACK
 var graph_color: Color = Color.BLACK
 
-var h_variable: float
-var n_variable: float
 var current_visual_index: int
 var empty_visual: Visual = Visual.new()
 
 @export var target_calculator: Calculator 
 @export var visualize_button: OptionButton
 @export var limit_visual: Visual
+@export var derivative_visual: Visual
 
 @onready var visual_list: Array[Visual] = [
 	empty_visual,
 	limit_visual,
+	derivative_visual,
 ]
 var current_function_name: String 
 
 func _ready() -> void:
+	empty_visual.graph_controller = self
 	limit_visual.graph_controller = self
-	
+	derivative_visual.graph_controller = self
 	target_calculator.graph_function.connect(on_graph)
 	visualize_button.item_selected.connect(on_visualize_changed)
 	queue_redraw()
@@ -111,6 +106,7 @@ func on_visualize_changed(index: int) -> void:
 
 func hide_all_visualizers() -> void:
 	limit_visual.visible = false
+	derivative_visual.visible = false
 
 func reset_visuals() -> void:
 	hide_all_visualizers()
