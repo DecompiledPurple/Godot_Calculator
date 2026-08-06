@@ -60,9 +60,9 @@ func deriv(function_name: String, input: Variant) -> Variant:
 		return
 	# we can write out the definition of the derivative
 	#math_functions["derivative_function"] = "(fun(\"" + function_name + "\"," + str(input) + ") - fun(\"" + function_name + "\"," + str(input) + " - x))/x"
-	var function_string1: String = math_functions[function_name].replace("x", str(input))
-	var function_string2: String = math_functions[function_name].replace("x", "(" + str(input) + " + x" + ")")
-	math_functions["derivative_function"] = "((" + function_string2 + ") - (" + function_string1 + "))/x"
+	var function_string1: String = math_functions[function_name].replace("x", "(" + str(input) + " - x)")
+	var function_string2: String = math_functions[function_name].replace("x", "(" + str(input) + " + x)")
+	math_functions["derivative_function"] = "((" + function_string2 + ") - (" + function_string1 + "))/(2*x)"
 	
 	var answer: Variant = lim("derivative_function", 0)
 	return answer
