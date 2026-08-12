@@ -67,6 +67,27 @@ func deriv(function_name: String, input: Variant) -> Variant:
 	var answer: Variant = lim("derivative_function", 0)
 	return answer
 
+func integrate(function_name: String, a: float, b: float):
+	# this is a left reimman sum
+	var n: int = CalculatorSettings.integral_iterations
+	var delta_x: float = (b-a)/n
+	var function_content: String = math_functions[function_name]
+	var new_function_content: String = function_content.replace("x", "(" + str(a) + " + " + str(delta_x) + " * x)")
+	var integral_content: String = "(" + str(delta_x) + ") * (" + new_function_content + ")"
+	print("integral content = " + integral_content)
+	var sum: float = summation(integral_content, n, 1)
+	return sum
+
+func summation(content: String, n: Variant, i: Variant):
+	var sum: float = 0
+	for x in range(i, n):
+		var answer1: float = fun(content, x)
+		var answer2: float = fun(content, x + 1)
+		var answer: float = (answer1 + answer2)/2
+		sum += answer
+		print("evelautating " + content + " at: " + str(x) + " = " + str(answer))
+	return sum
+
 func fun(function_name: String, input: Variant) -> Variant:
 	if not is_taking_input:
 		var error1: Error = expression.parse(str(input) + "* 1.0")

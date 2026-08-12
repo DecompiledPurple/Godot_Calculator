@@ -13,6 +13,7 @@ var graph_maximum: int = 10
 var graph_minimum: int = -10
 var max_limit_attempts: int = 10
 var special_graph_color: Color = Color.BLUE
+var integral_iterations: int = 100
 
 func position_to_graph(x: float, y: float) -> Vector2:
 	var scaled_position: Vector2 = Vector2(x, y) * SCALE
