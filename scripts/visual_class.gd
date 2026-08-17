@@ -26,8 +26,15 @@ func vector_to_graph(vector: Vector2) -> Vector2:
 	var scaled_vector: Vector2 = vector * SCALE
 	return Vector2(scaled_vector.x + X_SIZE/2, -scaled_vector.y + Y_SIZE/2)
 
+func rect_to_graph(rect: Rect2) -> Rect2:
+	var new_rect: Rect2 = rect
+	new_rect.position = vector_to_graph(rect.position)
+	new_rect.size = rect.size * CalculatorSettings.SCALE
+	print(new_rect)
+	return new_rect
+
 func empty_callable() -> void:
-	draw_circle(position_to_graph(0,0), VISUAL_CIRCLE_SIZE, Color.PURPLE, false)
+	graph_controller.draw_circle(position_to_graph(0,0), VISUAL_CIRCLE_SIZE, Color.PURPLE, false)
 
 func on_entered() -> void:
 	visible = true

@@ -6,7 +6,7 @@ const RIGHT_LIMIT_COLOR: Color = Color.BLUE
 const LIMIT_CIRCLE_SIZE: int = 5
 const LIMIT_COORDINATE_OFFSET: Vector2 = Vector2(0.5, -0.5) * CalculatorSettings.SCALE
 
-@onready var h_slider: HSlider = $HSlidle
+@onready var h_slider: HSlider = $HSlider
 @onready var h_label: Label = $HLabel
 @onready var right_limit_answer: RichTextLabel = $RightLimitDisplay/HBoxContainer/Answer
 @onready var left_limit_answer: RichTextLabel = $LeftLimitDisplay/HBoxContainer/Answer

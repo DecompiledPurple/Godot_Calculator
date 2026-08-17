@@ -8,7 +8,6 @@ const SLOPE_DISPLAY_OFFSET = Vector2(0.5, -0.5) * CalculatorSettings.SCALE
 const SLOPE_DISPLAY_COLOR = Color.DARK_TURQUOISE
 
 @onready var h_label = $HLabel
-@onready var x_label = $XLabel
 @onready var x_spin: SpinBox = $XVariable/XSpinBox
 @onready var x_slider: HSlider = $XSlider
 @onready var derivative_display: RichTextLabel = $VBoxContainer/DerivativeDisplay/HBoxContainer/Answer

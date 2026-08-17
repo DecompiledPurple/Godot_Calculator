@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://biendfa4dwkhn" path="res://scenes/graph_settings.tscn" id="3_kry3j"]
 [ext_resource type="PackedScene" uid="uid://dohmmb2hcseey" path="res://scenes/limit_visual.tscn" id="6_tefeu"]
 [ext_resource type="PackedScene" uid="uid://ck114u76qi0x6" path="res://scenes/derivative_visual.tscn" id="7_o6xl0"]
+[ext_resource type="PackedScene" uid="uid://dauti8n3krpad" path="res://scenes/integral_visual.tscn" id="8_tipki"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_7dm0k"]
 
@@ -31,11 +32,12 @@ texture = SubResource("ViewportTexture_8gbba")
 disable_3d = true
 size = Vector2i(1000, 1000)
 
-[node name="Graph" parent="Sprite3D/SubViewport" unique_id=363277246 node_paths=PackedStringArray("target_calculator", "visualize_button", "limit_visual", "derivative_visual") instance=ExtResource("3_8gbba")]
+[node name="Graph" parent="Sprite3D/SubViewport" unique_id=363277246 node_paths=PackedStringArray("target_calculator", "visualize_button", "limit_visual", "derivative_visual", "integral_visual") instance=ExtResource("3_8gbba")]
 target_calculator = NodePath("../../../MainControl/Calculator")
 visualize_button = NodePath("../../../MainControl/SettingsContainer/OptionButton")
 limit_visual = NodePath("../../../MainControl/LimitVisual")
 derivative_visual = NodePath("../../../MainControl/DerivateVisual")
+integral_visual = NodePath("../../../MainControl/IntegralVisual")
 
 [node name="MainControl" type="Control" parent="." unique_id=48407842]
 layout_mode = 3
@@ -75,13 +77,15 @@ text = "Graph Settings"
 layout_mode = 2
 size_flags_horizontal = 3
 selected = 0
-item_count = 3
+item_count = 4
 popup/item_0/text = "Visualize"
 popup/item_0/id = 0
 popup/item_1/text = "Limits"
 popup/item_1/id = 1
 popup/item_2/text = "Derivatives"
 popup/item_2/id = 2
+popup/item_3/text = "Integrals"
+popup/item_3/id = 3
 
 [node name="WindowsContainer" type="HBoxContainer" parent="MainControl" unique_id=1102050839]
 layout_mode = 1
@@ -106,6 +110,10 @@ visible = false
 layout_mode = 1
 
 [node name="DerivateVisual" parent="MainControl" unique_id=1304131978 instance=ExtResource("7_o6xl0")]
+visible = false
+layout_mode = 1
+
+[node name="IntegralVisual" parent="MainControl" unique_id=1568862957 instance=ExtResource("8_tipki")]
 visible = false
 layout_mode = 1
 
