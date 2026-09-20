@@ -110,5 +110,11 @@ func fun(function_name: String, input: Variant) -> Variant:
 		var output = expression.execute([input], self)
 		return output
 
+func has_function(function_name: String) -> bool:
+	if math_functions.has(function_name):
+		return true
+	else:
+		return false
+
 func round_to_placement(x:float, decimal_placement: int) -> float:
 	return round(x * 10**decimal_placement)/(10**decimal_placement)

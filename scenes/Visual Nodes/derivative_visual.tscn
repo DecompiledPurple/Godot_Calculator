@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ck114u76qi0x6"]
 
-[ext_resource type="Script" uid="uid://fiuitbwancku" path="res://scenes/derivative_visual.gd" id="1_s5mry"]
+[ext_resource type="Script" uid="uid://fiuitbwancku" path="res://scripts/attached/derivative_visual.gd" id="1_s5mry"]
 
 [node name="DerivateVisual" type="Control" unique_id=946458890]
 layout_mode = 3
@@ -235,6 +235,26 @@ grow_vertical = 2
 min_value = -999.0
 max_value = 999.0
 step = 0.0
+
+[node name="Background2" type="ColorRect" parent="." unique_id=1801275429]
+z_index = -1
+layout_mode = 0
+offset_left = -1.6000366
+offset_top = 63.6
+offset_right = 208.39996
+offset_bottom = 118.6
+mouse_filter = 2
+color = Color(0.1764706, 0.1764706, 0.1764706, 1)
+
+[node name="Background3" type="ColorRect" parent="." unique_id=1452027873]
+z_index = -1
+layout_mode = 0
+offset_left = 48.399963
+offset_top = 518.6
+offset_right = 199.39998
+offset_bottom = 575.6
+mouse_filter = 2
+color = Color(0.1764706, 0.1764706, 0.1764706, 1)
 
 [connection signal="value_changed" from="HSlider" to="." method="_on_h_slider_value_changed"]
 [connection signal="value_changed" from="XSlider" to="." method="_on_x_slider_value_changed"]

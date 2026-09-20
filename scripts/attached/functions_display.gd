@@ -3,7 +3,6 @@ extends Window
 @export var target_calculator: Calculator
 
 var function_screen_scene: Resource = preload("res://scenes/calculator/function_screen.tscn")
-var jonkler: Array[Callable] 
 
 @onready var screens: VBoxContainer = $ScrollContainer/Screens
 

@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://n6bqppgv3lgw" path="res://scripts/attached/limit_visual.gd" id="1_78epr"]
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_n3evj"]
+
 [node name="LimitVisual" type="Control" unique_id=946458890]
 layout_mode = 3
 anchor_left = 0.8
@@ -262,6 +264,28 @@ text = "Hide Limit Answer"
 layout_mode = 2
 size_flags_horizontal = 8
 button_pressed = true
+
+[node name="Background2" type="ColorRect" parent="." unique_id=1832439873]
+z_index = -1
+material = SubResource("CanvasItemMaterial_n3evj")
+layout_mode = 0
+offset_left = -1.6000366
+offset_top = 63.6
+offset_right = 192.39998
+offset_bottom = 91.6
+mouse_filter = 2
+color = Color(0.1764706, 0.1764706, 0.1764706, 1)
+
+[node name="Background3" type="ColorRect" parent="." unique_id=834931232]
+z_index = -1
+material = SubResource("CanvasItemMaterial_n3evj")
+layout_mode = 0
+offset_left = 47.399963
+offset_top = 528.6
+offset_right = 198.39998
+offset_bottom = 585.6
+mouse_filter = 2
+color = Color(0.1764706, 0.1764706, 0.1764706, 1)
 
 [connection signal="value_changed" from="NVariable/NSpinBox" to="." method="_on_n_spin_box_value_changed"]
 [connection signal="value_changed" from="HSlider" to="." method="_on_h_slider_value_changed"]

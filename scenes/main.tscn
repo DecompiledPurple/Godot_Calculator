@@ -1,25 +1,36 @@
 [gd_scene format=3 uid="uid://e13k6nfytm62"]
 
+[ext_resource type="Script" uid="uid://6pwqktn48ihi" path="res://scripts/attached/main_camera.gd" id="1_85g3d"]
 [ext_resource type="PackedScene" uid="uid://bt6q6c7nhcaw5" path="res://scenes/calculator/calculator.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://dvpmk43goql33" path="res://scenes/calculator/functions_display.tscn" id="2_0xm2m"]
-[ext_resource type="Script" uid="uid://copafafojtgnw" path="res://scenes/main_control.gd" id="2_tbgi4"]
+[ext_resource type="Script" uid="uid://copafafojtgnw" path="res://scripts/attached/main_control.gd" id="2_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://chljyoq14m8gt" path="res://scenes/calculator/graph.tscn" id="3_8gbba"]
 [ext_resource type="PackedScene" uid="uid://biendfa4dwkhn" path="res://scenes/graph_settings.tscn" id="3_kry3j"]
-[ext_resource type="PackedScene" uid="uid://dohmmb2hcseey" path="res://scenes/limit_visual.tscn" id="6_tefeu"]
-[ext_resource type="PackedScene" uid="uid://ck114u76qi0x6" path="res://scenes/derivative_visual.tscn" id="7_o6xl0"]
-[ext_resource type="PackedScene" uid="uid://dauti8n3krpad" path="res://scenes/integral_visual.tscn" id="8_tipki"]
+[ext_resource type="PackedScene" uid="uid://dohmmb2hcseey" path="res://scenes/Visual Nodes/limit_visual.tscn" id="6_tefeu"]
+[ext_resource type="PackedScene" uid="uid://ck114u76qi0x6" path="res://scenes/Visual Nodes/derivative_visual.tscn" id="7_o6xl0"]
+[ext_resource type="PackedScene" uid="uid://dauti8n3krpad" path="res://scenes/Visual Nodes/integral_visual.tscn" id="8_tipki"]
+[ext_resource type="PackedScene" uid="uid://carifaoj162kg" path="res://scenes/Visual Nodes/spatial_integral_visual.tscn" id="10_choun"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_choun"]
+transparency = 3
+alpha_hash_scale = 1.33
+alpha_antialiasing_mode = 1
+alpha_antialiasing_edge = 0.3
+albedo_color = Color(1, 0, 1, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_7dm0k"]
+material = SubResource("StandardMaterial3D_choun")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_8gbba"]
 viewport_path = NodePath("Sprite3D/SubViewport")
 
 [node name="Node" type="Node" unique_id=1103378696]
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=795961096]
+[node name="MainCamera" type="Camera3D" parent="." unique_id=795961096]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
 current = true
-fov = 108.0
+fov = 80.0
+script = ExtResource("1_85g3d")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=893439764]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.93147, -3.705843)
@@ -32,12 +43,13 @@ texture = SubResource("ViewportTexture_8gbba")
 disable_3d = true
 size = Vector2i(1000, 1000)
 
-[node name="Graph" parent="Sprite3D/SubViewport" unique_id=363277246 node_paths=PackedStringArray("target_calculator", "visualize_button", "limit_visual", "derivative_visual", "integral_visual") instance=ExtResource("3_8gbba")]
+[node name="Graph" parent="Sprite3D/SubViewport" unique_id=363277246 node_paths=PackedStringArray("target_calculator", "visualize_button", "limit_visual", "derivative_visual", "integral_visual", "spatial_integral_visual") instance=ExtResource("3_8gbba")]
 target_calculator = NodePath("../../../MainControl/Calculator")
 visualize_button = NodePath("../../../MainControl/SettingsContainer/OptionButton")
 limit_visual = NodePath("../../../MainControl/LimitVisual")
 derivative_visual = NodePath("../../../MainControl/DerivateVisual")
 integral_visual = NodePath("../../../MainControl/IntegralVisual")
+spatial_integral_visual = NodePath("../../../MainControl/SpatialIntegralVisual")
 
 [node name="MainControl" type="Control" parent="." unique_id=48407842]
 layout_mode = 3
@@ -77,7 +89,7 @@ text = "Graph Settings"
 layout_mode = 2
 size_flags_horizontal = 3
 selected = 0
-item_count = 4
+item_count = 5
 popup/item_0/text = "Visualize"
 popup/item_0/id = 0
 popup/item_1/text = "Limits"
@@ -86,6 +98,8 @@ popup/item_2/text = "Derivatives"
 popup/item_2/id = 2
 popup/item_3/text = "Integrals"
 popup/item_3/id = 3
+popup/item_4/text = "3D Integrals"
+popup/item_4/id = 4
 
 [node name="WindowsContainer" type="HBoxContainer" parent="MainControl" unique_id=1102050839]
 layout_mode = 1
@@ -116,6 +130,11 @@ layout_mode = 1
 [node name="IntegralVisual" parent="MainControl" unique_id=1568862957 instance=ExtResource("8_tipki")]
 visible = false
 layout_mode = 1
+
+[node name="SpatialIntegralVisual" parent="MainControl" unique_id=1144304782 node_paths=PackedStringArray("graph_sprite") instance=ExtResource("10_choun")]
+visible = false
+layout_mode = 1
+graph_sprite = NodePath("../../Sprite3D")
 
 [connection signal="pressed" from="MainControl/SettingsContainer/ShowGraphSettings" to="MainControl" method="_on_show_graph_settings_pressed"]
 [connection signal="pressed" from="MainControl/WindowsContainer/ShowCalculator" to="MainControl" method="_on_show_calculator_pressed"]

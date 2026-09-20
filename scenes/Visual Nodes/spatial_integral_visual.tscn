@@ -1,8 +1,8 @@
-[gd_scene format=3 uid="uid://dauti8n3krpad"]
+[gd_scene format=3 uid="uid://carifaoj162kg"]
 
-[ext_resource type="Script" uid="uid://uy6w7e4vm3cy" path="res://scripts/attached/integral_visual.gd" id="1_x1po3"]
+[ext_resource type="Script" uid="uid://debm5w5jmejbq" path="res://scripts/attached/spatial_integral_visual.gd" id="1_piovc"]
 
-[node name="IntegralVisual" type="Control" unique_id=946458890]
+[node name="SpatialIntegralVisual" type="Control" unique_id=946458890]
 layout_mode = 3
 anchor_left = 0.8
 anchor_top = 0.05
@@ -10,7 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 0.95
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_x1po3")
+script = ExtResource("1_piovc")
 
 [node name="Settings" type="GridContainer" parent="." unique_id=1308196596]
 layout_mode = 0
@@ -23,9 +23,9 @@ columns = 2
 [node name="Label" type="Label" parent="Settings" unique_id=85085680]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Hide Derivative Answer"
+text = "Hide Integral Answer"
 
-[node name="HideDerivativeAnswer" type="CheckBox" parent="Settings" unique_id=2067738094]
+[node name="HideIntegralAnswer" type="CheckBox" parent="Settings" unique_id=2067738094]
 layout_mode = 2
 size_flags_horizontal = 8
 button_pressed = true
@@ -33,28 +33,28 @@ button_pressed = true
 [node name="Label2" type="Label" parent="Settings" unique_id=867292541]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Hide Slope"
+text = "Hide Rectangle Areas"
 
-[node name="HideSlope" type="CheckBox" parent="Settings" unique_id=1801645433]
+[node name="HideRectangleAreas" type="CheckBox" parent="Settings" unique_id=1801645433]
 layout_mode = 2
 size_flags_horizontal = 8
 button_pressed = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1337149574]
 layout_mode = 0
-offset_left = 0.4
-offset_top = 275.0
-offset_right = 195.4
-offset_bottom = 378.0
+offset_left = 0.39993897
+offset_top = 183.6
+offset_right = 195.39993
+offset_bottom = 286.6
 
-[node name="DerivativeDisplay" type="ReferenceRect" parent="VBoxContainer" unique_id=1138360119]
+[node name="IntegralDisplay" type="ReferenceRect" parent="VBoxContainer" unique_id=1138360119]
 layout_mode = 2
 size_flags_vertical = 3
 border_color = Color(0.38431373, 0.38431373, 0.38431373, 1)
 border_width = 5.0
 editor_only = false
 
-[node name="ColorRect" type="ColorRect" parent="VBoxContainer/DerivativeDisplay" unique_id=416268402]
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer/IntegralDisplay" unique_id=416268402]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -63,7 +63,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.1764706, 0.1764706, 0.1764706, 1)
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/DerivativeDisplay" unique_id=197358432]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/IntegralDisplay" unique_id=197358432]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -71,16 +71,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Expression" type="RichTextLabel" parent="VBoxContainer/DerivativeDisplay/HBoxContainer" unique_id=434944633]
+[node name="Expression" type="RichTextLabel" parent="VBoxContainer/IntegralDisplay/HBoxContainer" unique_id=434944633]
 layout_mode = 2
 size_flags_horizontal = 2
 bbcode_enabled = true
-text = "f'(x) =
+text = "[char=0222b]f(x)dx = 
 "
 fit_content = true
 autowrap_mode = 0
 
-[node name="Answer" type="RichTextLabel" parent="VBoxContainer/DerivativeDisplay/HBoxContainer" unique_id=349913199]
+[node name="Answer" type="RichTextLabel" parent="VBoxContainer/IntegralDisplay/HBoxContainer" unique_id=349913199]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
@@ -88,14 +88,14 @@ text = "?"
 fit_content = true
 autowrap_mode = 0
 
-[node name="DerivativeApproximationDisplay" type="ReferenceRect" parent="VBoxContainer" unique_id=342693968]
+[node name="IntegralApproximationDisplay" type="ReferenceRect" parent="VBoxContainer" unique_id=342693968]
 layout_mode = 2
 size_flags_vertical = 3
 border_color = Color(0.38431373, 0.38431373, 0.38431373, 1)
 border_width = 5.0
 editor_only = false
 
-[node name="ColorRect" type="ColorRect" parent="VBoxContainer/DerivativeApproximationDisplay" unique_id=452011363]
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer/IntegralApproximationDisplay" unique_id=452011363]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -104,7 +104,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.1764706, 0.1764706, 0.1764706, 1)
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/DerivativeApproximationDisplay" unique_id=1513982593]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/IntegralApproximationDisplay" unique_id=1513982593]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -112,7 +112,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Expression" type="RichTextLabel" parent="VBoxContainer/DerivativeApproximationDisplay/HBoxContainer" unique_id=574423933]
+[node name="Expression" type="RichTextLabel" parent="VBoxContainer/IntegralApproximationDisplay/HBoxContainer" unique_id=574423933]
 layout_mode = 2
 size_flags_horizontal = 2
 bbcode_enabled = true
@@ -121,7 +121,7 @@ text = "f'(x) [char=2248]
 fit_content = true
 autowrap_mode = 0
 
-[node name="Expression2" type="RichTextLabel" parent="VBoxContainer/DerivativeApproximationDisplay/HBoxContainer" unique_id=1385030385]
+[node name="Expression2" type="RichTextLabel" parent="VBoxContainer/IntegralApproximationDisplay/HBoxContainer" unique_id=1385030385]
 layout_mode = 2
 size_flags_horizontal = 2
 bbcode_enabled = true
@@ -130,7 +130,7 @@ h[char=2192]0"
 fit_content = true
 autowrap_mode = 0
 
-[node name="Answer" type="RichTextLabel" parent="VBoxContainer/DerivativeApproximationDisplay/HBoxContainer" unique_id=1082994957]
+[node name="Answer" type="RichTextLabel" parent="VBoxContainer/IntegralApproximationDisplay/HBoxContainer" unique_id=1082994957]
 layout_mode = 2
 size_flags_horizontal = 2
 fit_content = true
@@ -182,7 +182,7 @@ offset_right = -0.049987793
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="HSlider" type="HSlider" parent="VBoxContainer2" unique_id=1255329362]
+[node name="NSlider" type="HSlider" parent="VBoxContainer2" unique_id=1255329362]
 layout_mode = 2
 
 [node name="BVariable" type="ReferenceRect" parent="VBoxContainer2" unique_id=1595720970]
@@ -273,7 +273,9 @@ offset_left = -3.6000366
 offset_top = 423.6
 offset_right = 197.39996
 offset_bottom = 443.6
-max_value = 2.0
+max_value = 1.0
+step = 0.0
+value = 0.5
 tick_count = 3
 ticks_on_borders = true
 
@@ -306,10 +308,65 @@ offset_right = 189.39996
 offset_bottom = 415.6
 text = "Reimman Sum Direction"
 
-[connection signal="pressed" from="Settings/HideDerivativeAnswer" to="." method="_on_hide_derivative_answer_pressed"]
-[connection signal="pressed" from="Settings/HideSlope" to="." method="_on_hide_slope_pressed"]
+[node name="Label2" type="Label" parent="." unique_id=489401777]
+layout_mode = 0
+offset_left = 0.39996338
+offset_top = 297.6
+offset_right = 189.39996
+offset_bottom = 320.6
+text = "Integral Shape"
+
+[node name="ShapeOption" type="OptionButton" parent="." unique_id=501710368]
+layout_mode = 0
+offset_left = 0.39996338
+offset_top = 321.6
+offset_right = 194.39996
+offset_bottom = 352.6
+selected = 0
+item_count = 3
+popup/item_0/text = "Square"
+popup/item_0/id = 0
+popup/item_1/text = "Rectangle"
+popup/item_1/id = 1
+popup/item_2/text = "Circle (Revolution)"
+popup/item_2/id = 2
+
+[node name="Background" type="ColorRect" parent="." unique_id=417175295]
+z_index = -1
+layout_mode = 0
+offset_left = -4.6000366
+offset_top = 391.6
+offset_right = 208.39996
+offset_bottom = 462.6
+mouse_filter = 2
+color = Color(0.1764706, 0.1764706, 0.1764706, 1)
+
+[node name="Background2" type="ColorRect" parent="." unique_id=73533254]
+z_index = -1
+layout_mode = 0
+offset_left = -1.6000366
+offset_top = 63.6
+offset_right = 192.39998
+offset_bottom = 118.6
+mouse_filter = 2
+color = Color(0.1764706, 0.1764706, 0.1764706, 1)
+
+[node name="FunctionNameEdit" type="LineEdit" parent="." unique_id=269666344]
+visible = false
+layout_mode = 0
+offset_left = 0.39996338
+offset_top = 356.6
+offset_right = 194.39996
+offset_bottom = 387.6
+text = "enter function name"
+
+[connection signal="pressed" from="Settings/HideIntegralAnswer" to="." method="_on_hide_integral_answer_pressed"]
+[connection signal="pressed" from="Settings/HideRectangleAreas" to="." method="_on_hide_rectangle_areas_pressed"]
 [connection signal="value_changed" from="VBoxContainer2/NVariable/NSpinBox" to="." method="_on_n_spin_box_value_changed"]
-[connection signal="value_changed" from="VBoxContainer2/HSlider" to="." method="_on_h_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer2/NSlider" to="." method="_on_n_slider_value_changed"]
 [connection signal="value_changed" from="VBoxContainer2/BVariable/BSpinBox" to="." method="_on_b_spin_box_value_changed"]
 [connection signal="value_changed" from="VBoxContainer2/AVariable/ASpinBox" to="." method="_on_a_spin_box_value_changed"]
 [connection signal="value_changed" from="DirectionSlider" to="." method="_on_direction_slider_value_changed"]
+[connection signal="item_selected" from="ShapeOption" to="." method="_on_option_button_item_selected"]
+[connection signal="editing_toggled" from="FunctionNameEdit" to="." method="_on_function_name_edit_editing_toggled"]
+[connection signal="text_submitted" from="FunctionNameEdit" to="." method="_on_function_name_edit_text_submitted"]

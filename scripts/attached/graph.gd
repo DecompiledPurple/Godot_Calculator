@@ -28,12 +28,14 @@ var empty_visual: Visual = Visual.new()
 @export var limit_visual: Visual
 @export var derivative_visual: Visual
 @export var integral_visual: Visual
+@export var spatial_integral_visual: Visual
 
 @onready var visual_list: Array[Visual] = [
 	empty_visual,
 	limit_visual,
 	derivative_visual,
 	integral_visual,
+	spatial_integral_visual,
 ]
 var current_function_name: String 
 
@@ -42,6 +44,7 @@ func _ready() -> void:
 	limit_visual.graph_controller = self
 	derivative_visual.graph_controller = self
 	integral_visual.graph_controller = self
+	spatial_integral_visual.graph_controller = self
 	target_calculator.graph_function.connect(on_graph)
 	visualize_button.item_selected.connect(on_visualize_changed)
 	queue_redraw()
@@ -111,6 +114,7 @@ func hide_all_visualizers() -> void:
 	limit_visual.visible = false
 	derivative_visual.visible = false
 	integral_visual.visible = false
+	spatial_integral_visual.visible = false
 
 func reset_visuals() -> void:
 	hide_all_visualizers()

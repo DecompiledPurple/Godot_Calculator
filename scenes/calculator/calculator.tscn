@@ -401,10 +401,15 @@ text = "f'(x)"
 [node name="Integrate" parent="FunctionOperations/GridContainer" unique_id=755756612 instance=ExtResource("3_wfhry")]
 layout_mode = 2
 
-[node name="CalculatorTextLabel" parent="FunctionOperations/GridContainer/Integrate" unique_id=1662886829 instance=ExtResource("3_quc1l")]
+[node name="CalculatorTextLabel" parent="FunctionOperations/GridContainer/Integrate" unique_id=319910506 instance=ExtResource("3_quc1l")]
 layout_mode = 0
 anchors_preset = 0
-theme_override_font_sizes/normal_font_size = 25
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 1.0
+grow_horizontal = 1
+grow_vertical = 1
+theme_override_font_sizes/normal_font_size = 24
 text = "[char=222b]f(x)dx"
 
 [node name="Operations" type="VBoxContainer" parent="FunctionOperations" unique_id=700489413]
