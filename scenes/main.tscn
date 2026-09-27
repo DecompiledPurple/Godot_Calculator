@@ -24,6 +24,9 @@ material = SubResource("StandardMaterial3D_choun")
 [sub_resource type="ViewportTexture" id="ViewportTexture_8gbba"]
 viewport_path = NodePath("Sprite3D/SubViewport")
 
+[sub_resource type="ArrayMesh" id="ArrayMesh_choun"]
+custom_aabb = AABB(2.4, 1.165, 0.925, 4.235, 1.65, 3.055)
+
 [node name="Node" type="Node" unique_id=1103378696]
 
 [node name="MainCamera" type="Camera3D" parent="." unique_id=795961096]
@@ -37,11 +40,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.93147, -3.705843)
 mesh = SubResource("BoxMesh_7dm0k")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=2036699073]
+pixel_size = 0.005
 texture = SubResource("ViewportTexture_8gbba")
 
 [node name="SubViewport" type="SubViewport" parent="Sprite3D" unique_id=173437799]
 disable_3d = true
-size = Vector2i(1000, 1000)
+size = Vector2i(2000, 2000)
 
 [node name="Graph" parent="Sprite3D/SubViewport" unique_id=363277246 node_paths=PackedStringArray("target_calculator", "visualize_button", "limit_visual", "derivative_visual", "integral_visual", "spatial_integral_visual") instance=ExtResource("3_8gbba")]
 target_calculator = NodePath("../../../MainControl/Calculator")
@@ -135,6 +139,10 @@ layout_mode = 1
 visible = false
 layout_mode = 1
 graph_sprite = NodePath("../../Sprite3D")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1246225966]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3893757, 6.5326996, -2.8257492)
+mesh = SubResource("ArrayMesh_choun")
 
 [connection signal="pressed" from="MainControl/SettingsContainer/ShowGraphSettings" to="MainControl" method="_on_show_graph_settings_pressed"]
 [connection signal="pressed" from="MainControl/WindowsContainer/ShowCalculator" to="MainControl" method="_on_show_calculator_pressed"]

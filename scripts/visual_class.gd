@@ -4,8 +4,9 @@ class_name Visual
 
 var FONT: Font = CalculatorSettings.FONT
 const COORDINATE_COLOR: Color = CalculatorSettings.COORDINATE_COLOR
-const VISUAL_CIRCLE_SIZE: int = 6
+const VISUAL_CIRCLE_SIZE: int = 8
 const TEXT_SIZE = 30
+const STRING_ROUND: int = 4
 
 var graph_controller: Node2D
 

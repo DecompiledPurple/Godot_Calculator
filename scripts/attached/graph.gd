@@ -1,23 +1,20 @@
 extends Node2D
 
 # general constants
-const SCALE: int = 25
+const SCALE: int = CalculatorSettings.SCALE
 const FUNCTION_ACCURACCY: float = 0.01
 const MINIMUM_RANGE: int = -50
 const MAXIMUM_RANGE: int = 50
 
 const GRAPH_WIDTH: int = 5
-const AXIS_WIDTH: int = 3
-const LINE_WIDTH: int = 2
 
-const Y_SIZE: float = 1000
-const X_SIZE: float= 1000
+const Y_SIZE: float = CalculatorSettings.Y_SIZE
+const X_SIZE: float= CalculatorSettings.X_SIZE
 
 const LINE_LENGTH_TOLERANCE: float = 5000.0
 const COORDINATE_COLOR: Color = Color.BLACK
 var FONT: Font = ThemeDB.fallback_font
 
-var background_color: Color = Color.BLACK
 var graph_color: Color = Color.BLACK
 
 var current_visual_index: int
@@ -54,7 +51,6 @@ func position_to_graph(x: float, y: float) -> Vector2:
 	return Vector2(scaled_position.x + X_SIZE/2, -scaled_position.y + Y_SIZE/2)
 
 func _draw() -> void:
-	draw_base_graph()
 	if current_function_name == "":
 		return
 	draw_current_graph()
@@ -64,20 +60,6 @@ func on_graph(function_name: String) -> void:
 	current_function_name = function_name
 	CalculatorSettings.current_function_name = function_name
 	queue_redraw()
-
-
-func draw_base_graph() -> void:
-	#draw_circle(Vector2.ZERO, 200, background_color, true)
-	# draw_circle(Vector2(500,500), 50, Color.REBECCA_PURPLE)
-	draw_line(Vector2(0, Y_SIZE/2), Vector2(X_SIZE, Y_SIZE/2), background_color, GRAPH_WIDTH)
-	draw_line(Vector2(X_SIZE/2, 0), Vector2(X_SIZE/2, Y_SIZE), background_color, GRAPH_WIDTH)
-	
-	for index in range(0, X_SIZE/SCALE):
-		var current_step: int = index * SCALE
-		draw_line(Vector2(current_step,0), Vector2(current_step, Y_SIZE), background_color, LINE_WIDTH)
-		draw_line(Vector2(current_step, Y_SIZE/2 - Y_SIZE/100), Vector2(current_step, Y_SIZE/2 + Y_SIZE/100), background_color, AXIS_WIDTH)
-		draw_line(Vector2(0, current_step), Vector2(X_SIZE, current_step), background_color, LINE_WIDTH)
-		draw_line(Vector2(X_SIZE/2 - X_SIZE/100, current_step), Vector2(X_SIZE/2 + X_SIZE/100, current_step), background_color, AXIS_WIDTH)
 
 func draw_current_graph() -> void:
 	var last_position: Vector2

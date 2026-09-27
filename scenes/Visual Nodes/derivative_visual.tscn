@@ -29,17 +29,26 @@ min_value = -1.0
 max_value = 2.0
 step = 0.1
 
-[node name="HLabel" type="Label" parent="." unique_id=2010540439]
+[node name="Background3" type="ColorRect" parent="HSlider" unique_id=1452027873]
+z_index = -1
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.671
+offset_left = -5.0
+offset_top = -22.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.1764706, 0.1764706, 0.1764706, 1)
+
+[node name="HLabel" type="Label" parent="HSlider" unique_id=2010540439]
 z_index = 1
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 48.399963
-offset_top = -52.599976
-offset_right = 104.39996
-offset_bottom = -29.599976
-grow_vertical = 0
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
 text = "h=10^0"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -74,6 +83,17 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Hide Derivative Answer"
 
+[node name="Background2" type="ColorRect" parent="Settings/Label" unique_id=1801275429]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.1764706, 0.1764706, 0.1764706, 1)
+
 [node name="HideDerivativeAnswer" type="CheckBox" parent="Settings" unique_id=2067738094]
 layout_mode = 2
 size_flags_horizontal = 8
@@ -84,17 +104,36 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Hide Slope"
 
+[node name="Background2" type="ColorRect" parent="Settings/Label2" unique_id=956998497]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.1764706, 0.1764706, 0.1764706, 1)
+
 [node name="HideSlope" type="CheckBox" parent="Settings" unique_id=1801645433]
 layout_mode = 2
 size_flags_horizontal = 8
 button_pressed = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1337149574]
-layout_mode = 0
-offset_left = 0.4
-offset_top = 360.6
-offset_right = 195.4
-offset_bottom = 463.6
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.86
+anchor_top = 0.711
+anchor_right = 0.86
+anchor_bottom = 0.711
+offset_left = -194.99997
+offset_top = -50.804977
+offset_right = 3.0517578e-05
+offset_bottom = 52.19519
+grow_horizontal = 0
+grow_vertical = 2
+pivot_offset = Vector2(200, 0)
 
 [node name="DerivativeDisplay" type="ReferenceRect" parent="VBoxContainer" unique_id=1138360119]
 layout_mode = 2
@@ -235,26 +274,6 @@ grow_vertical = 2
 min_value = -999.0
 max_value = 999.0
 step = 0.0
-
-[node name="Background2" type="ColorRect" parent="." unique_id=1801275429]
-z_index = -1
-layout_mode = 0
-offset_left = -1.6000366
-offset_top = 63.6
-offset_right = 208.39996
-offset_bottom = 118.6
-mouse_filter = 2
-color = Color(0.1764706, 0.1764706, 0.1764706, 1)
-
-[node name="Background3" type="ColorRect" parent="." unique_id=1452027873]
-z_index = -1
-layout_mode = 0
-offset_left = 48.399963
-offset_top = 518.6
-offset_right = 199.39998
-offset_bottom = 575.6
-mouse_filter = 2
-color = Color(0.1764706, 0.1764706, 0.1764706, 1)
 
 [connection signal="value_changed" from="HSlider" to="." method="_on_h_slider_value_changed"]
 [connection signal="value_changed" from="XSlider" to="." method="_on_x_slider_value_changed"]

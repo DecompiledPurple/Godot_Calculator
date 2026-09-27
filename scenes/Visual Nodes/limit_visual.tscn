@@ -74,17 +74,25 @@ min_value = -1.0
 max_value = 2.0
 step = 0.0
 
-[node name="HLabel" type="Label" parent="." unique_id=2010540439]
+[node name="Background3" type="ColorRect" parent="HSlider" unique_id=834931232]
+z_index = -1
+material = SubResource("CanvasItemMaterial_n3evj")
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.707
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.1764706, 0.1764706, 0.1764706, 1)
+
+[node name="HLabel" type="Label" parent="HSlider" unique_id=2010540439]
 z_index = 1
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 48.399963
-offset_top = -52.599976
-offset_right = 104.39996
-offset_bottom = -29.599976
-grow_vertical = 0
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
 text = "h=10^0"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -151,8 +159,6 @@ anchors_preset = -1
 anchor_top = 0.61
 anchor_right = 0.85
 anchor_bottom = 0.71
-grow_horizontal = 2
-grow_vertical = 0
 border_color = Color(0.38431373, 0.38431373, 0.38431373, 1)
 border_width = 5.0
 editor_only = false
@@ -234,7 +240,7 @@ layout_mode = 2
 size_flags_horizontal = 2
 bbcode_enabled = true
 text = "limf(x) [char=2248]
-x[char=2192]n[char=207B]
+x[char=2192]n
 "
 fit_content = true
 autowrap_mode = 0
@@ -260,32 +266,22 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Hide Limit Answer"
 
+[node name="Background2" type="ColorRect" parent="Settings/Label" unique_id=1832439873]
+z_index = -1
+material = SubResource("CanvasItemMaterial_n3evj")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.1764706, 0.1764706, 0.1764706, 1)
+
 [node name="HideLimitAnswer" type="CheckBox" parent="Settings" unique_id=2067738094]
 layout_mode = 2
 size_flags_horizontal = 8
 button_pressed = true
-
-[node name="Background2" type="ColorRect" parent="." unique_id=1832439873]
-z_index = -1
-material = SubResource("CanvasItemMaterial_n3evj")
-layout_mode = 0
-offset_left = -1.6000366
-offset_top = 63.6
-offset_right = 192.39998
-offset_bottom = 91.6
-mouse_filter = 2
-color = Color(0.1764706, 0.1764706, 0.1764706, 1)
-
-[node name="Background3" type="ColorRect" parent="." unique_id=834931232]
-z_index = -1
-material = SubResource("CanvasItemMaterial_n3evj")
-layout_mode = 0
-offset_left = 47.399963
-offset_top = 528.6
-offset_right = 198.39998
-offset_bottom = 585.6
-mouse_filter = 2
-color = Color(0.1764706, 0.1764706, 0.1764706, 1)
 
 [connection signal="value_changed" from="NVariable/NSpinBox" to="." method="_on_n_spin_box_value_changed"]
 [connection signal="value_changed" from="HSlider" to="." method="_on_h_slider_value_changed"]
