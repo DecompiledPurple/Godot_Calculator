@@ -15,7 +15,7 @@ var graph_color: Color = Color.BLACK
 func _ready() -> void:
 	queue_redraw()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
 func _draw() -> void:

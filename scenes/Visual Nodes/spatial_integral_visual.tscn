@@ -25,6 +25,17 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Hide Integral Answer"
 
+[node name="Background2" type="ColorRect" parent="Settings/Label" unique_id=73533254]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.1764706, 0.1764706, 0.1764706, 1)
+
 [node name="HideIntegralAnswer" type="CheckBox" parent="Settings" unique_id=2067738094]
 layout_mode = 2
 size_flags_horizontal = 8
@@ -34,6 +45,17 @@ button_pressed = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Hide Rectangle Areas"
+
+[node name="Background3" type="ColorRect" parent="Settings/Label2" unique_id=1528087157]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.1764706, 0.1764706, 0.1764706, 1)
 
 [node name="HideRectangleAreas" type="CheckBox" parent="Settings" unique_id=1801645433]
 layout_mode = 2
@@ -337,16 +359,6 @@ offset_left = -4.6000366
 offset_top = 391.6
 offset_right = 208.39996
 offset_bottom = 462.6
-mouse_filter = 2
-color = Color(0.1764706, 0.1764706, 0.1764706, 1)
-
-[node name="Background2" type="ColorRect" parent="." unique_id=73533254]
-z_index = -1
-layout_mode = 0
-offset_left = -1.6000366
-offset_top = 63.6
-offset_right = 192.39998
-offset_bottom = 118.6
 mouse_filter = 2
 color = Color(0.1764706, 0.1764706, 0.1764706, 1)
 

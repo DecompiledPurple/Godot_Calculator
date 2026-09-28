@@ -12,6 +12,7 @@ var graph_controller: Node2D
 
 var visual_draw: Callable = Callable(self, "empty_callable")
 var on_visual_entered: Callable = Callable(self, "on_entered")
+var on_visual_exit: Callable = Callable(self, "on_exit")
 
 func position_to_graph(x: float, y: float) -> Vector2:
 	var SCALE = CalculatorSettings.SCALE
@@ -31,7 +32,6 @@ func rect_to_graph(rect: Rect2) -> Rect2:
 	var new_rect: Rect2 = rect
 	new_rect.position = vector_to_graph(rect.position)
 	new_rect.size = rect.size * CalculatorSettings.SCALE
-	print(new_rect)
 	return new_rect
 
 func empty_callable() -> void:
@@ -40,3 +40,6 @@ func empty_callable() -> void:
 func on_entered() -> void:
 	visible = true
 	graph_controller.queue_redraw()
+
+func on_exit() -> void:
+	visible = false

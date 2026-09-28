@@ -14,7 +14,7 @@ func rotation_to_vector(x_rads, y_rads) -> Vector3:
 	return Vector3(-sin(y_rads), sin(x_rads), -cos(x_rads) * cos(y_rads)) 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var movement_vector: Vector3 = Vector3.ZERO
 
 	if Input.is_action_pressed("MOVE_FORWARD"):

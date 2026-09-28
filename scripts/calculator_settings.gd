@@ -1,8 +1,8 @@
 extends Node
 
-const SCALE: int = 50
-const Y_SIZE: int = 2000
-const X_SIZE: int = 2000
+const SCALE: float = 50
+const Y_SIZE: float = 2000
+const X_SIZE: float = 2000
 var FONT: Font = ThemeDB.fallback_font
 const COORDINATE_COLOR: Color = Color.BLACK
 

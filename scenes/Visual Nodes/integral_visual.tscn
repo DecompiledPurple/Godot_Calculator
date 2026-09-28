@@ -181,9 +181,11 @@ offset_top = -4.0
 offset_right = -0.049987793
 grow_horizontal = 0
 grow_vertical = 2
+max_value = 1000.0
 
 [node name="HSlider" type="HSlider" parent="VBoxContainer2" unique_id=1255329362]
 layout_mode = 2
+max_value = 1000.0
 
 [node name="BVariable" type="ReferenceRect" parent="VBoxContainer2" unique_id=1595720970]
 layout_mode = 2

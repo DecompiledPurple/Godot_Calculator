@@ -2,7 +2,7 @@ extends Node2D
 
 # general constants
 const SCALE: int = CalculatorSettings.SCALE
-const FUNCTION_ACCURACCY: float = 0.01
+const FUNCTION_ACCURACY: float = 0.01
 const MINIMUM_RANGE: int = -50
 const MAXIMUM_RANGE: int = 50
 
@@ -64,11 +64,11 @@ func on_graph(function_name: String) -> void:
 func draw_current_graph() -> void:
 	var last_position: Vector2
 	var skip_line: bool = true 
-	var minimum: float = CalculatorSettings.graph_minimum/FUNCTION_ACCURACCY
-	var maximum: float = CalculatorSettings.graph_maximum/FUNCTION_ACCURACCY
+	var minimum: float = CalculatorSettings.graph_minimum/FUNCTION_ACCURACY
+	var maximum: float = CalculatorSettings.graph_maximum/FUNCTION_ACCURACY
 	var graph_range: Array = range(minimum, maximum)
 	for x: float in graph_range:
-		x *= FUNCTION_ACCURACCY
+		x *= FUNCTION_ACCURACY
 		var y: Variant = CalculatorFunctions.fun(current_function_name, x)
 		if y == null or y is String or is_inf(y): # implied error
 			skip_line = true
@@ -88,8 +88,8 @@ func draw_current_graph() -> void:
 			last_position = point_position
 
 func on_visualize_changed(index: int) -> void:
+	visual_list[current_visual_index].on_visual_exit.call()
 	current_visual_index = index
-	hide_all_visualizers()
 	visual_list[index].on_visual_entered.call()
 
 func hide_all_visualizers() -> void:
