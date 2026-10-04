@@ -20,10 +20,6 @@ config/icon="res://icon.svg"
 CalculatorFunctions="*uid://cdsgn3bqt4hx4"
 CalculatorSettings="*uid://dei5jsq0ggyqq"
 
-[display]
-
-window/size/mode=3
-
 [dotnet]
 
 project/assembly_name="Calculator"

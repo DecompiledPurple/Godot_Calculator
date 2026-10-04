@@ -6,6 +6,7 @@ const MOVE_SPEED_MULTIPLIER: float = 0.5
 
 var movement_global: bool = false
 var moving_slow: bool = false
+@export var calculator_viewport: Window
 
 func _ready() -> void:
 	pass # Replace with function body.
@@ -15,6 +16,14 @@ func rotation_to_vector(x_rads, y_rads) -> Vector3:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
+	var focus_owner: Variant = get_viewport().gui_get_focus_owner()
+	if focus_owner is LineEdit and focus_owner.is_editing():
+		print("focus_owner = " + str(focus_owner))
+		return
+	var calculator_focus: Variant = calculator_viewport.gui_get_focus_owner()
+	if calculator_viewport.has_focus() and calculator_focus is LineEdit and calculator_focus.is_editing():
+		print("calculator focus = " + str(calculator_focus))
+		return
 	var movement_vector: Vector3 = Vector3.ZERO
 
 	if Input.is_action_pressed("MOVE_FORWARD"):

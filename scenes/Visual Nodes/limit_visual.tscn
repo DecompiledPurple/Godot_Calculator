@@ -254,11 +254,13 @@ fit_content = true
 autowrap_mode = 0
 
 [node name="Settings" type="GridContainer" parent="." unique_id=1308196596]
-layout_mode = 0
-offset_left = 0.39996338
-offset_top = 63.6
-offset_right = 195.39996
-offset_bottom = 269.6
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.05
+anchor_right = 1.0
+anchor_bottom = 0.05
+offset_bottom = 24.0
+grow_horizontal = 2
 columns = 2
 
 [node name="Label" type="Label" parent="Settings" unique_id=85085680]

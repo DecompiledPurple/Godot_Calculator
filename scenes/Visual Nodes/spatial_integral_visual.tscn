@@ -13,11 +13,13 @@ grow_vertical = 2
 script = ExtResource("1_piovc")
 
 [node name="Settings" type="GridContainer" parent="." unique_id=1308196596]
-layout_mode = 0
-offset_left = 0.39996338
-offset_top = 63.6
-offset_right = 195.39996
-offset_bottom = 269.6
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.05
+anchor_right = 1.0
+anchor_bottom = 0.05
+offset_bottom = 52.0
+grow_horizontal = 2
 columns = 2
 
 [node name="Label" type="Label" parent="Settings" unique_id=85085680]
@@ -63,10 +65,12 @@ size_flags_horizontal = 8
 button_pressed = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1337149574]
+visible = false
 layout_mode = 1
-offset_top = 180.0
-offset_right = 195.0
-offset_bottom = 283.0
+anchors_preset = -1
+anchor_top = 0.287
+anchor_right = 0.9
+anchor_bottom = 0.485
 
 [node name="IntegralDisplay" type="ReferenceRect" parent="VBoxContainer" unique_id=1138360119]
 layout_mode = 2
@@ -158,11 +162,11 @@ fit_content = true
 autowrap_mode = 0
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="." unique_id=1826548099]
-layout_mode = 0
-offset_left = 47.399963
-offset_top = 470.6
-offset_right = 200.39996
-offset_bottom = 606.6
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.802
+anchor_right = 0.9
+anchor_bottom = 1.0
 theme_override_constants/separation = 3
 
 [node name="NVariable" type="ReferenceRect" parent="VBoxContainer2" unique_id=851500602]
@@ -289,60 +293,35 @@ max_value = 999.0
 step = 0.0
 
 [node name="DirectionSlider" type="HSlider" parent="." unique_id=1873335504]
-layout_mode = 0
-offset_left = -3.6000366
-offset_top = 423.6
-offset_right = 197.39996
-offset_bottom = 443.6
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.723
+anchor_right = 0.9
+anchor_bottom = 0.75
 max_value = 1.0
 step = 0.0
 value = 0.5
 tick_count = 3
 ticks_on_borders = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=320236191]
-layout_mode = 0
-offset_left = 0.39996338
-offset_top = 440.6
-offset_right = 197.39996
-offset_bottom = 464.6
-theme_override_constants/separation = 44
-alignment = 1
-
-[node name="Label" type="Label" parent="HBoxContainer" unique_id=714865800]
-layout_mode = 2
-text = "left"
-
-[node name="Label2" type="Label" parent="HBoxContainer" unique_id=686273566]
-layout_mode = 2
-text = "middle"
-
-[node name="Label3" type="Label" parent="HBoxContainer" unique_id=764277442]
-layout_mode = 2
-text = "right"
-
-[node name="Label" type="Label" parent="." unique_id=1227726889]
-layout_mode = 0
-offset_left = 0.39996338
-offset_top = 392.6
-offset_right = 189.39996
-offset_bottom = 415.6
-text = "Reimman Sum Direction"
-
 [node name="Label2" type="Label" parent="." unique_id=489401777]
-layout_mode = 0
-offset_left = 0.39996338
-offset_top = 297.6
-offset_right = 189.39996
-offset_bottom = 320.6
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
 text = "Integral Shape"
 
 [node name="ShapeOption" type="OptionButton" parent="." unique_id=501710368]
-layout_mode = 0
-offset_left = 0.39996338
-offset_top = 321.6
-offset_right = 194.39996
-offset_bottom = 352.6
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.53
+anchor_right = 0.9
+anchor_bottom = 0.594
+grow_horizontal = 2
+grow_vertical = 2
 selected = 0
 item_count = 3
 popup/item_0/text = "Square"
@@ -354,21 +333,51 @@ popup/item_2/id = 2
 
 [node name="Background" type="ColorRect" parent="." unique_id=417175295]
 z_index = -1
-layout_mode = 0
-offset_left = -4.6000366
-offset_top = 391.6
-offset_right = 208.39996
-offset_bottom = 462.6
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.673
+anchor_right = 0.9
+anchor_bottom = 0.803
 mouse_filter = 2
 color = Color(0.1764706, 0.1764706, 0.1764706, 1)
 
+[node name="Label" type="Label" parent="Background" unique_id=1227726889]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+grow_horizontal = 2
+text = "Reimman Sum Direction"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Background" unique_id=320236191]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.584
+anchor_right = 1.0
+anchor_bottom = 0.881
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 44
+alignment = 1
+
+[node name="Label" type="Label" parent="Background/HBoxContainer" unique_id=714865800]
+layout_mode = 2
+text = "left"
+
+[node name="Label2" type="Label" parent="Background/HBoxContainer" unique_id=686273566]
+layout_mode = 2
+text = "middle"
+
+[node name="Label3" type="Label" parent="Background/HBoxContainer" unique_id=764277442]
+layout_mode = 2
+text = "right"
+
 [node name="FunctionNameEdit" type="LineEdit" parent="." unique_id=269666344]
-visible = false
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.6
+anchor_right = 0.9
+anchor_bottom = 0.644
 offset_left = 0.39996338
-offset_top = 356.6
-offset_right = 194.39996
-offset_bottom = 387.6
 text = "enter function name"
 
 [connection signal="pressed" from="Settings/HideIntegralAnswer" to="." method="_on_hide_integral_answer_pressed"]

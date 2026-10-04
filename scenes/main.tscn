@@ -29,11 +29,12 @@ custom_aabb = AABB(2.4, 1.165, 0.925, 4.235, 1.65, 3.055)
 
 [node name="Node" type="Node" unique_id=1103378696]
 
-[node name="MainCamera" type="Camera3D" parent="." unique_id=795961096]
+[node name="MainCamera" type="Camera3D" parent="." unique_id=795961096 node_paths=PackedStringArray("calculator_viewport")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
 current = true
 fov = 80.0
 script = ExtResource("1_85g3d")
+calculator_viewport = NodePath("../MainControl/Calculator")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=893439764]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.93147, -3.705843)

@@ -15,14 +15,11 @@ script = ExtResource("1_s5mry")
 [node name="HSlider" type="HSlider" parent="." unique_id=804772740]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.22
 anchor_top = 0.9
-anchor_right = 0.85
+anchor_right = 0.9
 anchor_bottom = 1.0
 offset_left = -0.35998535
-offset_top = 15.720032
 offset_right = -0.35998535
-offset_bottom = 15.720032
 grow_horizontal = 2
 grow_vertical = 2
 min_value = -3.0
@@ -36,8 +33,6 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 0.671
-offset_left = -5.0
-offset_top = -22.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -57,9 +52,8 @@ vertical_alignment = 1
 [node name="XSlider" type="HSlider" parent="." unique_id=1255329362]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.22
 anchor_top = 0.9
-anchor_right = 0.85
+anchor_right = 0.9
 anchor_bottom = 1.0
 offset_left = -0.35998535
 offset_top = -20.279968
@@ -72,11 +66,12 @@ max_value = 10.0
 step = 0.01
 
 [node name="Settings" type="GridContainer" parent="." unique_id=1308196596]
-layout_mode = 0
-offset_left = 0.39996338
-offset_top = 63.6
-offset_right = 195.39996
-offset_bottom = 269.6
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.05
+anchor_right = 1.0
+anchor_bottom = 0.05
+grow_horizontal = 2
 columns = 2
 
 [node name="Label" type="Label" parent="Settings" unique_id=85085680]
@@ -144,14 +139,10 @@ size_flags_horizontal = 8
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1337149574]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.86
-anchor_top = 0.711
-anchor_right = 0.86
-anchor_bottom = 0.711
-offset_left = -194.99997
-offset_top = -50.804977
+anchor_top = 0.62
+anchor_right = 0.9
+anchor_bottom = 0.819
 offset_right = 3.0517578e-05
-offset_bottom = 52.19519
 grow_horizontal = 0
 grow_vertical = 2
 pivot_offset = Vector2(200, 0)
@@ -246,16 +237,12 @@ fit_content = true
 autowrap_mode = 0
 
 [node name="XVariable" type="ReferenceRect" parent="." unique_id=851500602]
+z_index = -1
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.22
-anchor_top = 0.85
-anchor_right = 0.85
-anchor_bottom = 0.9
-offset_left = -0.2880249
-offset_top = -8.119995
-offset_right = 1.5599823
-offset_bottom = -10.279968
+anchor_top = 0.828
+anchor_right = 0.9
+anchor_bottom = 0.894
 grow_horizontal = 2
 grow_vertical = 0
 border_color = Color(0.38431373, 0.38431373, 0.38431373, 1)
