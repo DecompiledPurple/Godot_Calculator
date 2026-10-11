@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dp1xnx7povvo2" path="res://scripts/attached/graph.gd" id="1_f7yq8"]
 [ext_resource type="Script" uid="uid://cpd6fsypfk7gy" path="res://scripts/attached/base_layer.gd" id="2_rsotd"]
+[ext_resource type="Script" uid="uid://cwbu6hnwbloi0" path="res://scenes/calculator/visual_layer.gd" id="3_1jvfp"]
 
 [node name="Graph" type="Node2D" unique_id=1499286051]
 script = ExtResource("1_f7yq8")
@@ -21,3 +22,6 @@ grow_vertical = 2
 [node name="BaseLayer" type="Node2D" parent="." unique_id=2001284767]
 show_behind_parent = true
 script = ExtResource("2_rsotd")
+
+[node name="VisualLayer" type="Node2D" parent="." unique_id=289975113]
+script = ExtResource("3_1jvfp")

@@ -22,12 +22,6 @@ viewport_path = NodePath("Sprite3D/SubViewport")
 [sub_resource type="ArrayMesh" id="ArrayMesh_choun"]
 custom_aabb = AABB(2.4, 1.165, 0.925, 4.235, 1.65, 3.055)
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_ya4ey"]
-custom_solver_bias = 0.008
-margin = 1.389
-height = 2.2411835
-radius = 0.565
-
 [node name="Node" type="Node" unique_id=1103378696]
 
 [node name="MainCamera" type="Camera3D" parent="." unique_id=795961096 node_paths=PackedStringArray("calculator_viewport")]
@@ -143,12 +137,8 @@ layout_mode = 1
 graph_sprite = NodePath("../../Sprite3D")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1246225966]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3893757, 6.5326996, -2.8257492)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3893757, 6.736347, -2.8257492)
 mesh = SubResource("ArrayMesh_choun")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=581052728]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.49691743, 2.4945078, 4.376681)
-shape = SubResource("CylinderShape3D_ya4ey")
 
 [connection signal="pressed" from="MainControl/SettingsContainer/ShowGraphSettings" to="MainControl" method="_on_show_graph_settings_pressed"]
 [connection signal="pressed" from="MainControl/WindowsContainer/ShowCalculator" to="MainControl" method="_on_show_calculator_pressed"]

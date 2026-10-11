@@ -30,6 +30,7 @@ var b_variable: float = 1
 var sum_direction: int = 0 # change to float soon
 var hide_rectangle_areas: bool = true
 var hide_integral_answer: bool = true
+var second_function_name: String
 
 var sum_direction_functions: Array[Callable] = [ # this is obsolete, rewrite later
 	left_sum_draw,
@@ -45,22 +46,22 @@ func _ready() -> void:
 
 func _on_n_spin_box_value_changed(value: float) -> void:
 	n_variable = value
-	graph_controller.queue_redraw()
+	visual_layer.queue_redraw()
 
 func _on_h_slider_value_changed(value: float) -> void:
 	n_spin_box.value = value
 
 func _on_b_spin_box_value_changed(value: float) -> void:
 	b_variable = value
-	graph_controller.queue_redraw()
+	visual_layer.queue_redraw()
 
 func _on_a_spin_box_value_changed(value: float) -> void:
 	a_variable = value
-	graph_controller.queue_redraw()
+	visual_layer.queue_redraw()
 
 func _on_direction_slider_value_changed(value: float) -> void:
 	sum_direction = value
-	graph_controller.queue_redraw()
+	visual_layer.queue_redraw()
 
 func integral_visual_draw() -> void:
 	var delta_x: float = (b_variable - a_variable)/n_variable
@@ -73,10 +74,10 @@ func integral_visual_draw() -> void:
 	var position3: Vector2 = position_to_graph(delta_x, 0)
 	var text_position: Vector2 = vector_to_graph(DELTA_X_TEXT_POSITION)
 	var delta_text: String = "dx = " + str(delta_x)
-	graph_controller.draw_line(middle_graph_position, position1, DELTA_X_COLOR, DELTA_X_WIDTH)
-	graph_controller.draw_line(position1, position2, DELTA_X_COLOR, DELTA_X_WIDTH)
-	graph_controller.draw_line(position2, position3, DELTA_X_COLOR)
-	graph_controller.draw_string(FONT, text_position, delta_text, 0, -1, DELTA_X_TEXT_SIZE, DELTA_X_COLOR)
+	visual_layer.draw_line(middle_graph_position, position1, DELTA_X_COLOR, DELTA_X_WIDTH)
+	visual_layer.draw_line(position1, position2, DELTA_X_COLOR, DELTA_X_WIDTH)
+	visual_layer.draw_line(position2, position3, DELTA_X_COLOR)
+	visual_layer.draw_string(FONT, text_position, delta_text, 0, -1, DELTA_X_TEXT_SIZE, DELTA_X_COLOR)
 	if not hide_integral_answer:
 		var integral_answer_value: Variant = CalculatorFunctions.integrate(CalculatorSettings.current_function_name, a_variable, b_variable)
 		integral_answer.text = str(integral_answer_value)
@@ -95,7 +96,7 @@ func draw_rectangle_area_text(x: float, y: float, delta_x: float) -> float:
 	area = CalculatorFunctions.round_to_placement(area, AREA_ROUND_PLACEMENT)
 	text_position = vector_to_graph(text_position)
 	var text: String = "A = " + str(area)
-	graph_controller.draw_string(FONT, text_position, text, 0, -1, AREA_TEXT_SIZE, AREA_TEXT_COLOR)
+	visual_layer.draw_string(FONT, text_position, text, 0, -1, AREA_TEXT_SIZE, AREA_TEXT_COLOR)
 	return area
 
 
@@ -114,12 +115,12 @@ func reimann_sum_draw(iteration: int, delta_x: float, direction: float):
 		if iteration % 2 == 1:
 			current_color = INTEGRAL_COLOR4
 	area_rect = rect_to_graph(area_rect)
-	graph_controller.draw_rect(area_rect, current_color, false, INTEGRAL_WIDTH)
+	visual_layer.draw_rect(area_rect, current_color, false, INTEGRAL_WIDTH)
 	current_color.a = INTEGRAL_TRANSPARENCY 
-	graph_controller.draw_rect(area_rect, current_color)
+	visual_layer.draw_rect(area_rect, current_color)
 	if delta_x >= VERTEX_DELTA_X_MINIMUM:
 		current_color.a = 1
-		graph_controller.draw_circle(vertex_position, INTEGRAL_VERTEX_SIZE, current_color)
+		visual_layer.draw_circle(vertex_position, INTEGRAL_VERTEX_SIZE, current_color)
 		draw_rectangle_area_text(x2, y, delta_x)
 
 func left_sum_draw(iteration, delta_x):
@@ -134,15 +135,15 @@ func _on_hide_integral_answer_pressed() -> void:
 		hide_integral_answer = false
 	else:
 		hide_integral_answer = true
-	graph_controller.queue_redraw()
+	visual_layer.queue_redraw()
 
 func _on_hide_rectangle_areas_pressed() -> void:
 	if hide_rectangle_areas:
 		hide_rectangle_areas = false
 	else:
 		hide_rectangle_areas = true
-	graph_controller.queue_redraw()
-
+	visual_layer.queue_redraw()
 
 func _on_second_function_name_text_changed(new_text: String) -> void:
-	pass # Replace with function body.
+	second_function_name = new_text
+	visual_layer.queue_redraw()

@@ -30,13 +30,15 @@ func  _ready() -> void:
 	visual_draw = Callable(self, "spatial_integral_visual_draw")
 	material_base.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	material_base.blend_mode = BaseMaterial3D.BLEND_MODE_ADD
-	
-func spatial_integral_visual_draw() -> void:
-	var delta_x: float = (b_variable - a_variable)/n_variable
-	var current_function_name: String = CalculatorSettings.current_function_name
+
+func clear_boxes() -> void:
 	for box: MeshInstance3D in boxes_used:
 		box.free()
 	boxes_used.clear()
+func spatial_integral_visual_draw() -> void:
+	var delta_x: float = (b_variable - a_variable)/n_variable
+	var current_function_name: String = CalculatorSettings.current_function_name
+	clear_boxes()
 	
 	if shape_index == SQUARE_SHAPE_INDEX:
 		for index in range(n_variable):
@@ -130,34 +132,38 @@ func point_to_graph3d(point: float) -> float:
 
 func _on_direction_slider_value_changed(value: float) -> void:
 	direction_value = value
-	graph_controller.queue_redraw()
+	visual_layer.queue_redraw()
 
 func _on_b_spin_box_value_changed(value: float) -> void:
 	b_variable = value
-	graph_controller.queue_redraw()
+	visual_layer.queue_redraw()
 
 func _on_a_spin_box_value_changed(value: float) -> void:
 	a_variable = value
-	graph_controller.queue_redraw()
+	visual_layer.queue_redraw()
 
 func _on_n_spin_box_value_changed(value: float) -> void:
 	n_variable = value
-	graph_controller.queue_redraw()
+	visual_layer.queue_redraw()
 
 func _on_n_slider_value_changed(value: float) -> void:
 	n_spin_box.value = value
 
 func _on_option_button_item_selected(index: int) -> void:
 	shape_index = index
-	if shape_index == RECTANGLE_SHAPE_INDEX:
+	if shape_index == RECTANGLE_SHAPE_INDEX or shape_index == CIRCLE_SHAPE_INDEX:
 		function_name_edit.visible = true
 	else:
 		function_name_edit.visible = false
+	visual_layer.queue_redraw()
 
 func _on_function_name_edit_text_submitted(new_text: String) -> void:
 	height_function_name = new_text
-	queue_redraw()
+	visual_layer.queue_redraw()
 
 func _on_function_name_edit_editing_toggled(toggled_on: bool) -> void:
 	if toggled_on:
 		function_name_edit.clear()
+
+func on_exit() -> void:
+	clear_boxes()

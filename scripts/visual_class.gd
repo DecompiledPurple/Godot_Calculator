@@ -8,11 +8,13 @@ const VISUAL_CIRCLE_SIZE: int = 8
 const TEXT_SIZE = 30
 const STRING_ROUND: int = 4
 
-var graph_controller: Node2D
+var graph_controller: Primary_Graph
 
 var visual_draw: Callable = Callable(self, "empty_callable")
 var on_visual_entered: Callable = Callable(self, "on_entered")
 var on_visual_exit: Callable = Callable(self, "on_exit")
+
+@onready var visual_layer: Node2D = graph_controller.visual_layer
 
 func position_to_graph(x: float, y: float) -> Vector2:
 	var SCALE = CalculatorSettings.SCALE
@@ -35,11 +37,11 @@ func rect_to_graph(rect: Rect2) -> Rect2:
 	return new_rect
 
 func empty_callable() -> void:
-	graph_controller.draw_circle(position_to_graph(0,0), VISUAL_CIRCLE_SIZE, Color.PURPLE, false)
+	graph_controller.visual_layer.draw_circle(position_to_graph(0,0), VISUAL_CIRCLE_SIZE, Color.PURPLE, false)
 
 func on_entered() -> void:
 	visible = true
-	graph_controller.queue_redraw()
+	graph_controller.visual_layer.queue_redraw()
 
 func on_exit() -> void:
 	visible = false

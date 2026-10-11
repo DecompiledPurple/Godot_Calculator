@@ -1,9 +1,9 @@
 extends Node2D
 
 
-const Y_SIZE: int = CalculatorSettings.Y_SIZE
-const X_SIZE: int = CalculatorSettings.X_SIZE
-const SCALE: int = CalculatorSettings.SCALE
+const Y_SIZE: float = CalculatorSettings.Y_SIZE
+const X_SIZE: float = CalculatorSettings.X_SIZE
+const SCALE: float = CalculatorSettings.SCALE
 const GRAPH_WIDTH: int = 5
 const AXIS_WIDTH: int = 3
 const LINE_WIDTH: int = 2
@@ -27,16 +27,10 @@ func _draw() -> void:
 	draw_base_graph()
 
 func position_to_graph(x: float, y: float) -> Vector2:
-	var SCALE = CalculatorSettings.SCALE
-	var Y_SIZE = CalculatorSettings.Y_SIZE
-	var X_SIZE = CalculatorSettings.X_SIZE
 	var scaled_position: Vector2 = Vector2(x, y) * SCALE
 	return Vector2(scaled_position.x + X_SIZE/2, -scaled_position.y + Y_SIZE/2)
 
 func vector_to_graph(vector: Vector2) -> Vector2:
-	var SCALE = CalculatorSettings.SCALE
-	var Y_SIZE = CalculatorSettings.Y_SIZE
-	var X_SIZE = CalculatorSettings.X_SIZE
 	var scaled_vector: Vector2 = vector * SCALE
 	return Vector2(scaled_vector.x + X_SIZE/2, -scaled_vector.y + Y_SIZE/2)
 
@@ -50,7 +44,7 @@ func draw_base_graph() -> void:
 	for index in range(0, X_SIZE/SCALE):
 		if index == MAXIMUM_RANGE:
 			continue
-		var current_step: int = index * SCALE
+		var current_step: float = index * SCALE
 		draw_line(Vector2(current_step, 0), Vector2(current_step, Y_SIZE), background_color, LINE_WIDTH)
 		draw_string(CalculatorSettings.FONT, Vector2(current_step, Y_SIZE/2 ) + HORIZONTAL_TEXT_OFFSET, str(index + MINIMUM_RANGE), 0, -1, NUMBER_TEXT_SIZE, Color.BLACK)
 		draw_string(CalculatorSettings.FONT, Vector2(X_SIZE/2, current_step) + VERTICAL_TEXT_OFFSET, str(MAXIMUM_RANGE - index), 0, -1, NUMBER_TEXT_SIZE, Color.BLACK)

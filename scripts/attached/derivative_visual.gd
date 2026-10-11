@@ -37,7 +37,7 @@ func _on_h_slider_value_changed(value: float) -> void:
 	h_variable = 10**(value)
 	var h_string: String = str(CalculatorFunctions.round_to_placement(value, STRING_ROUND))
 	h_label.text = "h=10^" + h_string
-	graph_controller.queue_redraw()
+	visual_layer.queue_redraw()
 
 func _on_x_slider_value_changed(value: float) -> void:
 	x_spin.value = CalculatorFunctions.round_to_placement(value, STRING_ROUND)
@@ -51,7 +51,7 @@ func _on_x_spin_box_value_changed(value: float) -> void:
 			slope_graph_maximum = value
 		if slope_graph_minimum > value:
 			slope_graph_minimum = value
-	graph_controller.queue_redraw()
+	visual_layer.queue_redraw()
 
 func update_derivative_answer():
 	if hide_derivative_answer:
@@ -71,10 +71,10 @@ func _on_hide_derivative_answer_pressed() -> void:
 func _on_hide_slope_pressed() -> void:
 	if hide_slope:
 		hide_slope = false
-		graph_controller.queue_redraw()
+		visual_layer.queue_redraw()
 	else:
 		hide_slope = true
-		graph_controller.queue_redraw()
+		visual_layer.queue_redraw()
 
 func derivative_visual_draw() -> void:
 	var current_function_name: String = CalculatorSettings.current_function_name
@@ -95,15 +95,15 @@ func derivative_visual_draw() -> void:
 	left_secant_position = vector_to_graph(left_secant_position)
 	right_secant_position = vector_to_graph(right_secant_position)
 
-	graph_controller.draw_line(left_secant_position, right_secant_position, COORDINATE_COLOR, ROC_LINE_WIDTH)
-	graph_controller.draw_circle(left_point_position, VISUAL_CIRCLE_SIZE, LEFT_POINT_COLOR)
-	graph_controller.draw_circle(right_point_position, VISUAL_CIRCLE_SIZE, RIGHT_POINT_COLOR)
+	visual_layer.draw_line(left_secant_position, right_secant_position, COORDINATE_COLOR, ROC_LINE_WIDTH)
+	visual_layer.draw_circle(left_point_position, VISUAL_CIRCLE_SIZE, LEFT_POINT_COLOR)
+	visual_layer.draw_circle(right_point_position, VISUAL_CIRCLE_SIZE, RIGHT_POINT_COLOR)
 	if not hide_slope:
 		var slope_string: String = "m = " + str(rate_of_change)
-		graph_controller.draw_string(FONT, center_position + SLOPE_DISPLAY_OFFSET, slope_string, 0, -1, TEXT_SIZE, SLOPE_DISPLAY_COLOR)
+		visual_layer.draw_string(FONT, center_position + SLOPE_DISPLAY_OFFSET, slope_string, 0, -1, TEXT_SIZE, SLOPE_DISPLAY_COLOR)
 	else:
 		var slope_string: String = "m = ?"
-		graph_controller.draw_string(FONT, center_position + SLOPE_DISPLAY_OFFSET, slope_string, 0, -1, TEXT_SIZE, SLOPE_DISPLAY_COLOR)
+		visual_layer.draw_string(FONT, center_position + SLOPE_DISPLAY_OFFSET, slope_string, 0, -1, TEXT_SIZE, SLOPE_DISPLAY_COLOR)
 	
 	if draw_slope_curve:
 		draw_slope_graph()
@@ -134,7 +134,7 @@ func draw_slope_graph() -> void:
 				print("line too long at: " + str(x))
 				last_position = point_position
 				continue
-			graph_controller.draw_line(last_position, point_position, SLOPE_GRAPH_COLOR, SLOPE_GRAPH_WIDTH)
+			visual_layer.draw_line(last_position, point_position, SLOPE_GRAPH_COLOR, SLOPE_GRAPH_WIDTH)
 			last_position = point_position
 
 func _on_draw_slope_curve_pressed() -> void:
@@ -144,7 +144,7 @@ func _on_draw_slope_curve_pressed() -> void:
 		slope_graph_minimum = x_variable
 	else:
 		draw_slope_curve = false
-	graph_controller.queue_redraw()
+	visual_layer.queue_redraw()
 
 func derivative_on_exit() -> void:
 	visible = false
