@@ -20,8 +20,7 @@ func _ready() -> void:
 func _draw() -> void:
 	if CalculatorSettings.current_function_name == "":
 		return
-	print("drawing on the visual layer!")
-	parent_graph.visual_list[parent_graph.current_visual_index].visual_draw.call()
+	parent_graph.visual_list[parent_graph.current_visual_index].visual_draw()
 	#draw_graph(CalculatorSettings.current_function_name)
 
 func draw_graph(function_name: String) -> void:

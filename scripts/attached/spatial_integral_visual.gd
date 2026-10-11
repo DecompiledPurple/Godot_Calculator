@@ -27,7 +27,6 @@ var height_function_name: String
 @onready var function_name_edit: LineEdit = $FunctionNameEdit
 
 func  _ready() -> void:
-	visual_draw = Callable(self, "spatial_integral_visual_draw")
 	material_base.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	material_base.blend_mode = BaseMaterial3D.BLEND_MODE_ADD
 
@@ -35,7 +34,8 @@ func clear_boxes() -> void:
 	for box: MeshInstance3D in boxes_used:
 		box.free()
 	boxes_used.clear()
-func spatial_integral_visual_draw() -> void:
+
+func visual_draw() -> void:
 	var delta_x: float = (b_variable - a_variable)/n_variable
 	var current_function_name: String = CalculatorSettings.current_function_name
 	clear_boxes()
@@ -165,5 +165,5 @@ func _on_function_name_edit_editing_toggled(toggled_on: bool) -> void:
 	if toggled_on:
 		function_name_edit.clear()
 
-func on_exit() -> void:
+func on_exit() -> void: # oh there are overrides???
 	clear_boxes()

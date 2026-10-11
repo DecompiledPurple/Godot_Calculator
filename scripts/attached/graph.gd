@@ -16,7 +16,6 @@ const COORDINATE_COLOR: Color = Color.BLACK
 var FONT: Font = ThemeDB.fallback_font
 
 var graph_color: Color = Color.BLACK
-
 var current_visual_index: int
 var empty_visual: Visual = Visual.new()
 var second_graph_name: String 
@@ -97,9 +96,9 @@ func draw_graph(function_name: String) -> void:
 			last_position = point_position
 
 func on_visualize_changed(index: int) -> void:
-	visual_list[current_visual_index].on_visual_exit.call()
+	visual_list[current_visual_index].on_exit()
 	current_visual_index = index
-	visual_list[index].on_visual_entered.call()
+	visual_list[index].on_entered()
 
 func hide_all_visualizers() -> void:
 	limit_visual.visible = false

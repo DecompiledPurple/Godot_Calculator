@@ -19,9 +19,6 @@ var n_variable: float = 0
 var hide_limit_answer: bool = true
 var limit_answer: Variant = 0
 
-func _ready() -> void:
-	visual_draw = Callable(self, "limit_visual_draw")
-
 func _on_n_spin_box_value_changed(value: float) -> void:
 	n_variable = value
 	visual_layer.queue_redraw()
@@ -53,7 +50,7 @@ func _on_hide_limit_answer_pressed() -> void:
 		main_limit_answer.text = str(limit_answer)
 	visual_layer.queue_redraw()
 
-func limit_visual_draw() -> void:
+func visual_draw() -> void:
 	var current_function_name = CalculatorSettings.current_function_name
 	var x1 = h_variable + n_variable
 	var y1 = CalculatorFunctions.fun(current_function_name, x1)

@@ -41,8 +41,6 @@ var sum_direction_functions: Array[Callable] = [ # this is obsolete, rewrite lat
 @onready var n_spin_box: SpinBox = $VBoxContainer2/NVariable/NSpinBox
 @onready var integral_answer: RichTextLabel = $VBoxContainer/IntegralDisplay/HBoxContainer/Answer
 
-func _ready() -> void:
-	visual_draw = Callable(self, "integral_visual_draw")
 
 func _on_n_spin_box_value_changed(value: float) -> void:
 	n_variable = value
@@ -63,7 +61,7 @@ func _on_direction_slider_value_changed(value: float) -> void:
 	sum_direction = value
 	visual_layer.queue_redraw()
 
-func integral_visual_draw() -> void:
+func visual_draw() -> void:
 	var delta_x: float = (b_variable - a_variable)/n_variable
 	for i in range(0, n_variable):
 		sum_direction_functions[sum_direction].call(i, delta_x)

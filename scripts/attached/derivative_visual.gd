@@ -28,9 +28,6 @@ var slope_graph_minimum: float = 0
 var slope_graph_maximum: float = 0
 
 
-func _ready() -> void:
-	visual_draw = Callable(self, "derivative_visual_draw")
-	on_visual_exit = Callable(self, "derivative_on_exit")
 
 func _on_h_slider_value_changed(value: float) -> void:
 	value *= -1
@@ -76,7 +73,7 @@ func _on_hide_slope_pressed() -> void:
 		hide_slope = true
 		visual_layer.queue_redraw()
 
-func derivative_visual_draw() -> void:
+func visual_draw() -> void:
 	var current_function_name: String = CalculatorSettings.current_function_name
 	var center_y: Variant = CalculatorFunctions.fun(current_function_name, x_variable)
 	var x1: float = x_variable - h_variable
@@ -146,5 +143,5 @@ func _on_draw_slope_curve_pressed() -> void:
 		draw_slope_curve = false
 	visual_layer.queue_redraw()
 
-func derivative_on_exit() -> void:
+func on_exit() -> void:
 	visible = false
