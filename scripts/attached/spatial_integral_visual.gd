@@ -45,6 +45,9 @@ func spatial_integral_visual_draw() -> void:
 	elif shape_index == RECTANGLE_SHAPE_INDEX:
 		for index in range(n_variable):
 			draw_rectangular_prism(index, delta_x)
+	elif shape_index == CIRCLE_SHAPE_INDEX:
+		for index in range(n_variable):
+			draw_cylinder(index, delta_x)
 		
 # find a way to stop camera movement when focused on a textbox
 
@@ -97,10 +100,33 @@ func draw_cylinder(index: int, dx: float) -> void:
 	var current_function_name: String = CalculatorSettings.current_function_name
 	var x: float = a_variable + dx * (index + direction_value)
 	var y: float = CalculatorFunctions.fun(current_function_name,  x)
+	var cylinder_position: Vector3 = vector3_to_graph(Vector3(x,0,0))
 
+	if not y is float:
+		return
+	cylinder_mesh.height = point_to_graph3d(dx)
+	cylinder_mesh.top_radius = point_to_graph3d(abs(y))
+	cylinder_mesh.bottom_radius = point_to_graph3d(abs(y))
+	if index & 1 > 0:
+		cylinder_material.albedo_color = SOLID_COLOR1
+	else:
+		cylinder_material.albedo_color = SOLID_COLOR2
+	cylinder_material.render_priority = 1
+	cylinder_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	cylinder.transparency = SOLID_TRANPARENCY
+	cylinder.mesh = cylinder_mesh
+	cylinder.material_override = cylinder_material
+	cylinder.position = cylinder_position
+	cylinder.rotate_z(PI/2)
+	boxes_used.append(cylinder)
+	graph_sprite.add_child(cylinder)
+	
 
-func vector3_to_graph(vector: Vector3):
+func vector3_to_graph(vector: Vector3) -> Vector3:
 	return vector * CalculatorSettings.SCALE * graph_sprite.pixel_size
+
+func point_to_graph3d(point: float) -> float:
+	return point * CalculatorSettings.SCALE * graph_sprite.pixel_size
 
 func _on_direction_slider_value_changed(value: float) -> void:
 	direction_value = value

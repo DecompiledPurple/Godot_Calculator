@@ -380,6 +380,14 @@ anchor_bottom = 0.644
 offset_left = 0.39996338
 text = "enter function name"
 
+[node name="GeometricView" type="Button" parent="." unique_id=321321679]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.425
+anchor_right = 0.9
+anchor_bottom = 0.478
+text = "Enter Geometric View"
+
 [connection signal="pressed" from="Settings/HideIntegralAnswer" to="." method="_on_hide_integral_answer_pressed"]
 [connection signal="pressed" from="Settings/HideRectangleAreas" to="." method="_on_hide_rectangle_areas_pressed"]
 [connection signal="value_changed" from="VBoxContainer2/NVariable/NSpinBox" to="." method="_on_n_spin_box_value_changed"]

@@ -11,21 +11,22 @@
 [ext_resource type="PackedScene" uid="uid://dauti8n3krpad" path="res://scenes/Visual Nodes/integral_visual.tscn" id="8_tipki"]
 [ext_resource type="PackedScene" uid="uid://carifaoj162kg" path="res://scenes/Visual Nodes/spatial_integral_visual.tscn" id="10_choun"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_choun"]
-transparency = 3
-alpha_hash_scale = 1.33
-alpha_antialiasing_mode = 1
-alpha_antialiasing_edge = 0.3
-albedo_color = Color(1, 0, 1, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_7dm0k"]
-material = SubResource("StandardMaterial3D_choun")
+[sub_resource type="CylinderMesh" id="CylinderMesh_choun"]
+top_radius = 0.0
+bottom_radius = 1.505
+radial_segments = 32
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_8gbba"]
 viewport_path = NodePath("Sprite3D/SubViewport")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_choun"]
 custom_aabb = AABB(2.4, 1.165, 0.925, 4.235, 1.65, 3.055)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ya4ey"]
+custom_solver_bias = 0.008
+margin = 1.389
+height = 2.2411835
+radius = 0.565
 
 [node name="Node" type="Node" unique_id=1103378696]
 
@@ -38,7 +39,7 @@ calculator_viewport = NodePath("../MainControl/Calculator")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=893439764]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.93147, -3.705843)
-mesh = SubResource("BoxMesh_7dm0k")
+mesh = SubResource("CylinderMesh_choun")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=2036699073]
 pixel_size = 0.005
@@ -144,6 +145,10 @@ graph_sprite = NodePath("../../Sprite3D")
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1246225966]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3893757, 6.5326996, -2.8257492)
 mesh = SubResource("ArrayMesh_choun")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=581052728]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.49691743, 2.4945078, 4.376681)
+shape = SubResource("CylinderShape3D_ya4ey")
 
 [connection signal="pressed" from="MainControl/SettingsContainer/ShowGraphSettings" to="MainControl" method="_on_show_graph_settings_pressed"]
 [connection signal="pressed" from="MainControl/WindowsContainer/ShowCalculator" to="MainControl" method="_on_show_calculator_pressed"]

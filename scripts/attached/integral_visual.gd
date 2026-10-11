@@ -142,3 +142,7 @@ func _on_hide_rectangle_areas_pressed() -> void:
 	else:
 		hide_rectangle_areas = true
 	graph_controller.queue_redraw()
+
+
+func _on_second_function_name_text_changed(new_text: String) -> void:
+	pass # Replace with function body.

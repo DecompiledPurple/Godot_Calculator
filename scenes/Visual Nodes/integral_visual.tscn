@@ -214,7 +214,7 @@ max_value = 1000.0
 
 [node name="HSlider" type="HSlider" parent="VBoxContainer2" unique_id=1255329362]
 layout_mode = 2
-max_value = 1000.0
+max_value = 250.0
 
 [node name="BVariable" type="ReferenceRect" parent="VBoxContainer2" unique_id=1595720970]
 layout_mode = 2
