@@ -18,7 +18,6 @@ var FONT: Font = ThemeDB.fallback_font
 var graph_color: Color = Color.BLACK
 var current_visual_index: int
 var empty_visual: Visual = Visual.new()
-var second_graph_name: String 
 
 @export var target_calculator: Calculator 
 @export var visualize_button: OptionButton
@@ -37,6 +36,7 @@ var second_graph_name: String
 @onready var visual_layer: Node2D = $VisualLayer
 
 var current_function_name: String 
+var second_function_name: String
 
 func _ready() -> void:
 	empty_visual.graph_controller = self
@@ -57,13 +57,14 @@ func _draw() -> void:
 	if current_function_name == "":
 		return
 	draw_graph(current_function_name) 
-	#visual_list[current_visual_index].visual_draw.call()
+	if not second_function_name == "":
+		draw_graph(second_function_name)
 
 func queue_visuals() -> void:
 	if current_function_name == "":
 		return
 	visual_layer.queue_redraw()
-	
+
 func on_graph(function_name: String) -> void:
 	current_function_name = function_name
 	CalculatorSettings.current_function_name = function_name

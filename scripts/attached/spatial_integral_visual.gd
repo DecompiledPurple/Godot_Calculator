@@ -167,3 +167,4 @@ func _on_function_name_edit_editing_toggled(toggled_on: bool) -> void:
 
 func on_exit() -> void: # oh there are overrides???
 	clear_boxes()
+	visible = false

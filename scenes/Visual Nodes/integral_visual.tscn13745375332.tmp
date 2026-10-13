@@ -1,0 +1,379 @@
+[gd_scene format=3 uid="uid://dauti8n3krpad"]
+
+[ext_resource type="Script" uid="uid://uy6w7e4vm3cy" path="res://scripts/attached/integral_visual.gd" id="1_x1po3"]
+
+[node name="IntegralVisual" type="Control" unique_id=946458890]
+layout_mode = 3
+anchor_left = 0.8
+anchor_top = 0.05
+anchor_right = 1.0
+anchor_bottom = 0.95
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_x1po3")
+
+[node name="Settings" type="GridContainer" parent="." unique_id=1308196596]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.05
+anchor_right = 1.0
+anchor_bottom = 0.05
+grow_horizontal = 2
+columns = 2
+
+[node name="Label" type="Label" parent="Settings" unique_id=85085680]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Hide Integral Answer"
+
+[node name="Background2" type="ColorRect" parent="Settings/Label" unique_id=403718942]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.1764706, 0.1764706, 0.1764706, 1)
+
+[node name="HideIntegralAnswer" type="CheckBox" parent="Settings" unique_id=2067738094]
+layout_mode = 2
+size_flags_horizontal = 8
+button_pressed = true
+
+[node name="Label2" type="Label" parent="Settings" unique_id=867292541]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Hide Rectangle Areas"
+
+[node name="Background" type="ColorRect" parent="Settings/Label2" unique_id=1947222808]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.1764706, 0.1764706, 0.1764706, 1)
+
+[node name="HideRectangleAreas" type="CheckBox" parent="Settings" unique_id=1801645433]
+layout_mode = 2
+size_flags_horizontal = 8
+button_pressed = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1337149574]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.274
+anchor_right = 0.9
+anchor_bottom = 0.435
+offset_left = 0.4
+
+[node name="IntegralDisplay" type="ReferenceRect" parent="VBoxContainer" unique_id=1138360119]
+layout_mode = 2
+size_flags_vertical = 3
+border_color = Color(0.38431373, 0.38431373, 0.38431373, 1)
+border_width = 5.0
+editor_only = false
+
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer/IntegralDisplay" unique_id=416268402]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1764706, 0.1764706, 0.1764706, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/IntegralDisplay" unique_id=197358432]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Expression" type="RichTextLabel" parent="VBoxContainer/IntegralDisplay/HBoxContainer" unique_id=434944633]
+layout_mode = 2
+size_flags_horizontal = 2
+bbcode_enabled = true
+text = "[char=0222b]f(x)dx = 
+"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Answer" type="RichTextLabel" parent="VBoxContainer/IntegralDisplay/HBoxContainer" unique_id=349913199]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+text = "?"
+fit_content = true
+autowrap_mode = 0
+
+[node name="IntegralApproximationDisplay" type="ReferenceRect" parent="VBoxContainer" unique_id=342693968]
+layout_mode = 2
+size_flags_vertical = 3
+border_color = Color(0.38431373, 0.38431373, 0.38431373, 1)
+border_width = 5.0
+editor_only = false
+
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer/IntegralApproximationDisplay" unique_id=452011363]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1764706, 0.1764706, 0.1764706, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/IntegralApproximationDisplay" unique_id=1513982593]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Expression" type="RichTextLabel" parent="VBoxContainer/IntegralApproximationDisplay/HBoxContainer" unique_id=574423933]
+layout_mode = 2
+size_flags_horizontal = 2
+bbcode_enabled = true
+text = "f'(x) [char=2248]
+"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Expression2" type="RichTextLabel" parent="VBoxContainer/IntegralApproximationDisplay/HBoxContainer" unique_id=1385030385]
+layout_mode = 2
+size_flags_horizontal = 2
+bbcode_enabled = true
+text = "lim[(f(x+h)-f(x))/h]
+h[char=2192]0"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Answer" type="RichTextLabel" parent="VBoxContainer/IntegralApproximationDisplay/HBoxContainer" unique_id=1082994957]
+layout_mode = 2
+size_flags_horizontal = 2
+fit_content = true
+autowrap_mode = 0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="." unique_id=1826548099]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.178
+anchor_top = 0.792
+anchor_right = 0.9
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 3
+
+[node name="NVariable" type="ReferenceRect" parent="VBoxContainer2" unique_id=851500602]
+layout_mode = 2
+size_flags_vertical = 3
+border_color = Color(0.38431373, 0.38431373, 0.38431373, 1)
+border_width = 5.0
+editor_only = false
+
+[node name="Label" type="Label" parent="VBoxContainer2/NVariable" unique_id=1723248504]
+z_index = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.2
+anchor_bottom = 1.0
+grow_vertical = 2
+text = "n ="
+vertical_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer2/NVariable" unique_id=1602959695]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1764706, 0.1764706, 0.1764706, 1)
+
+[node name="NSpinBox" type="SpinBox" parent="VBoxContainer2/NVariable" unique_id=2037392860]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -0.049987793
+offset_top = -4.0
+offset_right = -0.049987793
+grow_horizontal = 0
+grow_vertical = 2
+max_value = 1000.0
+
+[node name="HSlider" type="HSlider" parent="VBoxContainer2" unique_id=1255329362]
+layout_mode = 2
+max_value = 250.0
+
+[node name="BVariable" type="ReferenceRect" parent="VBoxContainer2" unique_id=1595720970]
+layout_mode = 2
+size_flags_vertical = 3
+border_color = Color(0.38431373, 0.38431373, 0.38431373, 1)
+border_width = 5.0
+editor_only = false
+
+[node name="Label" type="Label" parent="VBoxContainer2/BVariable" unique_id=1642456074]
+z_index = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.2
+anchor_bottom = 1.0
+grow_vertical = 2
+text = "b ="
+vertical_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer2/BVariable" unique_id=663400633]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1764706, 0.1764706, 0.1764706, 1)
+
+[node name="BSpinBox" type="SpinBox" parent="VBoxContainer2/BVariable" unique_id=730807362]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -0.049987793
+offset_top = -4.0
+offset_right = -0.049987793
+grow_horizontal = 0
+grow_vertical = 2
+min_value = -999.0
+max_value = 999.0
+step = 0.0
+
+[node name="AVariable" type="ReferenceRect" parent="VBoxContainer2" unique_id=738667568]
+layout_mode = 2
+size_flags_vertical = 3
+border_color = Color(0.38431373, 0.38431373, 0.38431373, 1)
+border_width = 5.0
+editor_only = false
+
+[node name="Label" type="Label" parent="VBoxContainer2/AVariable" unique_id=655953125]
+z_index = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.2
+anchor_bottom = 1.0
+grow_vertical = 2
+text = "a ="
+vertical_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer2/AVariable" unique_id=1534778933]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1764706, 0.1764706, 0.1764706, 1)
+
+[node name="ASpinBox" type="SpinBox" parent="VBoxContainer2/AVariable" unique_id=1821626579]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -0.049987793
+offset_top = -4.0
+offset_right = -0.049987793
+grow_horizontal = 0
+grow_vertical = 2
+min_value = -999.0
+max_value = 999.0
+step = 0.0
+
+[node name="DirectionSlider" type="HSlider" parent="." unique_id=1873335504]
+z_index = 2
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.726
+anchor_right = 0.9
+anchor_bottom = 0.758
+max_value = 2.0
+tick_count = 3
+ticks_on_borders = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=320236191]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.75
+anchor_right = 0.9
+anchor_bottom = 0.75
+theme_override_constants/separation = 44
+alignment = 1
+
+[node name="Label" type="Label" parent="HBoxContainer" unique_id=714865800]
+layout_mode = 2
+text = "left"
+
+[node name="Label2" type="Label" parent="HBoxContainer" unique_id=686273566]
+layout_mode = 2
+text = "middle"
+
+[node name="Label3" type="Label" parent="HBoxContainer" unique_id=764277442]
+layout_mode = 2
+text = "right"
+
+[node name="Label" type="Label" parent="." unique_id=1227726889]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.693
+anchor_right = 0.9
+anchor_bottom = 0.731
+grow_horizontal = 2
+grow_vertical = 2
+text = "Reimman Sum Direction"
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1554721054]
+z_index = -1
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.683
+anchor_right = 0.9
+anchor_bottom = 0.792
+mouse_filter = 2
+color = Color(0.1764706, 0.16862746, 0.1764706, 1)
+
+[node name="SecondFunctionName" type="LineEdit" parent="." unique_id=54045135]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.6
+anchor_right = 0.9
+anchor_bottom = 0.644
+text = "enter 2nd function name"
+
+[node name="GeometricView" type="Button" parent="." unique_id=537112342]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.524
+anchor_right = 0.9
+anchor_bottom = 0.577
+text = "Enter Geometric View"
+
+[connection signal="pressed" from="Settings/HideIntegralAnswer" to="." method="_on_hide_integral_answer_pressed"]
+[connection signal="pressed" from="Settings/HideRectangleAreas" to="." method="_on_hide_rectangle_areas_pressed"]
+[connection signal="value_changed" from="VBoxContainer2/NVariable/NSpinBox" to="." method="_on_n_spin_box_value_changed"]
+[connection signal="value_changed" from="VBoxContainer2/HSlider" to="." method="_on_h_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer2/BVariable/BSpinBox" to="." method="_on_b_spin_box_value_changed"]
+[connection signal="value_changed" from="VBoxContainer2/AVariable/ASpinBox" to="." method="_on_a_spin_box_value_changed"]
+[connection signal="value_changed" from="DirectionSlider" to="." method="_on_direction_slider_value_changed"]
+[connection signal="editing_toggled" from="SecondFunctionName" to="." method="_on_second_function_name_editing_toggled"]
+[connection signal="text_changed" from="SecondFunctionName" to="." method="_on_second_function_name_text_changed"]
+[connection signal="pressed" from="GeometricView" to="." method="_on_geometric_view_pressed"]
