@@ -89,6 +89,7 @@ func summation(content: String, n: Variant, i: Variant):
 	return sum
 
 func fun(function_name: String, input: Variant) -> Variant:
+	
 	if not is_taking_input:
 		var error1: Error = expression.parse(str(input) + "* 1.0")
 		if not error1 == OK:

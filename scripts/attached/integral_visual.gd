@@ -78,10 +78,11 @@ func _on_direction_slider_value_changed(value: float) -> void:
 	visual_layer.queue_redraw()
 
 func visual_draw() -> void:
+	var has_second_function: bool = CalculatorFunctions.has_function(second_function_name) or false
 	var delta_x: float = (b_variable - a_variable)/n_variable
 	reimann_sum_positions.clear()
 	for i in range(0, n_variable):
-		sum_direction_functions[sum_direction].call(i, delta_x)
+		sum_direction_functions[sum_direction].call(i, delta_x, has_second_function)
 	if in_geometric_view:
 		update_sum_positions.emit(reimann_sum_positions)
 	
@@ -95,8 +96,9 @@ func visual_draw() -> void:
 	visual_layer.draw_line(position1, position2, DELTA_X_COLOR, DELTA_X_WIDTH)
 	visual_layer.draw_line(position2, position3, DELTA_X_COLOR)
 	visual_layer.draw_string(FONT, text_position, delta_text, 0, -1, DELTA_X_TEXT_SIZE, DELTA_X_COLOR)
-	if not hide_integral_answer:
-		var integral_answer_value: Variant = CalculatorFunctions.integrate(CalculatorSettings.current_function_name, a_variable, b_variable)
+	if not hide_integral_answer and not has_second_function:
+		# integration with a second function needs to be added
+		var integral_answer_value: Variant = CalculatorFunctions.integrate(CalculatorSettings.current_function_name, a_variable, b_variable) 
 		integral_answer.text = str(integral_answer_value)
 	else:
 		integral_answer.text = "?"
@@ -116,7 +118,7 @@ func draw_rectangle_area_text(x: float, y: float, delta_x: float) -> float:
 	visual_layer.draw_string(FONT, text_position, text, 0, -1, AREA_TEXT_SIZE, AREA_TEXT_COLOR)
 	return area
 
-func reimann_sum_draw(iteration: int, delta_x: float, direction: float):
+func reimann_sum_draw(iteration: int, delta_x: float, direction: float, has_second_function: bool):
 	var x: float = a_variable + delta_x * (iteration + direction)
 	var corner_x: float = a_variable + delta_x * iteration
 	var y: float = CalculatorFunctions.fun(CalculatorSettings.current_function_name, x)
@@ -129,7 +131,11 @@ func reimann_sum_draw(iteration: int, delta_x: float, direction: float):
 	var current_color: Color
 	var negative_color: Color
 	var positive_color: Color
-	var has_second_function: bool = CalculatorFunctions.has_function(second_function_name) or false
+
+	var top_function_name: String
+	var bottom_function_name: String
+	var top_y: float
+	var bottom_y: float
 
 	var is_writing_area: bool = false
 	var selected_written_height: float
@@ -139,27 +145,25 @@ func reimann_sum_draw(iteration: int, delta_x: float, direction: float):
 
 	if has_second_function:
 		y2 = CalculatorFunctions.fun(second_function_name, x)
-		if abs(y2) > abs(y):
-			area_rect = Rect2(corner_x, y2, delta_x, y2-y)
-			area_rect_top = Rect2(corner_x, y2, delta_x, y2)
-			area_rect_bottom = Rect2(corner_x, y, delta_x, y)
-			vertex_position = Vector2(y2, x)
-			reimann_sum_positions.append(Vector2(corner_x + delta_x/2, y2/2)) # the order in which we append matters for index matching
-			reimann_sum_positions.append(Vector2(corner_x + delta_x/2, y/2))
+		if y2 > y:
+			top_y = y2
+			bottom_y = y
+			top_function_name = second_function_name
+			bottom_function_name = CalculatorSettings.current_function_name
 		else:
-			area_rect = Rect2(corner_x, y, delta_x, y-y2)
-			area_rect_top = Rect2(corner_x, y, delta_x, y)
-			area_rect_bottom = Rect2(corner_x, y2, delta_x, y2)
-			vertex_position = Vector2(y, x)
-			reimann_sum_positions.append(Vector2(corner_x + delta_x/2, y/2)) 
-			reimann_sum_positions.append(Vector2(corner_x + delta_x/2, y2/2))
-
+			top_y = y
+			bottom_y = y2
+			top_function_name = CalculatorSettings.current_function_name
+			bottom_function_name = second_function_name
+		y2 = CalculatorFunctions.fun(second_function_name, x)
+		area_rect = Rect2(corner_x, top_y, delta_x, top_y - bottom_y)
+		vertex_position = Vector2(top_y, x)
+		reimann_sum_positions.append(Vector2(corner_x + delta_x/2, top_y/2))
+		reimann_sum_positions.append(Vector2(corner_x + delta_x/2, bottom_y/2))
 	else:
 		area_rect = Rect2(corner_x, y, delta_x, y)
 		reimann_sum_positions.append(Vector2(corner_x + delta_x/2, y/2))
 
-	current_color = INTEGRAL_COLOR1
-	positive_color = INTEGRAL_COLOR1
 	if iteration % 2 == 1:
 		positive_color = INTEGRAL_COLOR2
 		negative_color = INTEGRAL_COLOR4
@@ -173,25 +177,16 @@ func reimann_sum_draw(iteration: int, delta_x: float, direction: float):
 
 	area_rect = rect_to_graph(area_rect)
 	if in_geometric_view and has_second_function:
-		var top_function_name: String
-		var bottom_function_name: String
-		var top_y: float
-		var bottom_y: float
+		area_rect_top = Rect2(corner_x, top_y, delta_x, top_y)
+		area_rect_bottom = Rect2(corner_x, bottom_y, delta_x, bottom_y)
 		area_rect_top = rect_to_graph(area_rect_top)
 		area_rect_bottom = rect_to_graph(area_rect_bottom)
-
-		if y2 > y:
-			top_y = y2
-			bottom_y = y
-			top_function_name = second_function_name
-			bottom_function_name = CalculatorSettings.current_function_name
-		else:
-			top_y = y
-			bottom_y = y2
-			top_function_name = CalculatorSettings.current_function_name
-			bottom_function_name = second_function_name
 		# on top reimann sum selected
 		if geometric_index == iteration * 2:
+			if top_y > 0:
+				current_color = positive_color
+			else:
+				current_color = negative_color
 			visual_layer.draw_rect(area_rect_top, current_color, false, INTEGRAL_WIDTH)
 			current_color.a = INTEGRAL_TRANSPARENCY
 			visual_layer.draw_rect(area_rect_top, current_color)
@@ -202,7 +197,7 @@ func reimann_sum_draw(iteration: int, delta_x: float, direction: float):
 			draw_rectangle_area_text(x, top_y, delta_x)
 		# on bottom reimann sum selected
 		elif geometric_index == iteration * 2 + 1:
-			if area_rect_bottom.size.y > 0:
+			if bottom_y > 0:
 				current_color = negative_color
 			else:
 				current_color = positive_color
@@ -213,28 +208,51 @@ func reimann_sum_draw(iteration: int, delta_x: float, direction: float):
 			current_color.a = INTEGRAL_TRANSPARENCY2
 			visual_layer.draw_rect(area_rect, current_color)
 
-			written_function_name = bottom_function_name
+			written_function_name = "-" + bottom_function_name
 			selected_written_height= -bottom_y
 			is_writing_area = true
 		# neither selected
 		else:
-			if not show_hidden_sums:
-				current_color.a = INTEGRAL_TRANSPARENCY2
-			else: current_color.a = 1
-			visual_layer.draw_rect(area_rect_top, current_color)
-			if area_rect_bottom.size.y > 0:
-				current_color = negative_color
+			var first_drawn_rect: Rect2
+			var first_drawn_color: Color
+			var last_drawn_rect: Rect2
+			var last_drawn_color: Color
+			var transparency_used: float = INTEGRAL_TRANSPARENCY2
+			if show_hidden_sums:
+				transparency_used = 1
+			# order matters when rendering to make sure the red section stays on top, render that section last.
+			if top_y > 0:
+				first_drawn_rect = area_rect_top
+				first_drawn_color = positive_color
+				first_drawn_color.a = transparency_used
+				last_drawn_rect = area_rect_bottom
+				if bottom_y > 0:
+					last_drawn_color = negative_color
+				else:
+					last_drawn_color = positive_color
+				last_drawn_color.a = transparency_used
 			else:
-				current_color = positive_color
-			if not show_hidden_sums:
-				current_color.a = INTEGRAL_TRANSPARENCY2
-			else: current_color.a = 1
-			visual_layer.draw_rect(area_rect_bottom, current_color)
+				last_drawn_rect = area_rect_top
+				last_drawn_color = negative_color
+				last_drawn_color.a = transparency_used
+				first_drawn_rect = area_rect_bottom
+				if bottom_y > 0:
+					first_drawn_color = negative_color
+				else:
+					first_drawn_color = positive_color
+				first_drawn_color.a = transparency_used
+			visual_layer.draw_rect(first_drawn_rect, first_drawn_color)
+			visual_layer.draw_rect(last_drawn_rect, last_drawn_color)
 
 	elif in_geometric_view and not geometric_index == iteration:
-		current_color.a = INTEGRAL_TRANSPARENCY2
+		if show_hidden_sums:
+			current_color.a = 1
+		else:
+			current_color.a = INTEGRAL_TRANSPARENCY2
 		visual_layer.draw_rect(area_rect, current_color)
 	else:
+		if has_second_function:
+			current_color = positive_color
 		visual_layer.draw_rect(area_rect, current_color, false, INTEGRAL_WIDTH)
 		current_color.a = INTEGRAL_TRANSPARENCY
 		visual_layer.draw_rect(area_rect, current_color)
@@ -264,12 +282,12 @@ func reimann_sum_draw(iteration: int, delta_x: float, direction: float):
 		current_color.a = 1
 		visual_layer.draw_circle(vertex_position, INTEGRAL_VERTEX_SIZE, current_color)
 
-func left_sum_draw(iteration, delta_x):
-	reimann_sum_draw(iteration, delta_x, 0)
-func right_sum_draw(iteration, delta_x):
-	reimann_sum_draw(iteration, delta_x, 1)
-func middle_sum_draw(iteration, delta_x):
-	reimann_sum_draw(iteration, delta_x, 0.5)
+func left_sum_draw(iteration, delta_x, has_second_function):
+	reimann_sum_draw(iteration, delta_x, 0, has_second_function)
+func right_sum_draw(iteration, delta_x, has_second_function):
+	reimann_sum_draw(iteration, delta_x, 1, has_second_function)
+func middle_sum_draw(iteration, delta_x, has_second_function):
+	reimann_sum_draw(iteration, delta_x, 0.5, has_second_function)
 
 func _on_hide_integral_answer_pressed() -> void:
 	if hide_integral_answer: 
