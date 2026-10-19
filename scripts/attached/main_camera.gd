@@ -10,19 +10,24 @@ const CAMERA_TRANSITION: Tween.TransitionType = Tween.TransitionType.TRANS_QUAD
 
 var movement_global: bool = false
 var moving_slow: bool = false
-var geometric_points: Array[Variant]
+var geometric_points: Array[Vector2]
 var in_geometric_view: bool = false
 var geometric_iteration_index: int = 0
-
+var visual_subject: Visual
+var skip_next_view_update: bool = false
 
 @export var calculator_viewport: Window
 @export var integral_visual: Integral_Visual
+@export var spatial_integral_visual: Spatial_Integral_Visual
 @export var graph_sprite: Sprite3D
 
 func _ready() -> void:
 	integral_visual.enter_geometric_view.connect(on_geometric_view_entered)
 	integral_visual.update_sum_positions.connect(on_geometric_points_updated)
 	integral_visual.exit_geometric_view.connect(on_geometric_view_exit)
+	spatial_integral_visual.enter_geometric_view.connect(on_geometric_view_entered.bind(false))
+	spatial_integral_visual.update_sum_positions.connect(on_geometric_points_updated)
+	spatial_integral_visual.exit_geometric_view.connect(on_geometric_view_exit)
 
 func rotation_to_vector(x_rads, y_rads) -> Vector3:
 	return Vector3(-sin(y_rads), sin(x_rads), -cos(x_rads) * cos(y_rads)) 
@@ -86,15 +91,19 @@ func _input(event: InputEvent) -> void:
 		return
 	if event.is_action_released("GEOMETRIC_LAST"):
 		geometric_iteration_index -= 1
-		integral_visual.geometric_index = geometric_iteration_index
+		visual_subject.geometric_index = geometric_iteration_index
 		view_geometric_point(geometric_iteration_index)
 		
 	elif event.is_action_released("GEOMETRIC_NEXT"):
 		geometric_iteration_index += 1
-		integral_visual.geometric_index = geometric_iteration_index
+		visual_subject.geometric_index = geometric_iteration_index
 		view_geometric_point(geometric_iteration_index)
 
-func on_geometric_view_entered(sum_positions: Array[Vector2]) -> void:
+func on_geometric_view_entered(sum_positions: Array[Vector2], subject_is_base_integral: bool = true) -> void:
+	if subject_is_base_integral:
+		visual_subject = integral_visual
+	else:
+		visual_subject = spatial_integral_visual
 	geometric_points = sum_positions
 	rotation = Vector3.ZERO
 	in_geometric_view = true
@@ -111,20 +120,20 @@ func view_geometric_point(index: int):
 	elif 0 > index:
 		index = geometric_points.size() - 1
 		geometric_iteration_index = geometric_points.size() - 1
-		integral_visual.geometric_index = geometric_points.size() - 1
-	integral_visual.visual_layer.queue_redraw()
+		visual_subject.geometric_index = geometric_points.size() - 1
+	visual_subject.visual_layer.queue_redraw()
 
 	var point_position: Variant = geometric_points[index]
-	if point_position is Vector2:
-		var camera_tween: Tween = get_tree().create_tween()
-		var point_position_3d: Vector3 = vector3_to_graph(Vector3(point_position.x, point_position.y, 0)) + Vector3(0, 0, position.z)
-		camera_tween.tween_property(self, "position", point_position_3d, CAMERA_TWEEN_TIME).set_trans(CAMERA_TRANSITION).set_ease(CAMERA_TWEEN_DIRECTION)
+	var camera_tween: Tween = get_tree().create_tween()
+	var point_position_3d: Vector3 = vector3_to_graph(Vector3(point_position.x, point_position.y, 0)) + Vector3(0, 0, position.z)
+	camera_tween.tween_property(self, "position", point_position_3d, CAMERA_TWEEN_TIME).set_trans(CAMERA_TRANSITION).set_ease(CAMERA_TWEEN_DIRECTION)
 
 func on_geometric_points_updated(sum_positions: Array[Vector2]) -> void:
 	geometric_points = sum_positions
 	view_geometric_point(geometric_iteration_index)
 
 func on_geometric_view_exit() -> void:
+	visual_subject = null
 	in_geometric_view = false
 	
 func vector3_to_graph(vector: Vector3) -> Vector3:

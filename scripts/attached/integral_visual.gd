@@ -312,6 +312,9 @@ func _on_second_function_name_text_changed(new_text: String) -> void:
 func on_exit() -> void:
 	second_function_name = ""
 	reimann_sum_positions.clear()
+	in_geometric_view = false
+	exit_geometric_view.emit()
+	geometric_view_button.text = "Enter Geometric View"
 	visible = false
 
 func _on_second_function_name_editing_toggled(toggled_on: bool) -> void:

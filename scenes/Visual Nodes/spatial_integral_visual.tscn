@@ -8,6 +8,10 @@ anchor_left = 0.8
 anchor_top = 0.05
 anchor_right = 1.0
 anchor_bottom = 0.95
+offset_left = 2.3999634
+offset_top = 19.599998
+offset_right = 2.3999023
+offset_bottom = 19.599976
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_piovc")
@@ -372,6 +376,7 @@ layout_mode = 2
 text = "right"
 
 [node name="FunctionNameEdit" type="LineEdit" parent="." unique_id=269666344]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.6
@@ -398,3 +403,4 @@ text = "Enter Geometric View"
 [connection signal="item_selected" from="ShapeOption" to="." method="_on_option_button_item_selected"]
 [connection signal="editing_toggled" from="FunctionNameEdit" to="." method="_on_function_name_edit_editing_toggled"]
 [connection signal="text_submitted" from="FunctionNameEdit" to="." method="_on_function_name_edit_text_submitted"]
+[connection signal="pressed" from="GeometricView" to="." method="_on_geometric_view_pressed"]
